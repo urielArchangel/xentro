@@ -1,0 +1,16 @@
+{
+    "ID":"XABCI23",
+    "wallet_address":"0x9a93D845C0412997bB2D21C111A0543F80cA8039",
+    "referals":{
+        "count":10,
+        "points":10000
+    },
+    "community_badge":true,
+    "warrior_badge":false,
+    "ip":"10.201.10.109",
+    "status":"qualified",
+    "total_points":250000,
+    "blocked":false,
+    "last_login":1729012827232
+
+}

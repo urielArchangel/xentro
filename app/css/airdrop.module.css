@@ -1,0 +1,103 @@
+
+.bg_gradient_border{
+    background-image: linear-gradient(to right,#0477EF,#FFFFFF);
+    border: 0;
+}
+.XENTRO_text{
+    background-clip: text;
+    color: transparent;
+    background-image:linear-gradient(to bottom,#3a98fb,60%,#ffffff) ;
+}
+
+.underline_vector{
+    background-image: url(../images/underlineVector.png);
+    background-repeat: no-repeat; 
+    background-position: bottom;
+    background-position-x: left; 
+    background-size: 90% 15px ;
+}
+.hero_rightLogo{
+    background-image: url(../images/heroImage.png);
+    height: 533px;
+    background-repeat: no-repeat;
+    max-width: 584px;
+    width: 100%;
+    background-position-y: top;
+    transform: translateY(-123px) translateX(-80px);
+}
+.banner_section{
+    background-color: #00000020;
+    padding: 2.5em 0;
+    position: relative;
+    z-index: 4;
+    backdrop-filter: blur(15px);
+}
+.banner_section > div{
+    display: flex;
+    justify-content: space-between;
+    margin: auto;    
+   
+}
+.banner_section p{
+    background-clip: text;
+    color: transparent;
+    background-image:linear-gradient(to bottom,#0477EF,50%,#ffffff) ;
+    text-transform: uppercase;
+    font-family: gilroy-bold;
+    font-size: 40px;
+    font-weight: 700;
+}
+.bg_icon{
+    background-image: url(../images/bgIcon.png);
+}
+.section1_icon{
+    background-image: url(../images/section2Icon.png);
+    width: 477px;
+    height: 421px;
+}
+.section1_text{
+    line-height: 60px;
+    margin: 0.25em;
+}
+.section1_text2{
+    line-height: 40px;
+    margin: 0.25em;
+}
+.cardsIcons{
+    background-image: url(../images/cardIconsSection2.png);
+    height: 587.87px;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: top;
+    }
+    .section2_bgVector{
+        background-image: url(../images/bgIconSection2.png); 
+        background-repeat: no-repeat;
+        background-position-x: right;
+    background-position-y: calc(50% - 110px);
+
+    }
+    .bg_tasks_blured_section3{
+        background-image: url(../images/tasksBluredSection3.png);
+        height: 1127px;
+        background-position-x: center;
+        background-position-y: top;
+        background-size: 100% 100%;
+        margin-top: 1em;
+    }
+
+    .leftImageSection4{
+        background-image: url(../images/bgLeftSection4Card.png);background-repeat: no-repeat;
+        background-position-x: center;
+    }
+
+    .faq_1_section5{
+        background-image: linear-gradient(to bottom,#0254A920,#00316420);
+        
+    }
+
+    .section6Container{
+        background-image: url(../images/section6bg.png);
+        background-position: center;
+        background-repeat: no-repeat;
+    }

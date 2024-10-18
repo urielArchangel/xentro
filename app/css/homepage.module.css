@@ -1,0 +1,58 @@
+.hero {
+  background-image: url(../images/landingpagebg.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 1000px;
+}
+
+.faqAccordion {
+  border-radius: 1rem;
+  border: 1px solid #6ab3ff;
+  background: linear-gradient(
+    180deg,
+    rgba(2, 84, 169, 0.12) -2%,
+    rgba(0, 49, 100, 0.12) 100.05%
+  );
+}
+
+.gradientText {
+  background: linear-gradient(184deg, #0477ef 1.84%, #fff 100.09%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.community {
+  background-image: url(../images/communityBg.png);
+  background-size: 700px;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-bottom: 100px;
+}
+
+.featureCard {
+  background: linear-gradient(
+    180deg,
+    rgba(2, 84, 169, 0.12) -2%,
+    rgba(0, 49, 100, 0.12) 100.05%
+  );
+  backdrop-filter: blur(26.5px);
+}
+
+.bg_gradient_border {
+  background-image: linear-gradient(to right, #0477ef, #ffffff);
+  border: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .hero {
+    height: 600px;
+  }
+}
+
+@media screen and (min-width: 1500px) {
+  .hero {
+    height: 1300px;
+  }
+}

@@ -1,0 +1,38 @@
+{
+    "total_points_distributed":500000,
+    "total_mints":3,
+    "tasks_completed":20,
+    "tasks":[
+        {
+            "platform":"x",
+            "task":"follow this page",
+            "link":"https://x.com/",
+            "points":600,
+            "status":"active"
+        },
+        {
+            "platform":"telegram",
+            "task":"join this group",
+            "link":"https://telegram.org/",
+            "points":600,
+            "status":"deleted"
+        }
+    ],
+    "stats":{
+        "today":2,
+        "count":1
+    },
+    "mints":[{
+        "ID":"XABCI22",
+        "task":"Minted Xentro Community Badge",
+        "wallet":"0x1a93D845C0412997bB2D21C111A0543F80cA803A"
+    },{
+        "ID":"XABCI23",
+        "task":"Minted Xentro Community Badge",
+        "wallet":"0x9a93D845C0412997bB2D21C111A0543F80cA8039"
+    },{
+        "ID":"XABCI22",
+        "task":"Minted Xentro Warrior Badge",
+        "wallet":"0x1a93D845C0412997bB2D21C111A0543F80cA803A"
+    }]
+}

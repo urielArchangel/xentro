@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Gilroy Black";
+  src: url(./fonts/Gilroy-Black.ttf);
+  font-weight: 900; /* Set the heaviest weight */
+}
+@font-face {
+  font-family: gilroy-bold;
+  src: url(./fonts/Gilroy-Bold.ttf);
+}
+@font-face {
+  font-family: gilroy-regular;
+  src: url(./fonts/Gilroy-Regular.ttf);
+}
+
+.body {
+  background-image: url(./images/bg.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-bottom: 20px;
+  overflow: hidden;
+}
+.hd-shadow {
+  box-shadow: -8px 8px 50px #00000057;
+}
+
+.glow {
+  box-shadow: 0px 4px 31.2px 0px rgba(85, 168, 255, 0.3);
+}
+
+.gilroy-black-bold {
+  font-family: "Gilroy Black", sans-serif; /* Apply the font family */
+  font-weight: bolder; /* Ensure maximum boldness */
+  /* -webkit-text-stroke: 1px; */
+}
+.gilroy-bold {
+  font-family: gilroy-bold;
+}
+.gilroy-regular {
+  font-family: gilroy-regular;
+}
+
+.hero-H1 {
+  line-height: 85px;
+}
+.activeAdminSideNavLink {
+  background-color: #ecf4ff;
+  border-color: #0171f3;
+}
+.activeAdminSideNavLink * {
+  fill: #0060ff;
+  color: #0060ff;
+}
+#innerAdminPage_id {
+  transition: filter 1s ease-in-out;
+}
