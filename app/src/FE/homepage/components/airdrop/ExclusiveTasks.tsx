@@ -74,8 +74,9 @@ const ExclusiveTasks = () => {
             <div className="grid md:grid-cols-2 gap-10">
               <div className="text-white gilroy-regular">
                 <ul className="space-y-4">
-                  {tasks.map((task) => (
+                  {tasks.map((task,i) => (
                     <div
+                    key={i}
                       className={
                         homepagestyles.bg_gradient_border +
                         " border-0 p-[0.06em] rounded-lg hd-shadow"
