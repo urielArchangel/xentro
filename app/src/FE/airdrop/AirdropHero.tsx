@@ -6,7 +6,7 @@ import homepagestyles from "@/app/css/homepage.module.css";
 import heroimage from "@/app/images/airdrophero.png";
 import slider from "@/app/images/airdropslider.png";
 import underline from "@/app/images/underline.png";
-import Navbar from "../../../navbar/Navbar";
+import Navbar from "../navbar/Navbar";
 
 const AirdropHero = () => {
   return (
