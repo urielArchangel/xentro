@@ -137,7 +137,7 @@ const Navbar = () => {
           <div
             className={
               homepagestyles.bg_gradient_border +
-              " border-0 p-[0.06em] rounded-full hd-shadow hidden w-full min-[1000px]:block md:w-auto"
+              " border-0 p-[0.06em] rounded-full hd-shadow hidden w-[600px] min-[1000px]:block md:w-auto"
             }
             id="navbar-default"
           >
@@ -155,7 +155,7 @@ const Navbar = () => {
                   width={100}
                   className={`${
                     pathname === "/ecosystem"
-                      ? "block translate-y-[8px]"
+                      ? "block translate-y-[12px]"
                       : "hidden"
                   }`}
                 />
@@ -173,7 +173,7 @@ const Navbar = () => {
                   width={100}
                   className={`${
                     pathname === "/airdrop"
-                      ? "block translate-y-[8px]"
+                      ? "block translate-y-[12px]"
                       : "hidden"
                   }`}
                 />
@@ -190,7 +190,9 @@ const Navbar = () => {
                   alt="active"
                   width={100}
                   className={`${
-                    pathname === "/stake" ? "block translate-y-[8px]" : "hidden"
+                    pathname === "/stake"
+                      ? "block translate-y-[12px]"
+                      : "hidden"
                   }`}
                 />
               </li>
@@ -207,7 +209,7 @@ const Navbar = () => {
                   width={100}
                   className={`${
                     pathname === "/bridge"
-                      ? "block translate-y-[8px]"
+                      ? "block translate-y-[12px]"
                       : "hidden"
                   }`}
                 />
@@ -224,7 +226,7 @@ const Navbar = () => {
                   alt="active"
                   width={100}
                   className={`${
-                    pathname === "/faq" ? "block translate-y-[8px]" : "hidden"
+                    pathname === "/faq" ? "block translate-y-[12px]" : "hidden"
                   }`}
                 />
               </li>

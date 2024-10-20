@@ -9,6 +9,7 @@ import x from "@/app/images/socials/XTask.png";
 import telegram from "@/app/images/socials/Telegram.png";
 import instagram from "@/app/images/socials/Instagram.png";
 import xentro from "@/app/images/socials/xentro.png";
+import Link from "next/link";
 
 interface Task {
   id: number;
@@ -196,6 +197,18 @@ const ExclusiveTasks = () => {
               </div>
             </div>
           </div>
+        </div>
+        <div
+          className={
+            homepagestyles.bg_gradient_border +
+            " border-0 p-[0.06em] rounded-full hd-shadow w-[50%] mx-auto mt-16"
+          }
+        >
+          <Link href="airdrop/tasks">
+            <button className="bg-[#081A2E] w-full py-3 text-lg md:text-xl rounded-full font-semibold text-[#0477EF]">
+              View All Tasks
+            </button>
+          </Link>
         </div>
       </section>
     </>

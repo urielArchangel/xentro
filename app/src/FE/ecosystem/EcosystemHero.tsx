@@ -5,7 +5,7 @@ import ecosystemstyles from "@/app/css/ecosystem.module.css";
 import homepagestyles from "@/app/css/homepage.module.css";
 import heroimage from "@/app/images/ecosystem.png";
 import slider from "@/app/images/xentroslider.png";
-import Navbar from "../../../navbar/Navbar";
+import Navbar from "../navbar/Navbar";
 
 const EcosystemHero = () => {
   return (
