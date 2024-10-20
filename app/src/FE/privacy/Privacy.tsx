@@ -5,7 +5,7 @@ import Link from "next/link";
 const Privacy = () => {
   return (
     <>
-      <section className="px-[8%] pt-[15%] min-[769px]:pt-[8%] min-[1500px]:pt-[6%] text-white gilroy-regular font-[580]">
+      <section className="px-[8%] pt-[15%] min-[769px]:pt-[8%] min-[1500px]:pt-[6%] text-white gilroy-regular">
         <button>
           <Link href="/">
             <span className="text-white text-md md:text-lg flex gap-1 items-center mt-4">
