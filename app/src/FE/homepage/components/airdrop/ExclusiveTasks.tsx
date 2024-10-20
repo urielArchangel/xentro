@@ -1,29 +1,64 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import underline from "@/app/images/underline.png";
 import homepagestyles from "@/app/css/homepage.module.css";
 import Image from "next/image";
-import { FaLink, FaCopy } from "react-icons/fa6";
+import discord from "@/app/images/socials/Discord.png";
+import medium from "@/app/images/socials/Medium.png";
+import x from "@/app/images/socials/XTask.png";
+import telegram from "@/app/images/socials/Telegram.png";
+import instagram from "@/app/images/socials/Instagram.png";
+import xentro from "@/app/images/socials/xentro.png";
 
 interface Task {
   id: number;
   name: string;
+  icon: any;
   completed: boolean;
 }
-const tasksData: Task[] = [
-  { id: 1, name: "Follow Xentro on X", completed: false },
-  { id: 2, name: "Like the Post on Xentro Page", completed: false },
-  { id: 3, name: "Follow Xentro on Telegram", completed: false },
-  { id: 4, name: "Join Xentro Community on Discord", completed: false },
-  { id: 5, name: "Follow Xentro on Instagram", completed: false },
-  { id: 6, name: "Follow Xentro on Medium", completed: false },
-  { id: 7, name: "Mint your Xentro Community Badge", completed: false },
-  { id: 8, name: "Mint your Xentro Warrior Badge", completed: false },
-];
 
 const ExclusiveTasks = () => {
   const [isConnected, setIsConnected] = useState<boolean>(false);
+  const tasksData: Task[] = [
+    { id: 1, name: "Follow Xentro on X", completed: false, icon: x },
+    { id: 2, name: "Like the Post on Xentro Page", completed: false, icon: x },
+    {
+      id: 3,
+      name: "Follow Xentro on Telegram",
+      completed: false,
+      icon: telegram,
+    },
+    {
+      id: 4,
+      name: "Join Xentro Community on Discord",
+      completed: false,
+      icon: discord,
+    },
+    {
+      id: 5,
+      name: "Follow Xentro on Instagram",
+      completed: false,
+      icon: instagram,
+    },
+    { id: 6, name: "Follow Xentro on Medium", completed: false, icon: medium },
+    {
+      id: 7,
+      name: "Mint your Xentro Community Badge",
+      completed: false,
+      icon: xentro,
+    },
+    {
+      id: 8,
+      name: "Mint your Xentro Warrior Badge",
+      completed: false,
+      icon: xentro,
+    },
+  ];
   const [tasks, setTasks] = useState<Task[]>(tasksData);
+
+  useEffect(() => {
+    console.log("Tasks: ", tasks);
+  }, []);
 
   const handleConnectWallet = () => {
     setIsConnected(true);
@@ -41,7 +76,7 @@ const ExclusiveTasks = () => {
   return (
     <>
       <section className="px-[8%] pt-[10%]">
-        <h3 className="text-white gilroy-bold text-4xl min-[1500px]:text-6xl mb-8">
+        <h3 className="text-white gilroy-bold text-3xl md:text-4xl lg:text-5xl min-[1500px]:text-6xl mb-8 text-center min-[401px]:text-start">
           <span className="inline-block relative">
             <span
               className={`${homepagestyles.gradientText} text-white gilroy-bold`}
@@ -59,7 +94,7 @@ const ExclusiveTasks = () => {
           Exclusive Tasks
         </h3>
         <p
-          className={`text-white gilroy-regular mb-10 ${
+          className={`text-white gilroy-regular text-center min-[401px]:text-start mb-10 ${
             isConnected ? "hidden" : "block"
           }`}
         >
@@ -71,12 +106,11 @@ const ExclusiveTasks = () => {
               Completed: <span className="font-bold">{completedTasks}</span> out
               of <span className="font-bold">{tasks.length}</span>
             </h4>
-            <div className="grid md:grid-cols-2 gap-10">
-              <div className="text-white gilroy-regular">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-stretch">
+              <div className="text-white gilroy-regular h-full">
                 <ul className="space-y-4">
-                  {tasks.map((task,i) => (
+                  {tasks.map((task) => (
                     <div
-                    key={i}
                       className={
                         homepagestyles.bg_gradient_border +
                         " border-0 p-[0.06em] rounded-lg hd-shadow"
@@ -86,7 +120,15 @@ const ExclusiveTasks = () => {
                         key={task.id}
                         className="flex items-center justify-between bg-[#0B1219] rounded-lg p-3"
                       >
-                        <span>{task.name}</span>
+                        <span className="text-xs max-[599px]:text-md min-[600px]:text-lg flex items-center gap-3">
+                          <Image
+                            src={task.icon}
+                            alt="task"
+                            width={25}
+                            height={25}
+                          />
+                          {task.name}
+                        </span>
                         <button
                           className={`px-4 py-2 text-white rounded-full font-bold ${
                             task.completed
@@ -177,12 +219,14 @@ const WalletInfo: React.FC = () => {
   };
 
   return (
-    <div className="rounded-xl text-white mx-auto gilroy-regular border-[#027EFF] border">
+    <div className="rounded-xl text-white mx-auto gilroy-regular border-[#027EFF] border h-full">
       {/* Connected Wallet */}
       <div className="border-b border-[#027EFF]">
         <div className="px-6 py-6">
           <div className="bg-[#081A2E] border-[#2F95FF] border py-2 px-2 mb-8 flex justify-between items-center rounded-full">
-            <span className="text-xl">Connected Wallet: 0x123....789a</span>
+            <span className="text-xs min-[400px]:text-lg lg:text-xl">
+              Connected Wallet: 0x123....789a
+            </span>
             <button className="text-[#027EFF] p-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -217,7 +261,9 @@ const WalletInfo: React.FC = () => {
               Invite Link
             </span>
             <div className="bg-transparent border-white border p-3 flex justify-between items-center rounded-full">
-              <span className="truncate text-xl">{inviteLink}</span>
+              <span className="truncate text-xs min-[400px]:text-lg lg:text-xl">
+                {inviteLink}
+              </span>
               <button onClick={handleCopyClick} className="text-[#027EFF] p-1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

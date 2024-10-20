@@ -9,11 +9,11 @@ const JoinCommunity = () => {
     <>
       <section className={`px-[8%] py-16 ${homepagestyles.community}`}>
         <div className="flex justify-center">
-          <p className="text-white gilroy-bold text-4xl mb-10 text-center">
+          <p className="text-white gilroy-bold text-3xl md:text-4xl lg:text-5xl mb-10 text-center">
             Join the{" "}
             <span className="inline-block relative">
               <span
-                className={`${homepagestyles.gradientText} text-white gilroy-bold text-4xl`}
+                className={`${homepagestyles.gradientText} text-white gilroy-bold`}
               >
                 Xentro
               </span>
@@ -28,7 +28,7 @@ const JoinCommunity = () => {
             Community
           </p>
         </div>
-        <div className="flex justify-center text-xl text-white gap-10 gilroy-regular">
+        <div className="flex justify-center text-sm md:text-xl text-white gap-10 gilroy-regular">
           <p className="flex items-center">
             <Image src={check} alt="check" width={20} height={20} />
             <span className="ml-2">Exclusive Updates</span>

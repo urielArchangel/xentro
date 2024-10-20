@@ -14,21 +14,20 @@ const XentroFeatures = () => {
     <>
       <div className="py-16 px-20">
         <div className="flex justify-center">
-          <p className="text-white gilroy-bold text-4xl min-[1500px]:text-6xl mb-10">
-            <span className="inline-block relative">
-              <span
-                className={`${homepagestyles.gradientText} text-white gilroy-bold`}
-              >
-                Xentro
-              </span>
-              <Image
-                src={underline}
-                alt="underline"
-                width={300}
-                height={300}
-                className="absolute bottom-[-2] left-0"
-              />
-            </span>{" "}
+          <p className="text-white gilroy-bold text-4xl mb-20">
+            <div
+              className={`${homepagestyles.gradientText} inline relative text-white gilroy-bold text-4xl`}
+            >
+              Xentro
+              <div className="absolute">
+                <Image
+                  src={underline}
+                  alt="underline"
+                  width={300}
+                  height={300}
+                />
+              </div>
+            </div>{" "}
             Features
           </p>
         </div>
@@ -37,7 +36,7 @@ const XentroFeatures = () => {
             <Image src={bar} alt="mission" width={6.5} height={300} />
           </div>
           <div className="col-span-6">
-            <div className="grid grid-cols-6 mb-28 min-[1500px]:mb-36">
+            <div className="grid grid-cols-6 mb-28">
               <FeatureCard
                 title="Decentralized Finance (DeFi) Integration"
                 description="Seamlessly Connect with the Future of Finance"
@@ -47,7 +46,7 @@ const XentroFeatures = () => {
                 <Image src={defi} alt="mission" width={270} height={300} />
               </div>
             </div>
-            <div className="grid grid-cols-6 mb-28  min-[1500px]:mb-36">
+            <div className="grid grid-cols-6 mb-28">
               <FeatureCard
                 title="Non-Custodial Management"
                 description="Retain Full Control Over Your Assets"
@@ -62,7 +61,7 @@ const XentroFeatures = () => {
                 />
               </div>
             </div>
-            <div className="grid grid-cols-6 mb-28 min-[1500px]:mb-36">
+            <div className="grid grid-cols-6 mb-28">
               <FeatureCard
                 title="Exclusive Investment Opportunities"
                 description="Discover Top-Tier, Secure Yield Options"
@@ -72,14 +71,13 @@ const XentroFeatures = () => {
                 <Image src={exclusive} alt="mission" width={220} height={300} />
               </div>
             </div>
-            <div className="grid grid-cols-6 mb-28 min-[1500px]:mb-36">
+            <div className="grid grid-cols-6 mb-28">
               <FeatureCard
                 title="Seamless Cross-Chain bridging"
                 description="Effortlessly Connect Assets Across Blockchains"
                 explanation="Access a curated selection of exclusive, secure investment opportunities with varying yield potentials, tailored to suit different risk profiles and financial goals."
               />
-              <div className="col-span-2 ml-5 relative">
-                {/* <div className="absolute h-[300px] w-[150px] p-28 opacity-30 bg-black backdrop-blur-xl bg-opacity-50 shadow-lg"></div> */}
+              <div className="col-span-2 ml-5">
                 <Image
                   src={crosschain}
                   alt="mission"
@@ -107,7 +105,7 @@ const FeatureCard: React.FC<FeatureProps> = ({
   explanation,
 }) => {
   return (
-    <div className="#027EFF rounded-2xl col-span-4 translate-x-[-70px] border-[#027EFF] border min-[1500px]:h-[240px]">
+    <div className="#027EFF rounded-2xl col-span-4 translate-x-[-70px] border-[#027EFF] border">
       <div
         className={`pt-7 pb-7 px-5 rounded-t-2xl ${homepagestyles.featureCard}`}
       >

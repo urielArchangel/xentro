@@ -20,12 +20,12 @@ const page = () => {
         {" "}
         <AirdropHero />
         <div className="px-[8%] pt-[8%]">
-          <div className="grid grid-cols-2">
-            <div className="min-[1500px]:scale-[1.3] min-[1500px]:translate-x-[200px]">
+          <div className="grid grid-cols-1 min-[769px]:grid-cols-2">
+            <div className="min-[1500px]:scale-[1.3] min-[1500px]:translate-x-[200px] flex justify-center min-[769px]:justify-start mt-10 min-[769px]:mt-0 scale-custom scale-[0.7] min-[769px]:scale-[1]">
               <Image src={shield} alt="token" width={300} height={300} />
             </div>
-            <div className="flex justify-center flex-col text-white text-end">
-              <p className="text-white gilroy-bold text-5xl min-[1500px]:text-6xl mb-10">
+            <div className="flex justify-center flex-col text-white text-center min-[769px]:text-end order-first min-[769px]:order-last">
+              <p className="text-white gilroy-bold text-4xl md:text-5xl min-[1500px]:text-6xl mb-10">
                 Become a{" "}
                 <span className={`${homepagestyles.gradientText} gilroy-bold`}>
                   Xentro
@@ -45,7 +45,7 @@ const page = () => {
         <MintBadge />
         <div>
           <div className="flex flex-col items-center pb-20 pt-24">
-            <p className="text-white gilroy-bold text-4xl min-[1500px]:text-6xl mb-10">
+            <p className="text-white gilroy-bold text-3xl md:text-4xl lg:text-5xl min-[1500px]:text-6xl mb-10">
               <span className="inline-block relative">
                 <span
                   className={`${homepagestyles.gradientText} text-white gilroy-bold`}
@@ -60,7 +60,7 @@ const page = () => {
                   className="absolute bottom-[-2] left-0"
                 />
               </span>{" "}
-              Airdrop FAqs
+              Airdrop FAQs
             </p>
             <div className="w-[80%]">
               {xentroQuestions.map((question, index) => (

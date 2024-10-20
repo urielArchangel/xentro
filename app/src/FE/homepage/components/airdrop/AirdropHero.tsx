@@ -12,9 +12,9 @@ const AirdropHero = () => {
   return (
     <>
       <Navbar />
-      <section className="grid grid-cols-5 px-[8%] pt-10 place-items-center">
-        <div className="col-span-3">
-          <h1 className="text-white gilroy-black-bold text-3xl md:text-4xl lg:text-6xl min-[1500px]:text-7xl text-start mb-10">
+      <section className="grid grid-cols-1 min-[769px]:grid-cols-5 px-[8%] pt-[15%] min-[769px]:pt-[10%] min-[1500px]:pt-[6%] place-items-center">
+        <div className="min-[769px]:col-span-3 text-center min-[769px]:text-start">
+          <h1 className="text-white gilroy-black-bold text-4xl lg:text-6xl min-[1500px]:text-7xl text-center min-[769px]:text-start mb-10">
             <span className="inline-block relative">
               <span
                 className={`${homepagestyles.gradientText} text-white gilroy-bold`}
@@ -31,7 +31,7 @@ const AirdropHero = () => {
             </span>{" "}
             <span>EARLY ADOPTERS AIRDROP</span>
           </h1>
-          <p className="text-white gilroy-regular text-lg md:text-xl text-start w-[100%] mb-10 min-[1500px]:text-2xl">
+          <p className="text-white gilroy-regular text-lg md:text-xl text-center min-[769px]:text-start w-[100%] mb-10 min-[1500px]:text-2xl">
             Embrace Early Adoption and Earn Exclusive Rewards
           </p>
           <div
@@ -55,7 +55,7 @@ const AirdropHero = () => {
             </button>
           </div>
         </div>
-        <div className="col-span-2">
+        <div className="min-[769px]:col-span-2 scale-[0.7] min-[769px]:scale-[1]">
           <Image src={heroimage} alt="heroimage" />
         </div>
       </section>

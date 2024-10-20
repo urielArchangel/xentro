@@ -8,7 +8,7 @@ const HowtoParticipate = () => {
     <>
       <section className="px-[8%] mt-28 overflow-hidden">
         <div className="flex justify-center">
-          <p className="text-white gilroy-bold text-5xl mb-10">
+          <p className="text-white gilroy-bold text-3xl md:text-4xl lg:text-5xl mb-10">
             How To Participate
           </p>
         </div>
@@ -18,7 +18,7 @@ const HowtoParticipate = () => {
           <Image
             src={logo}
             alt="logo"
-            className="absolute top-0 right-0 translate-x-[140px] scale-[0.8] translate-y-[-100px]"
+            className="absolute top-0 right-0 translate-x-[140px] scale-[0.5] min-[769px]:scale-[0.8] translate-y-[-100px]"
           />
         </div>
       </section>

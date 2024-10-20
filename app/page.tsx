@@ -24,14 +24,11 @@ const page = () => {
 
         {/* MINT */}
         <div className="flex flex-col items-center pb-20 pt-32">
-          <p className="text-white gilroy-bold text-5xl text-center mb-10">
+          <p className="text-white gilroy-bold text-3xl md:text-4xl lg:text-5xl text-center mb-10 min-[769px]:w-[60%] px-3">
             Mint your{" "}
             <span className={`${homepagestyles.gradientText}`}>Xentro</span>{" "}
-            badge to qualify <br />
-            for the{" "}
-            <span className={`${homepagestyles.gradientText}`}>
-              Xentro
-            </span>{" "}
+            badge to qualify for the{" "}
+            <span className={`${homepagestyles.gradientText}`}>Xentro</span>{" "}
             Airdrop
           </p>
           <div
@@ -47,9 +44,9 @@ const page = () => {
         </div>
         {/* FAQ */}
         <div className="flex flex-col items-center pb-20 pt-24">
-          <p className="text-white gilroy-bold text-5xl text-center mb-10">
-            Frequently Asked Questions
-            <span className={`${homepagestyles.gradientText}`}>(FAQ&apos;s)</span>
+          <p className="text-white gilroy-bold px-3 text-3xl md:text-4xl lg:text-5xl  text-center mb-10">
+            Frequently Asked Questions{" "}
+            <span className={`${homepagestyles.gradientText}`}>(FAQ's)</span>
           </p>
           <div className="w-[80%]">
             {faq.faq.map((data: FAQData, index: number) => {

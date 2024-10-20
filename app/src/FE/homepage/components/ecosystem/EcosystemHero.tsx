@@ -12,8 +12,8 @@ const EcosystemHero = () => {
     <>
       <Navbar />
       <section className="grid grid-cols-1 min-[769px]:grid-cols-5 px-[8%] pt-[15%] min-[769px]:pt-[10%] min-[1500px]:pt-[6%] place-items-center">
-        <div className="min-[769px]:col-span-3 text-center">
-          <h1 className="text-white gilroy-black-bold text-4xl lg:text-5xl text-center min-[769px]:text-start mb-10">
+        <div className="min-[769px]:col-span-3 text-center min-[769px]:text-start">
+          <h1 className="text-white gilroy-black-bold text-4xl lg:text-5xl min-[1500px]:text-6xl text-center min-[769px]:text-start mb-10">
             <span className={`${homepagestyles.gradientText}`}>XENTRO</span> The
             Ultimate Web3 Financial Ecosystem
           </h1>
@@ -33,7 +33,11 @@ const EcosystemHero = () => {
           </div>
         </div>
         <div className="min-[769px]:col-span-2 scale-[0.8] min-[769px]:scale-[1]">
-          <Image src={heroimage} alt="heroimage" />
+          <Image
+            src={heroimage}
+            alt="heroimage"
+            className="mix-blend-multiply"
+          />
         </div>
       </section>
       <Image src={slider} alt="slider" />

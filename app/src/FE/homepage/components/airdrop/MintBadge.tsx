@@ -8,7 +8,7 @@ const MintBadge = () => {
   return (
     <>
       <section className="px-[8%] pt-[8%]">
-        <h3 className="text-white gilroy-bold text-4xl mb-10 text-center">
+        <h3 className="text-white gilroy-bold text-3xl md:text-4xl lg:text-5xl mb-10 text-center">
           Mint Your{" "}
           <span className="inline-block relative">
             <span
@@ -26,7 +26,7 @@ const MintBadge = () => {
           </span>{" "}
           Badge
         </h3>
-        <div className="grid md:grid-cols-2 grid-cols-1 place-items-center gilroy-regular gap-5">
+        <div className="flex justify-center items-center flex-col min-[961px]:flex-row space-y-10 min-[961px]:space-y-0 min-[961px]:space-x-10">
           <XentroBadge
             title="Xentro Community Badge"
             description="Complete all Xentro Exclusive Social Tasks."
@@ -36,7 +36,6 @@ const MintBadge = () => {
             description="Join the ranks of the Xentro Warriors and be eligible for the airdrop."
           />
         </div>
-        #0028511f
       </section>
     </>
   );
@@ -49,13 +48,13 @@ interface MintBadgeProps {
 
 const XentroBadge: React.FC<MintBadgeProps> = ({ title, description }) => {
   return (
-    <div className="bg-[#0028511f] p-5 rounded-xl text-white border border-[#002953]">
+    <div className="bg-[#0028511f] p-5 rounded-xl text-white border border-[#002953] min-[480px]:h-[530px] min-[480px]:relative w-[90%] min-[480px]:w-max">
       <div className="group relative">
         <div className={`blur-sm p-1`}>
           <Image
             src={xentrobadge}
             alt="badge"
-            className="rounded-xl w-[400px]"
+            className="rounded-xl min-[480px]:w-[400px]"
           />
         </div>
         <div
@@ -63,23 +62,23 @@ const XentroBadge: React.FC<MintBadgeProps> = ({ title, description }) => {
           `}
         >
           <div className="flex flex-col justify-end items-center font-bold">
-            <ul className="flex space-x-5 gilroy-bold text-3xl mb-10">
-              <li className="p-1 w-10 h-12 text-center rounded-md bg-[#254367]">
+            <ul className="flex min-[480px]:space-x-5 space-x-1 gilroy-bold min-[480px]:text-3xl text-xl min-[480px]:mb-10 mb-4">
+              <li className="p-1 min-[480px]:w-10 min-[480px]:h-12 w-8 h-8 text-center rounded-md bg-[#254367]">
                 0
               </li>
-              <li className="p-1 w-10 h-12 text-center rounded-md bg-[#254367]">
+              <li className="p-1 min-[480px]:w-10 min-[480px]:h-12 w-8 h-8 text-center rounded-md bg-[#254367]">
                 1
               </li>
-              <li className="p-1 w-10 h-12 text-center rounded-md bg-[#254367]">
+              <li className="p-1 min-[480px]:w-10 min-[480px]:h-12 w-8 h-8 text-center rounded-md bg-[#254367]">
                 4
               </li>
-              <li className="p-1 w-10 h-12 text-center rounded-md bg-[#254367]">
+              <li className="p-1 min-[480px]:w-10 min-[480px]:h-12 w-8 h-8 text-center rounded-md bg-[#254367]">
                 7
               </li>
-              <li className="p-1 w-10 h-12 text-center rounded-md bg-[#254367]">
+              <li className="p-1 min-[480px]:w-10 min-[480px]:h-12 w-8 h-8 text-center rounded-md bg-[#254367]">
                 4
               </li>
-              <li className="p-1 w-10 h-12 text-center rounded-md bg-[#254367]">
+              <li className="p-1 min-[480px]:w-10 min-[480px]:h-12 w-8 h-8 text-center rounded-md bg-[#254367]">
                 2
               </li>
             </ul>
@@ -87,11 +86,11 @@ const XentroBadge: React.FC<MintBadgeProps> = ({ title, description }) => {
         </div>
       </div>
       <p className="text-xl font-semibold tracking-wide my-3">{title}</p>
-      <p className="text-sm font-light w-[400px]">{description}</p>
+      <p className="text-sm font-light min-[480px]:w-[400px]">{description}</p>
       <div
         className={
           homepagestyles.bg_gradient_border +
-          " border-0 p-[0.06em] rounded-full hd-shadow mt-8 inline-block w-full"
+          " border-0 p-[0.06em] rounded-full hd-shadow mt-8 inline-block w-full min-[480px]:w-[90%] min-[480px]:absolute bottom-6 left-5"
         }
       >
         <button className="bg-[#08131E] w-full h-full rounded-full px-5 py-2 text-[#0477EF] text-xl">

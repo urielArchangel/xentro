@@ -65,16 +65,20 @@ export const EcosystemFeaturesTemplate: React.FC<FeatureProps> = ({
               title === "Bridge" ? "scale-[1.2] max-[450px]:scale-[1]" : ""
             } ${
               title === "Pay" ? "scale-[1.4] max-[450px]:scale-[1]" : ""
-            } flex justify-center mb-10`}
+            } flex justify-center mb-10 max-[600px]:scale-[0.8] ${
+              homepagestyles.scale_custom
+            }`}
           >
             <Image src={image} alt="token" width={300} height={300} />
           </div>
           <div className="flex justify-center flex-col text-white text-center min-[769px]:text-end">
-            <h3 className="text-4xl gilroy-bold mb-5">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl gilroy-bold mb-5">
               <span className={`${homepagestyles.gradientText}`}>XENTRO</span>{" "}
               {title}
             </h3>
-            <p className="gilroy-regular text-xl">{description}</p>
+            <p className="gilroy-regular text-sm sm:text-md md:text-xl">
+              {description}
+            </p>
           </div>
         </div>
       </div>
@@ -90,17 +94,21 @@ const AlternateEcosystemFeaturesTemplate: React.FC<FeatureProps> = ({
     <>
       <div className="p-[8%]">
         <div className="grid grid-cols-1 min-[769px]:grid-cols-2">
-          <div className="flex justify-center flex-col text-white text-center min-[769px]:text-start ">
-            <h3 className="text-4xl gilroy-bold mb-5">
+          <div className="flex justify-center flex-col text-white text-center min-[769px]:text-start">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl gilroy-bold mb-5">
               <span className={`${homepagestyles.gradientText}`}>XENTRO</span>{" "}
               {title}
             </h3>
-            <p className="gilroy-regular text-xl">{description}</p>
+            <p className="gilroy-regular text-sm sm:text-md md:text-xl">
+              {description}
+            </p>
           </div>
           <div
             className={`flex justify-end ${
               title === "Funjies" && "min-[769px]:translate-x-10 scale-[1.2]"
-            } flex justify-center mb-10 order-first min-[769px]:order-last`}
+            } flex justify-center mb-10 order-first min-[769px]:order-last max-[600px]:scale-[0.8] ${
+              homepagestyles.scale_custom
+            }`}
           >
             <Image src={image} alt="token" width={400} height={300} />
           </div>

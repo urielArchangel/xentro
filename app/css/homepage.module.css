@@ -1,9 +1,10 @@
 .hero {
   background-image: url(../images/landingpagebg.png);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+  background-size: cover; /* Ensure the image covers the entire container */
+  background-position: center; /* Keep the image centered */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
   height: 1000px;
+  width: 100%;
 }
 
 .faqAccordion {
@@ -47,12 +48,22 @@
 
 @media screen and (max-width: 768px) {
   .hero {
-    height: 600px;
+    background-image: url(../images/mobilelandingpagebg.png);
+    background-size: cover;
+    height: auto;
   }
 }
 
 @media screen and (min-width: 1500px) {
   .hero {
     height: 1300px;
+    background-size: 100% 100%;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1023px) {
+  /* Apply scale here */
+  .scale_custom {
+    transform: scale(0.8);
   }
 }
