@@ -1,0 +1,8 @@
+.bg_gradient_border {
+  background-image: linear-gradient(to bottom, #0477ef, #ffffff);
+  border: 0;
+}
+
+.innterContainerBG {
+  background-image: linear-gradient(to bottom, #0b151f, #0c1117);
+}
