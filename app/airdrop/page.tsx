@@ -2,14 +2,14 @@ import React from "react";
 import Link from "next/link";
 import homepagestyles from "@/app/css/homepage.module.css";
 import Image from "next/image";
-import AirdropHero from "../src/FE/airdrop/AirdropHero";
+import AirdropHero from "../src/airdrop/AirdropHero";
 import JoinCommunity from "../src/FE/homepage/components/JoinCommunity";
 import Footer from "@/app/src/FE/footer/Footer";
 import shield from "@/app/images/shield.png";
 import underline from "@/app/images/underline.png";
-import HowtoParticipate from "../src/FE/airdrop/HowtoParticipate";
-import ExclusiveTasks from "../src/FE/airdrop/ExclusiveTasks";
-import MintBadge from "../src/FE/airdrop/MintBadge";
+import HowtoParticipate from "../src/airdrop/HowtoParticipate";
+import ExclusiveTasks from "../src/airdrop/ExclusiveTasks";
+import MintBadge from "../src/airdrop/MintBadge";
 import { xentroQuestions } from "../src/data/faq/faqQuestions";
 import FaqAccordion from "../src/FE/homepage/components/FaqAccordion";
 

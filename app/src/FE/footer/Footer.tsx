@@ -9,6 +9,7 @@ import x from "@/app/images/socials/Twitter.png";
 import telegram from "@/app/images/socials/Telegram.png";
 import instagram from "@/app/images/socials/Instagram.png";
 import star from "@/app/images/socials/Star.png";
+import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -54,8 +55,12 @@ const Footer = () => {
                 </li>
               </ul>
               <ul className="text-[20px] font-bold space-y-4 my-10">
-                <li>Terms & Conditions</li>
-                <li>Privacy Policy</li>
+                <li>
+                  <Link href={"/terms-and-condition"}>Terms & Conditions</Link>
+                </li>
+                <li>
+                  <Link href={"/privacy-policy"}>Privacy Policy</Link>
+                </li>
               </ul>
             </section>
           </div>
@@ -158,8 +163,12 @@ const Footer = () => {
                 </li>
               </ul>
               <ul className="text-[20px] font-bold space-y-4 my-10 text-center">
-                <li>Terms & Conditions</li>
-                <li>Privacy Policy</li>
+                <li>
+                  <Link href={"/terms-and-condition"}>Terms & Conditions</Link>
+                </li>
+                <li>
+                  <Link href={"/privacy-policy"}>Privacy Policy</Link>
+                </li>
               </ul>
             </section>
           </div>

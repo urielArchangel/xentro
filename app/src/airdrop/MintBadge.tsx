@@ -12,7 +12,7 @@ const MintBadge = () => {
           Mint Your{" "}
           <span className="inline-block relative">
             <span
-              className={`${homepagestyles.gradientText} text-white gilroy-bold text-4xl`}
+              className={`${homepagestyles.gradientText} text-white gilroy-bold`}
             >
               Xentro
             </span>
