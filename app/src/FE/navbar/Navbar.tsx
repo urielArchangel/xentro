@@ -23,7 +23,11 @@ const Navbar = () => {
             href="/"
             className="flex items-center space-x-3 rtl:space-x-reverse"
           >
-            <Image src={logo} alt="xentro" className="mx-auto w-[200px]" />
+            <Image
+              src={logo}
+              alt="xentro"
+              className="mx-auto w-[130px] md:w-[200px]"
+            />
           </Link>
           <button
             onClick={toggleMobileMenu}

@@ -14,20 +14,21 @@ const XentroFeatures = () => {
     <>
       <div className="py-16 px-20">
         <div className="flex justify-center">
-          <p className="text-white gilroy-bold text-4xl mb-20">
-            <div
-              className={`${homepagestyles.gradientText} inline relative text-white gilroy-bold text-4xl`}
-            >
-              Xentro
-              <div className="absolute">
-                <Image
-                  src={underline}
-                  alt="underline"
-                  width={300}
-                  height={300}
-                />
-              </div>
-            </div>{" "}
+          <p className="text-white gilroy-bold text-3xl md:text-4xl lg:text-5xl mb-10 min-[1500px]:text-6xl">
+            <span className="inline-block relative">
+              <span
+                className={`${homepagestyles.gradientText} text-white gilroy-bold`}
+              >
+                Xentro
+              </span>
+              <Image
+                src={underline}
+                alt="underline"
+                width={300}
+                height={300}
+                className="absolute bottom-[-2] left-0"
+              />
+            </span>{" "}
             Features
           </p>
         </div>

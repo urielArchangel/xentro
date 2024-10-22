@@ -33,7 +33,7 @@ const Xentromission = () => {
             take full control of your financial future.
           </p>
         </div>
-        <div className="min-[1500px]:scale-[1.3] flex justify-center mt-10 min-[769px]:mt-0">
+        <div className="min-[1500px]:scale-[1.3] max-[768px]:scale-[0.8] flex justify-center mt-10 min-[769px]:mt-0">
           <Image
             src={mission}
             alt="mission"

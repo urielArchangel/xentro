@@ -172,7 +172,7 @@ const AllTasks = () => {
                 <p>
                   {" "}
                   <span
-                    className={`${homepagestyles.gradientText} text-white gilroy-bold sm:text-xl md:text-2xl lg:text-3xl tracking-wider`}
+                    className={`${homepagestyles.gradientText} text-white gilroy-bold text-lg sm:text-xl md:text-2xl lg:text-3xl tracking-wider`}
                   >
                     {2000000 + totalPoints}
                   </span>

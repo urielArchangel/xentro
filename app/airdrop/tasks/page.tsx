@@ -4,7 +4,7 @@ import Footer from "@/app/src/FE/footer/Footer";
 import JoinCommunity from "@/app/src/FE/homepage/components/JoinCommunity";
 import Link from "next/link";
 import homepagestyles from "@/app/css/homepage.module.css";
-import AllTasks from "@/app/src/airdrop/AllTasks";
+import AllTasks from "@/app/src/FE/airdrop/AllTasks";
 
 const page = () => {
   return (

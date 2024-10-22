@@ -18,7 +18,7 @@ const Footer = () => {
       <div
         className={
           footercss.bg_gradient_border +
-          " border-0 p-[0.07em] rounded-[18px] hd-shadow min-[850px]:block hidden"
+          " border-0 p-[0.07em] rounded-[18px] hd-shadow min-[933px]:block hidden"
         }
       >
         <section
@@ -106,7 +106,7 @@ const Footer = () => {
       <div
         className={
           footercss.bg_gradient_border +
-          " border-0 p-[0.07em] rounded-[18px] hd-shadow min-[850px]:hidden block"
+          " border-0 p-[0.07em] rounded-[18px] hd-shadow min-[933px]:hidden block"
         }
       >
         <section
@@ -117,12 +117,12 @@ const Footer = () => {
         >
           <div className="flex flex-col justify-center items-center">
             <Image src={logo} alt="xentro" className="block mb-8 w-[200px]" />
-            <h6 className="text-[18px] text-white text-center mb-8">
+            <h6 className="text-base md:text-lg text-white text-center mb-8">
               Gateway to UNTRAD Banking <br /> Enjoy Finance on a Freeway with
               Xentro
             </h6>
           </div>
-          <div className="flex text-[20px] font-semibold items-center justify-between w-full max-w-[320px] self-center">
+          <div className="flex text-base md:text-lg font-semibold items-center justify-around w-full max-w-[320px] self-center">
             <ul className="space-y-4">
               <li>Medium</li>
               <li>Discord</li>
@@ -162,7 +162,7 @@ const Footer = () => {
                   <Image src={star} alt="star" />
                 </li>
               </ul>
-              <ul className="text-[20px] font-bold space-y-4 my-10 text-center">
+              <ul className="text-base md:text-lg font-bold space-y-4 my-10 text-center">
                 <li>
                   <Link href={"/terms-and-condition"}>Terms & Conditions</Link>
                 </li>
@@ -173,7 +173,7 @@ const Footer = () => {
             </section>
           </div>
           <div className="self-center">
-            <h6 className="text-[20px] font-semibold text-center mt-8">
+            <h6 className="text-base md:text-lg font-semibold text-center mt-8">
               For partnerships, please get in touch with us at
             </h6>
             <div
@@ -182,12 +182,12 @@ const Footer = () => {
                 " border-0 p-[0.06em] rounded-[11px] hd-shadow mt-8"
               }
             >
-              <button className="bg-[#021327] block w-full h-full rounded-[11px] px-6 py-4 text-white text-[20px] font-bold">
+              <button className="bg-[#021327] block w-full h-full rounded-[11px] px-6 py-4 text-white text-base md:text-lg font-bold">
                 info@joinxentro.com
               </button>
             </div>
           </div>
-          <p className="text-center absolute left-0 right-0 mx-auto bottom-6 text-[20px] ">
+          <p className="text-center absolute left-0 right-0 mx-auto bottom-6 text-base md:text-lg">
             Copyright © 2024 Xentro. All rights reserved.
           </p>
         </section>
