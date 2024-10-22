@@ -106,7 +106,7 @@ const ExclusiveTasks = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-stretch">
               <div className="text-white gilroy-regular h-full">
                 <ul className="space-y-4">
-                  {tasks.map((task) => (
+                  {tasks.map((task, index) => (
                     <div
                       className={
                         homepagestyles.bg_gradient_border +
@@ -114,7 +114,7 @@ const ExclusiveTasks = () => {
                       }
                     >
                       <li
-                        key={task.id}
+                        key={task.id || index}
                         className="flex items-center justify-between bg-[#0B1219] rounded-lg p-3"
                       >
                         <span className="text-xs max-[599px]:text-md min-[600px]:text-lg flex items-center gap-3">

@@ -34,7 +34,16 @@ const XentroFeatures = () => {
         </div>
         <section className="grid grid-cols-8 lg:grid-cols-7 items-stretch">
           <div className="h-full">
-            <Image src={bar} alt="mission" width={7} height={300} />
+            <Image
+              src={bar}
+              alt="mission"
+              width={7}
+              height={300}
+              style={{
+                height: "auto",
+              }}
+              className="h-[300px] md:h-[250px] sm:h-[200px] lg:h-[150px]"
+            />
           </div>
           <div className="col-span-7 lg:col-span-6 h-full">
             <div className="grid grid-cols-7 md:grid-cols-6 md:mb-28">

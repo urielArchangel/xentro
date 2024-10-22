@@ -88,25 +88,25 @@ const Privacy = () => {
           <p className="mb-10 font-semibold tracking-wider md:tracking-wide">
             <span className="block">How do you protect your information?</span>
             We employ a periodic malware inspection across the board. As such,
-            eliminating the use of vulnerability scanning. Furthermore, users'
-            personal information is stored in a secure network, with limited
-            access to personnel who have satisfactorily sworn to the oath of
-            confidentiality. Additionally, all financially sensitive information
-            provided is well encrypted using the Secure Socket Layer (SSL)
-            framework.
+            eliminating the use of vulnerability scanning. Furthermore,
+            users&apos; personal information is stored in a secure network, with
+            limited access to personnel who have satisfactorily sworn to the
+            oath of confidentiality. Additionally, all financially sensitive
+            information provided is well encrypted using the Secure Socket Layer
+            (SSL) framework.
           </p>
           <p className="mb-10 font-semibold tracking-wider md:tracking-wide">
             <span className="block">Do you use Cookies?</span>
             <span className="mb-5 block">
               Yes we do. Firstly, cookies are tiny data traces and files sent by
-              a website or service provider to a computer's hard drive via a web
-              browser (if permitted). This enables such a site or service vendor
-              to subsequently recognize your browser and identify its peculiar
-              information. With previous site activities, customer preference
-              can easily be predicted, thus, yielding better service. Not only
-              that, we also use cookies to compile aggregate data about our
-              site's traffic and impressions. Shaping our product development
-              path for the future.
+              a website or service provider to a computer&apos;s hard drive via
+              a web browser (if permitted). This enables such a site or service
+              vendor to subsequently recognize your browser and identify its
+              peculiar information. With previous site activities, customer
+              preference can easily be predicted, thus, yielding better service.
+              Not only that, we also use cookies to compile aggregate data about
+              our site&apos;s traffic and impressions. Shaping our product
+              development path for the future.
             </span>
             Considering the aforementioned, we can easily understand user
             preferences for future visits. In all transparency, we could indulge
@@ -123,14 +123,14 @@ const Privacy = () => {
           </p>
           <p className="mb-10 font-semibold tracking-wider md:tracking-wide">
             <span className="block">Third-party disclosure</span>
-            We don't and never intend to share or trade your PII to any external
-            candidates without prior and clear notice to you. This excludes web
-            hosting partners or other parties who oversee the website, or offer
-            integral business support services to us, on the basis that they
-            jointly agree to maintain the integrity and confidentiality of users
-            information. We may feel obliged to disclose information as it is
-            appropriate, in compliance with the law, policy enforcement or for
-            protection of proprietary rights.
+            We don&apos;t and never intend to share or trade your PII to any
+            external candidates without prior and clear notice to you. This
+            excludes web hosting partners or other parties who oversee the
+            website, or offer integral business support services to us, on the
+            basis that they jointly agree to maintain the integrity and
+            confidentiality of users information. We may feel obliged to
+            disclose information as it is appropriate, in compliance with the
+            law, policy enforcement or for protection of proprietary rights.
           </p>
           <p className="mb-10 font-semibold tracking-wider md:tracking-wide">
             <span className="block">Contact Us</span>

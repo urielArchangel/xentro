@@ -241,7 +241,7 @@ const AllTasks = () => {
             </li>
           </div>
           <ul className="space-y-2">
-            {tasks.map((task) => (
+            {tasks.map((task, index) => (
               <div
                 className={
                   homepagestyles.bg_gradient_border +
@@ -249,7 +249,7 @@ const AllTasks = () => {
                 }
               >
                 <li
-                  key={task.id}
+                  key={task.id || index}
                   className="grid grid-cols-3 bg-[#092747] rounded-lg py-3 px-[5%]"
                 >
                   <span className="text-xs max-[599px]:text-md min-[600px]:text-lg flex items-center gap-3 place-self-start">

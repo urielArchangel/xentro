@@ -47,7 +47,9 @@ const page = () => {
           <div className="flex flex-col items-center pb-20 pt-24">
             <p className="text-white gilroy-bold px-3 text-3xl md:text-4xl lg:text-5xl  text-center mb-10">
               Frequently Asked Questions{" "}
-              <span className={`${homepagestyles.gradientText}`}>(FAQ's)</span>
+              <span className={`${homepagestyles.gradientText}`}>
+                (FAQ&apos;s)
+              </span>
             </p>
             <div className="w-[80%]">
               {faq.faq.map((data: FAQData, index: number) => {
