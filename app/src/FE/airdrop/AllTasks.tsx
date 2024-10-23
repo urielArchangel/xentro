@@ -243,6 +243,7 @@ const AllTasks = () => {
           <ul className="space-y-2">
             {tasks.map((task, index) => (
               <div
+                key={index}
                 className={
                   homepagestyles.bg_gradient_border +
                   " border-0 p-[0.06em] rounded-lg hd-shadow"
