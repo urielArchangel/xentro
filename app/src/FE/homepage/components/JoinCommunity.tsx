@@ -7,7 +7,9 @@ import Image from "next/image";
 const JoinCommunity = () => {
   return (
     <>
-      <section className={`px-[8%] py-16 ${homepagestyles.community}`}>
+      <section
+        className={`px-[4%] md:px-[8%] py-16 ${homepagestyles.community}`}
+      >
         <div className="flex justify-center">
           <p className="text-white gilroy-bold text-3xl md:text-4xl lg:text-5xl mb-10 text-center">
             Join the{" "}
@@ -28,7 +30,7 @@ const JoinCommunity = () => {
             Community
           </p>
         </div>
-        <div className="flex justify-center text-sm md:text-xl text-white gap-10 gilroy-regular">
+        <div className="flex justify-center text-xs sm:text-sm md:text-md lg:text-lg xl:text-xl text-white gap-2 md:gap-10 gilroy-regular">
           <p className="flex items-center">
             <Image src={check} alt="check" width={20} height={20} />
             <span className="ml-2">Exclusive Updates</span>
@@ -43,19 +45,19 @@ const JoinCommunity = () => {
           </p>
         </div>
         <form className="flex justify-center w-full sm:px-4">
-          <div className="text-center w-full">
+          <div className="text-center w-full flex justify-center gap-2 md:gap-0">
             <input
               type="email"
               placeholder="Email Address"
-              className="gilroy-regular px-5 py-4 rounded-full border-[#0477EF] w-full sm:w-[50%] mt-6 bg-[#1a2b3d42] border border-[#151515] focus:outline-none text-white placeholder:text-xl"
+              className="gilroy-regular px-3 py-3 md:px-5 md:py-4 rounded-full border-[#0477EF] w-full sm:w-[50%] mt-6 bg-[#1a2b3d42] border border-[#151515] focus:outline-none text-white placeholder:text-xl"
             />
             <div
               className={
                 homepagestyles.bg_gradient_border +
-                " border-0 p-[0.06em] rounded-full hd-shadow mt-4 inline-block w-full sm:w-[20%] sm:ml-5"
+                " border-0 p-[0.06em] rounded-full hd-shadow mt-4 inline-block w-[50%] sm:w-[20%] sm:ml-5"
               }
             >
-              <button className="bg-[#021327] w-full h-full rounded-full px-5 py-3 text-white text-lg md:text-xl gilroy-bold">
+              <button className="bg-[#021327] w-full h-full rounded-full px-3 py-1 md:px-5 md:py-3 text-white text-lg md:text-xl gilroy-bold">
                 Subscribe
               </button>
             </div>
