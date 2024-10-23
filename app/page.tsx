@@ -68,7 +68,6 @@ const page = () => {
         </div>
         <Footer />
       </main>
-      s
     </>
   );
 };
