@@ -10,6 +10,9 @@ import telegram from "@/app/images/socials/Telegram.png";
 import instagram from "@/app/images/socials/Instagram.png";
 import xentro from "@/app/images/socials/xentro.png";
 import Link from "next/link";
+import { useAccount } from "wagmi";
+import { useConnectModal } from "@rainbow-me/rainbowkit";
+import { trauncateAddressMiddle } from "../helpers";
 
 interface Task {
   id: number;
@@ -19,7 +22,10 @@ interface Task {
 }
 
 const ExclusiveTasks = () => {
-  const [isConnected, setIsConnected] = useState<boolean>(false);
+  // const [isConnected, setIsConnected] = useState<boolean>(false);
+  const { isConnected } = useAccount();
+  const { openConnectModal } = useConnectModal();
+
   const tasksData: Task[] = [
     { id: 1, name: "Follow Xentro on X", completed: false, icon: x },
     { id: 2, name: "Like the Post on Xentro Page", completed: false, icon: x },
@@ -58,7 +64,9 @@ const ExclusiveTasks = () => {
   const [tasks, setTasks] = useState<Task[]>(tasksData);
 
   const handleConnectWallet = () => {
-    setIsConnected(true);
+    if (openConnectModal) {
+      openConnectModal();
+    }
   };
 
   const completedTasks = tasks.filter((task) => task.completed).length;
@@ -111,7 +119,7 @@ const ExclusiveTasks = () => {
                       key={index}
                       className={
                         homepagestyles.bg_gradient_border +
-                        " border-0 p-[0.06em] rounded-lg hd-shadow"
+                        " border-0 p-[0.07em] rounded-lg hd-shadow"
                       }
                     >
                       <li
@@ -230,14 +238,18 @@ const WalletInfo: React.FC = () => {
       });
   };
 
+  const { isConnected, address } = useAccount();
+
+
   return (
     <div className="rounded-xl text-white mx-auto gilroy-regular border-[#027EFF] border h-full">
       {/* Connected Wallet */}
       <div className="border-b border-[#027EFF]">
         <div className="px-6 py-6">
           <div className="bg-[#081A2E] border-[#2F95FF] border py-2 px-2 mb-8 flex justify-between items-center rounded-full">
-            <span className="text-xs min-[400px]:text-lg lg:text-xl">
-              Connected Wallet: 0x123....789a
+            <span className="text-sm lg:text-xl overflow-hidden text-ellipsis">
+             
+              {address }
             </span>
             <button className="text-[#027EFF] p-1">
               <svg

@@ -7,6 +7,7 @@ import HomepageHero from "@/app/src/FE/homepage/components/HomepageHero";
 import Xentromission from "@/app/src/FE/homepage/components/XentroMission";
 import Footer from "@/app/src/FE/footer/Footer";
 import faq from "@/app/src/data/faq/faq.json";
+import Link from "next/link";
 
 type FAQData = {
   question: string;
@@ -38,9 +39,9 @@ const page = () => {
                 " border-0 p-[0.06em] rounded-full hd-shadow mt-8 inline-block"
               }
             >
-              <button className="bg-[#070D12] w-full h-full rounded-full  px-5 py-3 text-white text-xl gilroy-bold">
+              <Link href='/airdrop' className="bg-[#070D12] block w-full h-full rounded-full  px-5 py-3 text-white text-xl gilroy-bold">
                 Join Xentro Airdrop
-              </button>
+              </Link>
             </div>
           </div>
           {/* FAQ */}
@@ -51,10 +52,11 @@ const page = () => {
                 (FAQ&apos;s)
               </span>
             </p>
-            <div className="w-[80%]">
+            <div className="w-[80%]" id="faq">
               {faq.faq.map((data: FAQData, index: number) => {
                 return (
                   <FaqAccordion
+                  
                     key={index}
                     question={data.question}
                     answer={data.answer}

@@ -1,10 +1,13 @@
 import React from "react";
 import Mints from "./Mints";
+import {use} from 'react'
 
-const page = ({params}:{params:{userID:string}}) => {
+const page = ({params}:{params:Promise<{userID:string}>}) => {
+  const {userID} =  use(params)
+
   return (
     <section>
-      <Mints id={params.userID} />
+      <Mints id={userID} />
     </section>
   );
 };

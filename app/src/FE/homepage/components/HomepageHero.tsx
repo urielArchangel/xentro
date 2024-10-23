@@ -1,16 +1,12 @@
 import React from "react";
-import Link from "next/link";
 import Image from "next/image";
 import homepagestyles from "@/app/css/homepage.module.css";
-import leftlogo from "@/app/images/leftlogo.png";
-import rightlogo from "@/app/images/rightlogo.png";
 import round from "@/app/images/circle.png";
-import Navbar from "../../navbar/Navbar";
+import Link from "next/link";
 
 const HomepageHero = () => {
   return (
     <>
-      <Navbar />
       <div className={`${homepagestyles.hero} w-full`}>
         <div
           className={`flex flex-col items-center gap-2 md:gap-5 pb-20 pt-24 px-[4%] ${homepagestyles.zindex}`}
@@ -37,12 +33,12 @@ const HomepageHero = () => {
           <div
             className={
               homepagestyles.bg_gradient_border +
-              " border-0 p-[0.06em] rounded-full hd-shadow mt-8 inline-block"
+              " border-0 p-[0.07em] rounded-full hd-shadow mt-8 inline-block"
             }
           >
-            <button className="bg-[#002953] w-full h-full rounded-full md:px-5 md:py-3 px-2 py-1 text-white text-lg md:text-xl gilroy-regular font-semibold">
+            <Link href="/airdrop" className="bg-[#002953] block w-full h-full rounded-full md:px-5 md:py-3 px-2 py-1 text-white text-lg md:text-xl gilroy-regular font-semibold">
               Join Xentro Airdrop
-            </button>
+            </Link>
           </div>
         </div>
       </div>

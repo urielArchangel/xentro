@@ -11,6 +11,8 @@ import instagram from "@/app/images/socials/Instagram.png";
 import youtube from "@/app/images/socials/yt.png";
 import Link from "next/link";
 import { FaSearch } from "react-icons/fa";
+import { useAccount } from "wagmi";
+import { trauncateAddressMiddle } from "../helpers";
 
 interface Task {
   id: number;
@@ -144,6 +146,8 @@ const AllTasks = () => {
     setTasks(filteredTasks);
   };
 
+  const {address} = useAccount()
+
   return (
     <>
       <div className="px-[8%]">
@@ -155,13 +159,11 @@ const AllTasks = () => {
         >
           <div className="rounded-xl px-5 py-3 text-white bg-[#092747] gilroy-regular">
             <div className="flex md:flex-row flex-col justify-between">
-              <div className="flex flex-row justify-between md:justify-normal items-center md:items-start md:flex-col gap-3 mb-3">
-                <p className="text-xs min-[400px]:text-lg lg:text-xl font-semibold tracking-wide">
-                  Connected Wallet:
-                </p>
+              <div className="flex flex-row justify-between items-center ">
+             
                 <div className="bg-[#081A2E] border-[#2F95FF] border py-1 px-6 flex items-center rounded-full">
                   <span className="text-xs min-[400px]:text-lg lg:text-xl font-bold tracking-wide">
-                    0x1232123….789a
+                   {trauncateAddressMiddle(address,10)}
                   </span>
                 </div>
               </div>
@@ -209,11 +211,11 @@ const AllTasks = () => {
               " border-0 p-[0.06em] rounded-lg hd-shadow my-2"
             }
           >
-            <li className="grid grid-cols-3 bg-[#092747] rounded-lg py-3 px-[5%] font-semibold">
+            <li className="flex justify-between bg-[#092747] rounded-lg py-3 px-[5%] font-semibold">
               <span className="text-xs max-[599px]:text-md min-[600px]:text-lg flex items-center gap-3 place-self-start">
                 Task
               </span>
-              <span className="text-xs max-[599px]:text-md min-[600px]:text-lg flex items-center gap-3 place-self-center">
+              <span className="text-xs max-[599px]:text-md min-[600px]:text-lg flex items-center self-center">
                 Points{" "}
                 <svg
                   width="27"
@@ -251,17 +253,17 @@ const AllTasks = () => {
               >
                 <li
                   key={task.id || index}
-                  className="grid grid-cols-3 bg-[#092747] rounded-lg py-3 px-[5%]"
+                  className="flex items-center bg-[#092747] rounded-lg py-3 px-[5%] justify-between "
                 >
-                  <span className="text-xs max-[599px]:text-md min-[600px]:text-lg flex items-center gap-3 place-self-start">
+                  <span className="text-xs max-[599px]:text-md min-[600px]:text-lg flex items-center  w-[33%] ">
                     <Image
                       src={task.icon}
                       alt="task"
-                      className="w-[15px] md:w-[25px]"
+                      className="w-[15px] md:w-[25px] mx-2"
                     />
                     {task.task}
                   </span>
-                  <span className="text-xs max-[599px]:text-md min-[600px]:text-lg flex items-center place-self-center">
+                  <span className="text-xs max-[599px]:text-md min-[600px]:text-lg flex items-center place-self-center  w-[33%]">
                     {task.points}
                   </span>
                   <button

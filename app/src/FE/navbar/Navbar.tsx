@@ -1,23 +1,52 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import logo from "@/app/images/xentroLogoWNameWhite.png";
 import activeidentifier from "@/app/images/active.png";
 import homepagestyles from "@/app/css/homepage.module.css";
+import {
+  ConnectButton,
+  useAccountModal,
+  useConnectModal,
+} from "@rainbow-me/rainbowkit";
+import { useAccount, useDisconnect } from "wagmi";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
-
+  
+  const { isConnected, address } = useAccount();
+  const { openConnectModal } = useConnectModal();
+    const { openAccountModal } = useAccountModal();
+  const [hash,setHash] =useState("") 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
+  const connectWalletButtonAction = () => {
+    if (openAccountModal) {
+      openAccountModal();
+      return;
+    }
+    if (openConnectModal) {
+      openConnectModal();
+      return;
+    }
+  };
+  useLayoutEffect(()=>{
+    
+    if(window.location.hash){
+  setHash( window.location.hash.replace("#",''))
+    }else{
+      setHash("")
+    }
+
+  },[hash,pathname])
 
   return (
     <>
-      <nav className="bg-transparent px-[4%] bg-[#002953] bg-opacity-90 backdrop-blur-md fixed w-full z-[10000] top-0 start-0">
+      <nav className=" left-0 bg-[#00295310] bg-opacity-90 backdrop-blur-md fixed w-screen z-[10] top-0 py-4">
         <div className="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-4">
           <Link
             href="/"
@@ -32,7 +61,7 @@ const Navbar = () => {
           <button
             onClick={toggleMobileMenu}
             type="button"
-            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg min-[1000px]:hidden focus:outline-none"
+            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg min-[1200px]:hidden focus:outline-none"
           >
             <svg
               width="26"
@@ -75,7 +104,7 @@ const Navbar = () => {
               href="/"
               className="flex items-center space-x-3 rtl:space-x-reverse absolute top-6 left-6"
             >
-              <Image src={logo} alt="xentro" className="mx-auto w-[100px]" />
+              <Image src={logo} alt="xentro" className="mx-auto w-[80px]" />
             </Link>
             <button
               className="absolute top-6 right-6 text-white"
@@ -129,9 +158,10 @@ const Navbar = () => {
                     " border-0 p-[0.06em] rounded-full hd-shadow inline-block"
                   }
                 >
-                  <button className="bg-[#002953] w-full h-full rounded-full  px-5 py-3 text-white text-lg gilroy-regular font-semibold">
+                  <ConnectButton />
+                  {/* <button className="bg-[#002953] w-full h-full rounded-full  px-5 py-3 text-white text-lg gilroy-regular font-semibold">
                     Connect Wallet
-                  </button>
+                  </button> */}
                 </div>
               </li>
             </ul>
@@ -141,109 +171,85 @@ const Navbar = () => {
           <div
             className={
               homepagestyles.bg_gradient_border +
-              " border-0 p-[0.06em] rounded-full hd-shadow hidden w-[600px] min-[1000px]:block md:w-auto"
+              " border-0 p-[0.07em] rounded-full hd-shadow hidden w-[600px] min-[1200px]:block md:w-auto"
             }
             id="navbar-default"
           >
-            <ul className="font-medium flex flex-col p-4  mt-4 text-white md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 bg-[#002953] w-full h-full rounded-full  px-5 py-3 text-white text-lg gilroy-regular font-medium">
-              <li className="flex flex-col items-center">
+            <ul className=" flex flex-col h-16 px-10 mt-4  text-white md:flex-row md:space-x-8 md:items-center md:mt-0 md:border-0 bg-[#002953] w-full md:justify-between rounded-full  text-lg gilroy-regular font-medium">
+              <li className="w-[80px]  relative h-full ">
                 <Link
                   href="/ecosystem"
-                  className={`py-2 px-3 bg-blue-700 md:bg-transparent md:p-0 `}
+                  className={`h-full flex items-center justify-center px-3 bg-blue-700 md:bg-transparent md:p-0 `}
                 >
                   Ecosystem
                 </Link>
-                <Image
-                  src={activeidentifier}
-                  alt="active"
-                  width={100}
-                  className={`${
-                    pathname === "/ecosystem"
-                      ? "block translate-y-[12px]"
-                      : "hidden"
-                  }`}
-                />
+                <span
+                  hidden={!pathname.includes("ecosystem")}
+                  className="bg-white h-[5px] absolute w-full bottom-0 rounded-tl-[10px] rounded-tr-[10px]"
+                ></span>
               </li>
-              <li className="flex flex-col items-center">
+              <li className="h-full w-[80px]  relative">
                 <Link
                   href="/airdrop"
-                  className={`py-2 px-3 bg-blue-700 md:bg-transparent md:p-0 `}
+                  className={`h-full flex items-center justify-center py-2 px-3 bg-blue-700 md:bg-transparent md:p-0 `}
                 >
                   Airdrop
                 </Link>
-                <Image
-                  src={activeidentifier}
-                  alt="active"
-                  width={100}
-                  className={`${
-                    pathname === "/airdrop"
-                      ? "block translate-y-[12px]"
-                      : "hidden"
-                  }`}
-                />
+                <span
+                  hidden={!pathname.includes("airdrop")}
+                  className="bg-white h-[5px] absolute w-full bottom-0 rounded-tl-[10px] rounded-tr-[10px]"
+                ></span>
               </li>
-              <li className="flex flex-col items-center">
+              <li className=" w-[80px] relative h-full ">
                 <Link
                   href="/stake"
-                  className={`py-2 px-3 bg-blue-700 md:bg-transparent md:p-0 `}
+                  className={`h-full flex items-center justify-center py-2 px-3 bg-blue-700 md:bg-transparent md:p-0 `}
                 >
                   Stake
                 </Link>
-                <Image
-                  src={activeidentifier}
-                  alt="active"
-                  width={100}
-                  className={`${
-                    pathname === "/stake"
-                      ? "block translate-y-[12px]"
-                      : "hidden"
-                  }`}
-                />
+                <span
+                  hidden={!pathname.includes("stake")}
+                  className="bg-white h-[5px] absolute w-full bottom-0 rounded-tl-[10px] rounded-tr-[10px]"
+                ></span>
               </li>
-              <li className="flex flex-col items-center">
+              <li className=" w-[80px] relative h-full ">
                 <Link
                   href="/bridge"
-                  className={`py-2 px-3 bg-blue-700 md:bg-transparent md:p-0 `}
+                  className={` h-full flex items-center justify-center py-2 px-3 bg-blue-700 md:bg-transparent md:p-0 `}
                 >
                   Bridge
                 </Link>
-                <Image
-                  src={activeidentifier}
-                  alt="active"
-                  width={100}
-                  className={`${
-                    pathname === "/bridge"
-                      ? "block translate-y-[12px]"
-                      : "hidden"
-                  }`}
-                />
+                <span
+                  hidden={!pathname.includes("bridge")}
+                  className="bg-white h-[5px] absolute w-full bottom-0 rounded-tl-[10px] rounded-tr-[10px]"
+                ></span>
               </li>
-              <li>
+              <li className=" w-[80px] relative h-full ">
                 <Link
-                  href="/faq"
-                  className={`py-2 px-3 bg-blue-700 md:bg-transparent md:p-0 `}
+                  href="/#faq"
+                  className={` h-full flex items-center justify-center py-2 px-3 bg-blue-700 md:bg-transparent md:p-0 `}
                 >
                   FAQ
                 </Link>
-                <Image
-                  src={activeidentifier}
-                  alt="active"
-                  width={100}
-                  className={`${
-                    pathname === "/faq" ? "block translate-y-[12px]" : "hidden"
-                  }`}
-                />
+                <span
+                  hidden ={hash != "faq"}
+                  className="bg-white h-[5px] absolute w-full bottom-0 rounded-tl-[10px] rounded-tr-[10px]"
+                ></span>
               </li>
             </ul>
           </div>
+
           <div
             className={
               homepagestyles.bg_gradient_border +
-              " border-0 p-[0.06em] rounded-full hd-shadow inline-block hidden min-[1000px]:block"
+              " border-0 p-[0.07em] rounded-full hd-shadow  max-w-[250px] block"
             }
           >
-            <button className="bg-[#002953] w-full h-full rounded-full  px-5 py-3 text-white text-lg gilroy-regular font-semibold">
-              Connect Wallet
+            <button
+              onClick={connectWalletButtonAction}
+              className="bg-[#002953] w-full h-full rounded-full overflow-hidden text-ellipsis px-5 py-3 text-white text-lg gilroy-regular font-semibold"
+            >
+              {isConnected ? address : "Connect Wallet"}
             </button>
           </div>
         </div>

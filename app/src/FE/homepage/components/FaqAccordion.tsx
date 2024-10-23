@@ -18,13 +18,15 @@ const FaqAccordion: React.FC<FaqAccordionProps> = ({ question, answer }) => {
 
   return (
     <div
-      className={`mb-2 min-[1500px]:mb-5 px-8 py-6 text-white ${homepagestyles.faqAccordion}`}
+    onClick={handleOpenAccordion}
+
+      className={`mb-2 cursor-pointer min-[1500px]:mb-5 px-8 py-6 text-white ${homepagestyles.faqAccordion} bg-red-400`}
     >
-      <div className="flex justify-between">
+      <div className="flex justify-between" >
         <p className="gilroy-bold text-md md:text-xl min-[1500px]:text-2xl">
           {question}
         </p>
-        <button onClick={handleOpenAccordion}>
+        <button >
           {isOpen ? <Close /> : <Open />}
         </button>
       </div>

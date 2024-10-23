@@ -6,7 +6,7 @@ import { adminCookieName } from './app/src/data/constants'
 // This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
   if(request.url.includes("/admin")){
-  const cookie = cookies().get(adminCookieName)
+  const cookie = (await cookies()).get(adminCookieName)
   if(!cookie||!cookie.value){
     return NextResponse.redirect(new URL("/admin/auth",request.nextUrl))
   }

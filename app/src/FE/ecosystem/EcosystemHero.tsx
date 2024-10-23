@@ -1,16 +1,12 @@
 import React from "react";
-import Link from "next/link";
 import Image from "next/image";
-import ecosystemstyles from "@/app/css/ecosystem.module.css";
 import homepagestyles from "@/app/css/homepage.module.css";
 import heroimage from "@/app/images/ecosystem.png";
 import slider from "@/app/images/xentroslider.png";
-import Navbar from "../navbar/Navbar";
 
 const EcosystemHero = () => {
   return (
     <>
-      <Navbar />
       <section className="grid grid-cols-1 min-[769px]:grid-cols-5 px-[8%] pt-[15%] min-[769px]:pt-[10%] min-[1500px]:pt-[6%] place-items-center">
         <div className="min-[769px]:col-span-3 text-center min-[769px]:text-start">
           <h1 className="text-white gilroy-black-bold text-4xl lg:text-5xl min-[1500px]:text-6xl text-center min-[769px]:text-start mb-10">

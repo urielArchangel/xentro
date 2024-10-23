@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "@/app/src/FE/navbar/Navbar";
 import Footer from "@/app/src/FE/footer/Footer";
 import JoinCommunity from "@/app/src/FE/homepage/components/JoinCommunity";
 import Link from "next/link";
@@ -50,7 +49,6 @@ const page = () => {
           <p>Complete all tasks to earn rewards</p>
         </section>
         <AllTasks />
-        <Navbar />
         <JoinCommunity />
         <Footer />
       </div>

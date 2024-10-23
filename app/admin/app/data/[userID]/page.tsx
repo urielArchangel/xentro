@@ -1,10 +1,11 @@
 import React from 'react'
 import Data from './Data'
 
-const page = ({ params }: { params: { userID: string } }) => {
+const page = async({ params }: { params: Promise<{ userID: string }> }) => {
+  const {userID} = await params
   return (
     <section>
-      <Data id={params.userID} />
+      <Data id={userID} />
     </section>
   )
 }
