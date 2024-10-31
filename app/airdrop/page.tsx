@@ -12,8 +12,17 @@ import ExclusiveTasks from "../src/FE/airdrop/ExclusiveTasks";
 import MintBadge from "../src/FE/airdrop/MintBadge";
 import { xentroQuestions } from "../src/data/faq/faqQuestions";
 import FaqAccordion from "../src/FE/homepage/components/FaqAccordion";
+import { cookies } from "next/headers";
+import { userDataCookieName } from "../src/data/constants";
+import { UserType, verifyUserDataToken } from "../src/BE/userdata/jwt";
 
-const page = () => {
+
+const page = async() => {
+  let data=null as UserType|null;
+const cookie = (await cookies()).get(userDataCookieName)
+if(cookie && cookie.value){
+  data=verifyUserDataToken(cookie.value)
+}
   return (
     <>
       <div className="body pt-5">
@@ -41,7 +50,7 @@ const page = () => {
           </div>
         </div>
         <HowtoParticipate />
-        <ExclusiveTasks />
+        <ExclusiveTasks user={data} />
         <MintBadge />
         <div>
           <div className="flex flex-col items-center pb-20 pt-24">

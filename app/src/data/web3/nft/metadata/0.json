@@ -1,0 +1,8 @@
+{
+    "name": "Xentro Community Badge",
+    "description": "A badge for members of the Xentro community.",
+    "image": "ipfs://QmaLreX5CkRbJmxe6Br8kmWf1zaAetGJZkrAzdaEWs7u2H",
+    "attributes": [
+      { "trait_type": "Badge Type", "value": "Community" }
+    ]
+  }

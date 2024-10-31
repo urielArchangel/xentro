@@ -1,17 +1,16 @@
 "use client";
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import logo from "@/app/images/xentroLogoWNameWhite.png";
-import activeidentifier from "@/app/images/active.png";
 import homepagestyles from "@/app/css/homepage.module.css";
 import {
   ConnectButton,
   useAccountModal,
   useConnectModal,
 } from "@rainbow-me/rainbowkit";
-import { useAccount, useDisconnect } from "wagmi";
+import { useAccount } from "wagmi";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -24,7 +23,8 @@ const Navbar = () => {
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
-  const connectWalletButtonAction = () => {
+  const connectWalletButtonAction = async() => {
+  
     if (openAccountModal) {
       openAccountModal();
       return;

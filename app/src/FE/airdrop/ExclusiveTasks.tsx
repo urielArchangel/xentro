@@ -12,8 +12,12 @@ import xentro from "@/app/images/socials/xentro.png";
 import Link from "next/link";
 import { useAccount } from "wagmi";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
-import { trauncateAddressMiddle } from "../helpers";
-
+import Web3 from "web3";
+import NFTMetatdata from "@/app/src/BE/web3/artifacts/Metadata.json";
+import { NFTContractAddress } from "../../data/constants";
+import { updateCommunityBadgeMintDBAction } from "../../BE/serveractions";
+import { UserType } from "../../BE/userdata/jwt";
+import useMessage from "antd/es/message/useMessage";
 interface Task {
   id: number;
   name: string;
@@ -21,10 +25,80 @@ interface Task {
   completed: boolean;
 }
 
-const ExclusiveTasks = () => {
+const ExclusiveTasks = ({user}:{user:UserType|null}) => {
   // const [isConnected, setIsConnected] = useState<boolean>(false);
-  const { isConnected } = useAccount();
+  const { isConnected, address } = useAccount();
+
   const { openConnectModal } = useConnectModal();
+  const [message,c] = useMessage()
+
+  const isCommunityBadgeMinted = async()=>{
+
+    message.destroy();
+
+
+    const web3 = new Web3(window.ethereum);
+
+    const contract = new web3.eth.Contract(
+      NFTMetatdata.output.abi,
+      NFTContractAddress
+    );
+
+    const has = await contract.methods.hasCommunityBadge(address).call() as boolean
+    if(has){
+    setTasks((prevTasks) =>
+    prevTasks.map((task) =>
+      task.id === 7 ? { ...task, completed: true } : task
+    )
+  );
+    }
+  }
+
+  useEffect(()=>{
+  const run =async()=>{
+    if(!user && address){
+      console.log(22)
+   
+      await isCommunityBadgeMinted()
+      console.log(11)
+       }
+  }
+  run()
+  },[address])
+
+  const mintCommunityBadge = async () => {
+    message.destroy();
+    if (!isConnected) {
+      if (openConnectModal) openConnectModal();
+      return;
+    }
+    const web3 = new Web3(window.ethereum);
+
+    const contract = new web3.eth.Contract(
+      NFTMetatdata.output.abi,
+      NFTContractAddress
+    );
+    const priceInWei = BigInt(
+      await contract.methods.getCommissionFee().call()
+    ).toString();
+    await contract.methods
+      .mintCommunityBadge()
+      .send({ value: priceInWei, from: address })
+      .on("sent", () => {
+        message.destroy();
+        message.loading("confirming task...", 1000000);
+      })
+      .on("receipt", async () => {
+        await updateCommunityBadgeMintDBAction(String(address));
+        message.destroy();
+        message.success("community badge minted",3)
+        setTasks((prevTasks) =>
+          prevTasks.map((task) =>
+            task.id === 7 ? { ...task, completed: true } : task
+          )
+        );
+      });
+  };
 
   const tasksData: Task[] = [
     { id: 1, name: "Follow Xentro on X", completed: false, icon: x },
@@ -51,7 +125,7 @@ const ExclusiveTasks = () => {
     {
       id: 7,
       name: "Mint your Xentro Community Badge",
-      completed: false,
+      completed: user? user.community_badge:false,
       icon: xentro,
     },
     {
@@ -71,15 +145,19 @@ const ExclusiveTasks = () => {
 
   const completedTasks = tasks.filter((task) => task.completed).length;
 
-  const handleTaskClick = (id: number) => {
-    setTasks((prevTasks) =>
-      prevTasks.map((task) =>
-        task.id === id ? { ...task, completed: true } : task
-      )
-    );
+  const handleTaskClick = async (id: number) => {
+    switch (id) {
+      case 7:
+        await mintCommunityBadge();
+        break;
+
+      default:
+        break;
+    }
   };
   return (
     <>
+    {c}
       <section className="px-[8%] pt-[10%]">
         <h3 className="text-white gilroy-bold text-3xl md:text-4xl lg:text-5xl min-[1500px]:text-6xl mb-8 text-center min-[401px]:text-start">
           <span className="inline-block relative">
@@ -240,7 +318,6 @@ const WalletInfo: React.FC = () => {
 
   const { isConnected, address } = useAccount();
 
-
   return (
     <div className="rounded-xl text-white mx-auto gilroy-regular border-[#027EFF] border h-full">
       {/* Connected Wallet */}
@@ -248,8 +325,7 @@ const WalletInfo: React.FC = () => {
         <div className="px-6 py-6">
           <div className="bg-[#081A2E] border-[#2F95FF] border py-2 px-2 mb-8 flex justify-between items-center rounded-full">
             <span className="text-sm lg:text-xl overflow-hidden text-ellipsis">
-             
-              {address }
+              {address}
             </span>
             <button className="text-[#027EFF] p-1">
               <svg

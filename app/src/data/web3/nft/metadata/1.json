@@ -1,0 +1,9 @@
+{
+    "name": "Xentro Warrior Badge",
+    "description": "A badge for warriors of the Xentro community.",
+    "image": "ipfs://Qmf5B3mn1vfz4JUQDSBzTM3EP3m8wKWSAfSZGEWwMpHhWQ",
+    "attributes": [
+      { "trait_type": "Badge Type", "value": "Warrior" }
+    ]
+  }
+  

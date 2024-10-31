@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import RainbowKitContexts from "./src/BE/web3/Rainbowkit/RaibowkitProvider";
+import RainbowKitContexts from "./src/FE/web3/Rainbowkit/RaibowkitProvider";
 import Navbar from "./src/FE/navbar/Navbar";
 
 const gilroySemiBold = localFont({
