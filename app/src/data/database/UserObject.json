@@ -5,6 +5,7 @@
         "count":10,
         "points":10000
     },
+    "tasks_completed":[],
     "community_badge":true,
     "warrior_badge":false,
     "ip":"10.201.10.109",

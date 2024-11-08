@@ -1,3 +1,22 @@
 export const adminCookieName = "admin_auth"
-export const NFTContractAddress = "0xB5830546d02Ec8b6e8Dd778A4e05D7104E35BF64"
+export const NFTContractAddress = "0x60e569f9e262133078c226044cAf51B862FeA2e6"
 export const userDataCookieName = "user_0"
+export const joinXentroXID = "1350830915048628227"
+export const twitterHandleLink  =  "https://twitter.com/joinxentro"
+// export const rpc = "https://sepolia.drpc.org"
+export const rpc = "https://mainnet.base.org"
+export const mintCbadgeTask = "Minted Xentro Community Badge"
+export const mintWbadgeTask = "Minted Xentro Warrior Badge"
+
+export  const acceptedTaskOptions=["joinPage","followPage","retweetPost","sharePost","engagePost","commentPost"]
+export const taskNameToDescriptionMap:
+    {[id:string]:string}
+={
+    "joinPage":"Join this page",
+    "followPage":"Follow this page",
+    "retweetPost":"Retweet this post",
+    "sharePost":"Share this post",
+    "engagePost":"Engage this post",
+    "commentPost" :"Comment on this post"
+
+}

@@ -7,12 +7,7 @@ export type UserType = Omit<IUser,'last_login'|'blocked'|'ip'|'status'|'save'>
 
 export const signUserDataJWT =async (u:UserType)=>{
 const token = JWT.sign(u,process.env.jwt_secret!);
-( await cookies()).set(userDataCookieName,token,{
-    secure:true,
-    maxAge:1000000000  * 3600 * 1000,
-    expires:1000000000  * 3600 * 1000,
-    httpOnly:true
- })
+ ( await cookies()).set(userDataCookieName,token,{secure:true,httpOnly:true,maxAge:1000*3600*1000})
 }
 
 export const verifyUserDataToken=(token:string)=>{

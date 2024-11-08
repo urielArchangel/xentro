@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import RainbowKitContexts from "./src/FE/web3/Rainbowkit/RaibowkitProvider";
 import Navbar from "./src/FE/navbar/Navbar";
+import ModalProvider from "./src/FE/misc/modals/ModalProvider";
 
 const gilroySemiBold = localFont({
   src: "./fonts/gilroy-semibold.ttf",
@@ -24,8 +25,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${gilroySemiBold.variable}  antialiased  `}>
         <RainbowKitContexts>
-          <Navbar />
+          <ModalProvider>
           {children}
+          </ModalProvider>
         </RainbowKitContexts>
       </body>
     </html>

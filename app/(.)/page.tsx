@@ -15,6 +15,8 @@ type FAQData = {
 };
 
 const page = () => {
+
+
   return (
     <>
       <main className="body pt-5">

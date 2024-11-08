@@ -3,18 +3,24 @@ import { ChevronDown, ChevronsUpDownIcon } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import msExcel from "@/app/images/admin/overview/msExcelIcon.png";
-import data from '@/app/src/data/database/dataObject.json'
-
 import { FaEllipsisVertical } from "react-icons/fa6";
 import Link from "next/link";
+import { IApp, IUser } from "@/declarations";
 
 
-const MintsLog = () => {
-
+const MintsLog = ({
+  appString,
+  usersString,
+}: {
+  appString: string;
+  usersString: string;
+}) => {
+  const app = JSON.parse(appString) as IApp;
+  const users = JSON.parse(usersString) as IUser[];
   const downloadCSV = () => {
     const csvData = [
       ["User ID", "Wallet","Task"],
-      ...data.mints.map((e) => [
+      ...app.mints.map((e) => [
         e.ID,
         e.wallet,
         e.task,
@@ -97,11 +103,11 @@ const MintsLog = () => {
         <tbody>
        
            
-           {data.mints.map((e,i)=>( <tr key={i} className="border-b ">
+           {app.mints.map((e,i)=>( <tr key={i} className="border-b ">
             <td className="w-[80px] text-start py-4 pl-4">
               <input type="checkbox" id="" className="block cursor-pointer checkbox_class" />
             </td>
-            <td className="text-lg py-4"><Link className="underline block text-blue-500" href={"/admin/app/mints/"+e.ID}>{e.ID} </Link></td>
+            <td className="text-lg py-4"><Link className="underline block text-blue-500" target="_blank" href={"/admin/app/mints/"+e.ID}>{e.ID} </Link></td>
             <td className="text-lg py-4 text-break-all pr-8 " >{e.wallet}</td>
             <td className="text-lg py-4 break-all">{e.task}</td>
             <td className="text-lg py-4">

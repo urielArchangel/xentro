@@ -19,7 +19,7 @@ import { ReactNode } from 'react';
   const config = getDefaultConfig({
   appName: 'XENTRO',
   projectId: '0.0.1',
-  chains: [ sepolia],
+  chains: [ base ],
   ssr: true, // If your dApp uses server side rendering (SSR)
 });
 

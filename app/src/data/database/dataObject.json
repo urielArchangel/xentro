@@ -8,8 +8,9 @@
             "task":"follow this page",
             "link":"https://x.com/",
             "points":600,
-            "status":"active"
-        },
+            "status":"active",
+            "exclusive":"true"
+        }, 
         {
             "platform":"telegram",
             "task":"join this group",

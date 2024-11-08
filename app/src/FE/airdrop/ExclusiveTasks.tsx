@@ -1,70 +1,110 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import underline from "@/app/images/underline.png";
 import homepagestyles from "@/app/css/homepage.module.css";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import discord from "@/app/images/socials/Discord.png";
 import medium from "@/app/images/socials/Medium.png";
 import x from "@/app/images/socials/XTask.png";
 import telegram from "@/app/images/socials/Telegram.png";
 import instagram from "@/app/images/socials/Instagram.png";
-import xentro from "@/app/images/socials/xentro.png";
 import Link from "next/link";
 import { useAccount } from "wagmi";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import Web3 from "web3";
+import xentrologo from "@/app/images/herologo.png";
 import NFTMetatdata from "@/app/src/BE/web3/artifacts/Metadata.json";
-import { NFTContractAddress } from "../../data/constants";
-import { updateCommunityBadgeMintDBAction } from "../../BE/serveractions";
+import {
+  NFTContractAddress,
+  taskNameToDescriptionMap,
+} from "../../data/constants";
+import {
+  taskCompletedAction,
+  updateCommunityBadgeMintDBAction,
+  updateWarriorBadgeMintDBAction,
+} from "../../BE/serveractions";
 import { UserType } from "../../BE/userdata/jwt";
 import useMessage from "antd/es/message/useMessage";
-interface Task {
-  id: number;
-  name: string;
-  icon: any;
-  completed: boolean;
-}
+import { useModal } from "../misc/modals/ModalProvider";
+import { IApp, ITask, IUser } from "@/declarations";
+import { fetchUserClient } from "../helpers";
+import { useRouter, useSearchParams } from "next/navigation";
+import Loading from "@/app/(.)/loading";
 
-const ExclusiveTasks = ({user}:{user:UserType|null}) => {
-  // const [isConnected, setIsConnected] = useState<boolean>(false);
+const ExclusiveTasks = ({ appString }: { appString: string }) => {
+  const taskPlatformIconMapping = (platformName: string) => {
+    const icons: { [id: string]: StaticImageData } = {
+      x,
+      telegram,
+      medium,
+      instagram,
+      discord,
+    };
+    return icons[platformName] || x;
+  };
+
   const { isConnected, address } = useAccount();
-
   const { openConnectModal } = useConnectModal();
-  const [message,c] = useMessage()
-
-  const isCommunityBadgeMinted = async()=>{
-
-    message.destroy();
-
-
-    const web3 = new Web3(window.ethereum);
-
-    const contract = new web3.eth.Contract(
-      NFTMetatdata.output.abi,
-      NFTContractAddress
+  const { setModal, openModal } = useModal();
+  const [loading, setLoading] = useState(true);
+  const [message, messageContext] = useMessage();
+  const [app, setApp] = useState<IApp | null>(null);
+  const [user, setUser] = useState<IUser | null>(null);
+  const [completedTasksCount, setCompletedTasksCount] = useState(0);
+  const router = useRouter();
+  const viewAllTask = useCallback(() => {
+    return app?.tasks.some(
+      (task) => !user?.tasks_completed_ids.includes(task.id) && !task.exclusive
     );
+  }, [app, user]);
 
-    const has = await contract.methods.hasCommunityBadge(address).call() as boolean
-    if(has){
-    setTasks((prevTasks) =>
-    prevTasks.map((task) =>
-      task.id === 7 ? { ...task, completed: true } : task
-    )
+  const isTaskCompleted = useCallback(
+    (id: string) => user?.tasks_completed_ids.includes(id) ?? false,
+    [user]
   );
-    }
-  }
+  const ref = useSearchParams().get("ref");
+  useEffect(() => {
+    const initData = async () => {
+      setApp(JSON.parse(appString));
+      if (address) {
+        const [fetchedUser, error] = await fetchUserClient(
+          String(address),
+          ref ? ref : undefined
+        );
 
-  useEffect(()=>{
-  const run =async()=>{
-    if(!user && address){
-      console.log(22)
-   
-      await isCommunityBadgeMinted()
-      console.log(11)
-       }
-  }
-  run()
-  },[address])
+        if (error) message.error(error);
+        else setUser(fetchedUser);
+      }
+    };
+    initData();
+    if (app && user) {
+      
+      let counter = 0;
+      app.tasks.map((e) => {
+        if (e.exclusive && e.status) {
+          if (user.tasks_completed_ids.includes(e.id)) {
+            counter++;
+          }
+        }
+      });
+      setCompletedTasksCount(counter);
+    }
+    setLoading(false);
+  }, [address, appString, message, ref,completedTasksCount]);
+
+  const handleClickStateUpdate = async (id: string) => {
+    message.loading("Please wait...", 10000000);
+  
+    const [res, error] = await taskCompletedAction(id, String(address));
+    message.destroy();
+    if (error) {
+      message.error(error, 2);
+      return;
+    }
+   await message.success(res, 2);
+   setCompletedTasksCount(prev=>(prev+=1))
+
+  };
 
   const mintCommunityBadge = async () => {
     message.destroy();
@@ -91,51 +131,70 @@ const ExclusiveTasks = ({user}:{user:UserType|null}) => {
       .on("receipt", async () => {
         await updateCommunityBadgeMintDBAction(String(address));
         message.destroy();
-        message.success("community badge minted",3)
-        setTasks((prevTasks) =>
-          prevTasks.map((task) =>
-            task.id === 7 ? { ...task, completed: true } : task
-          )
-        );
+        message.success("community badge minted", 3);
+        const [res, error] = await taskCompletedAction("0", String(address));
+        if (error) {
+          message.destroy();
+          message.error(error, 3);
+          return;
+        }
+        message.success(res);
+        router.refresh();
       });
   };
 
-  const tasksData: Task[] = [
-    { id: 1, name: "Follow Xentro on X", completed: false, icon: x },
-    { id: 2, name: "Like the Post on Xentro Page", completed: false, icon: x },
-    {
-      id: 3,
-      name: "Follow Xentro on Telegram",
-      completed: false,
-      icon: telegram,
-    },
-    {
-      id: 4,
-      name: "Join Xentro Community on Discord",
-      completed: false,
-      icon: discord,
-    },
-    {
-      id: 5,
-      name: "Follow Xentro on Instagram",
-      completed: false,
-      icon: instagram,
-    },
-    { id: 6, name: "Follow Xentro on Medium", completed: false, icon: medium },
-    {
-      id: 7,
-      name: "Mint your Xentro Community Badge",
-      completed: user? user.community_badge:false,
-      icon: xentro,
-    },
-    {
-      id: 8,
-      name: "Mint your Xentro Warrior Badge",
-      completed: false,
-      icon: xentro,
-    },
-  ];
-  const [tasks, setTasks] = useState<Task[]>(tasksData);
+  const mintWarriorBadge = async () => {
+    message.destroy();
+    if (!isConnected) {
+      if (openConnectModal) openConnectModal();
+      return;
+    }
+    const web3 = new Web3(window.ethereum);
+
+    const contract = new web3.eth.Contract(
+      NFTMetatdata.output.abi,
+      NFTContractAddress
+    );
+    const cBadge = (await contract.methods
+      .hasCommunityBadge(address)
+      .call()) as boolean;
+    if (!cBadge) {
+      message.destroy();
+      message.error("Mint community badge first", 3);
+      return;
+    }
+
+    const priceInWei = BigInt(
+      await contract.methods.getCommissionFee().call()
+    ).toString();
+    await contract.methods
+      .mintWarriorBadge()
+      .send({ value: priceInWei, from: address })
+      .on("sent", () => {
+        message.destroy();
+        message.loading("confirming task...", 1000000);
+      })
+      .on("receipt", async () => {
+        await updateWarriorBadgeMintDBAction(String(address));
+        message.destroy();
+        message.success("warrior badge minted", 3);
+        const [res, error] = await taskCompletedAction("1", String(address));
+        if (error) {
+          message.destroy();
+          message.error(error, 3);
+          return;
+        }
+        message.success(res);
+        router.refresh();
+      });
+  };
+
+  // const followOnX =async(id:number)=>{
+  //   setModal(<TwitterFollowChecker taskID={id} />)
+  //   openModal()
+  // }
+
+  const tasks: ITask[] = app ? app.tasks : [];
 
   const handleConnectWallet = () => {
     if (openConnectModal) {
@@ -143,21 +202,19 @@ const ExclusiveTasks = ({user}:{user:UserType|null}) => {
     }
   };
 
-  const completedTasks = tasks.filter((task) => task.completed).length;
-
-  const handleTaskClick = async (id: number) => {
-    switch (id) {
-      case 7:
-        await mintCommunityBadge();
-        break;
-
-      default:
-        break;
+  const handleMintTaskClick = async (badge: "warrior" | "community") => {
+    if (badge == "warrior") {
+      await mintWarriorBadge();
+      return;
+    } else {
+      await mintCommunityBadge();
     }
   };
+
   return (
     <>
-    {c}
+      {messageContext}
+      {loading ? <Loading /> : null}
       <section className="px-[8%] pt-[10%]">
         <h3 className="text-white gilroy-bold text-3xl md:text-4xl lg:text-5xl min-[1500px]:text-6xl mb-8 text-center min-[401px]:text-start">
           <span className="inline-block relative">
@@ -186,51 +243,99 @@ const ExclusiveTasks = ({user}:{user:UserType|null}) => {
         <div className="group relative">
           <div className={`${isConnected ? "" : "blur-md p-3"}`}>
             <h4 className="text-lg mb-4 text-white gilroy-regular">
-              Completed: <span className="font-bold">{completedTasks}</span> out
-              of <span className="font-bold">{tasks.length}</span>
+              Completed:{" "}
+              <span className="font-bold">{completedTasksCount}</span> out of{" "}
+              <span className="font-bold">{tasks.length}</span>
             </h4>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-stretch">
               <div className="text-white gilroy-regular h-full">
                 <ul className="space-y-4">
-                  {tasks.map((task, index) => (
-                    <div
-                      key={index}
-                      className={
-                        homepagestyles.bg_gradient_border +
-                        " border-0 p-[0.07em] rounded-lg hd-shadow"
-                      }
-                    >
-                      <li
-                        key={task.id || index}
-                        className="flex items-center justify-between bg-[#0B1219] rounded-lg p-3"
+                  {tasks.map((task, index) => {
+                    if (!task.status) return <></>;
+                    return (
+                      <div
+                        key={index}
+                        className={
+                          homepagestyles.bg_gradient_border +
+                          " border-0 p-[0.07em] rounded-lg hd-shadow"
+                        }
                       >
-                        <span className="text-xs max-[599px]:text-md min-[600px]:text-lg flex items-center gap-3">
-                          <Image
-                            src={task.icon}
-                            alt="task"
-                            width={25}
-                            height={25}
-                          />
-                          {task.name}
-                        </span>
-                        <button
-                          className={`px-4 py-2 text-white rounded-full font-bold ${
-                            task.completed
-                              ? "bg-gray-500 cursor-not-allowed"
-                              : "bg-[#004995] glow"
-                          }`}
-                          onClick={() => handleTaskClick(task.id)}
-                          disabled={task.completed}
+                        <li
+                          key={task.id || index}
+                          className="flex items-center justify-between bg-[#0B1219] rounded-lg p-3"
                         >
-                          {task.completed ? "Done" : "Start"}
-                        </button>
-                      </li>
-                    </div>
-                  ))}
+                          <span className="text-xs max-[599px]:text-md min-[600px]:text-lg flex items-center gap-3">
+                            <Image
+                              src={
+                                task.platform
+                                  ? taskPlatformIconMapping(task.platform)
+                                  : xentrologo
+                              }
+                              alt="task"
+                              width={30}
+                              height={30}
+                              className={task.platform ? "w-6 ml-4" : "w-10"}
+                            />
+                            {task.platform
+                              ? taskNameToDescriptionMap[task.task]
+                              : task.task}
+                          </span>
+                          {task.mint ? (
+                            <button
+                              className={`px-4 py-2 text-white rounded-full font-bold ${
+                                task.mintBadge == "community" &&
+                                user?.community_badge
+                                  ? "bg-gray-500 cursor-not-allowed"
+                                  : task.mintBadge == "warrior" &&
+                                    user?.warrior_badge
+                                  ? "bg-gray-500 cursor-not-allowed"
+                                  : "bg-[#004995] glow"
+                              }`}
+                              onClick={() =>
+                                handleMintTaskClick(task.mintBadge!)
+                              }
+                              disabled={
+                                task.mintBadge == "community" &&
+                                user?.community_badge
+                                  ? true
+                                  : task.mintBadge == "warrior" &&
+                                    user?.warrior_badge
+                                  ? true
+                                  : false
+                              }
+                            >
+                              {task.mintBadge == "community" &&
+                              user?.community_badge
+                                ? "Done"
+                                : task.mintBadge == "warrior" &&
+                                  user?.warrior_badge
+                                ? "Done"
+                                : "Start"}
+                            </button>
+                          ) : (
+                            <Link
+                              target="_blank"
+                              onClick={() => {
+                                handleClickStateUpdate(task.id);
+                              }}
+                              className={`px-4 py-2 text-white rounded-full font-bold ${
+                                isTaskCompleted(task.id)
+                                  ? "bg-gray-500 cursor-not-allowed"
+                                  : "bg-[#004995] glow"
+                              }`}
+                              href={task.link}
+                            >
+                              {isTaskCompleted(task.id) ? "Done" : "Start"}
+                            </Link>
+                          )}
+                        </li>
+                      </div>
+                    );
+                  })}
                 </ul>
               </div>
               <div>
-                <WalletInfo />
+                <WalletInfo user={user} />
               </div>
             </div>
           </div>
@@ -281,28 +386,29 @@ const ExclusiveTasks = ({user}:{user:UserType|null}) => {
             </div>
           </div>
         </div>
-        <div
-          className={`
-           ${
-             homepagestyles.bg_gradient_border
-           } border-0 p-[0.06em] rounded-full hd-shadow w-[50%] mx-auto mt-16  ${
-            isConnected ? "block" : "hidden"
-          }`}
-        >
-          <Link href="airdrop/tasks">
-            <button className="bg-[#081A2E] w-full py-3 text-lg md:text-xl rounded-full font-semibold text-[#0477EF]">
-              View All Tasks
-            </button>
-          </Link>
-        </div>
+        {viewAllTask() && isConnected && (
+          <div
+            className={`${homepagestyles.bg_gradient_border} p-[0.06em] rounded-full hd-shadow w-[50%] mx-auto mt-16`}
+          >
+            <Link href="/airdrop/tasks">
+              <button className="bg-[#081A2E] w-full py-3 text-lg md:text-xl rounded-full font-semibold text-[#0477EF]">
+                View All Tasks
+              </button>
+            </Link>
+          </div>
+        )}
       </section>
     </>
   );
 };
 
-const WalletInfo: React.FC = () => {
+const WalletInfo = ({ user }: { user: IUser | null }) => {
   const [copySuccess, setCopySuccess] = useState<string>("");
-  const inviteLink = "bit.ly/InviteCode298ayu712kliobha";
+  console.log({ i: user?.invite_link, u: user });
+  const inviteLink =
+    user && user.invite_link
+      ? user.invite_link
+      : "Mint both badges to get invite link";
 
   const handleCopyClick = () => {
     navigator.clipboard
@@ -316,7 +422,7 @@ const WalletInfo: React.FC = () => {
       });
   };
 
-  const { isConnected, address } = useAccount();
+  const { address } = useAccount();
 
   return (
     <div className="rounded-xl text-white mx-auto gilroy-regular border-[#027EFF] border h-full">
@@ -347,7 +453,8 @@ const WalletInfo: React.FC = () => {
           <div>
             <span className="text-xl">
               {" "}
-              <span className="font-semibold">Number of Referrals:</span> 100
+              <span className="font-semibold">Number of Referrals:</span>{" "}
+              {user ? user.referals.count : 0}
             </span>
           </div>
         </div>
@@ -362,7 +469,7 @@ const WalletInfo: React.FC = () => {
             </span>
             <div className="bg-transparent border-white border p-3 flex justify-between items-center rounded-full">
               <span className="truncate text-xs min-[400px]:text-lg lg:text-xl">
-                {inviteLink}
+                {user ? inviteLink : ""}
               </span>
               <button onClick={handleCopyClick} className="text-[#027EFF] p-1">
                 <svg
@@ -414,7 +521,7 @@ const WalletInfo: React.FC = () => {
                 homepagestyles.gradientText
               }
             >
-              200000
+              {user ? user.total_points : 0}
             </h3>
           </div>
 
@@ -429,7 +536,10 @@ const WalletInfo: React.FC = () => {
           </div>
 
           {/* Claim Button */}
-          <button className="bg-[#081A2E] border border-[#027EFF] w-full py-3 text-lg rounded-full glow text-[#0477EF]">
+          <button
+            disabled
+            className=" bg-[#081A2E] border border-[#027EFF] w-full py-3 text-lg rounded-full glow text-[#0477EF]"
+          >
             Claim
           </button>
         </div>

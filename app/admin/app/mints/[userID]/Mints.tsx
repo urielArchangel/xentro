@@ -2,10 +2,17 @@ import {  UserCircle2 } from "lucide-react";
 import React from "react";
 import { FaEllipsisVertical } from "react-icons/fa6";
 import admincss from "@/app/css/admin.module.css";
-import users from '@/app/src/data/database/users.json'
+import { fetchUsers } from "@/app/src/BE/helpers";
+import { redirect } from "next/navigation";
 
-const Mints = ({id}:{id:string}) => {
-  const user = users.filter(e=>e.ID.toLowerCase() == id.toLowerCase() )[0]
+const Mints = async({id}:{id:string}) => {
+  
+  const user =  (await fetchUsers()).filter(user=>user.ID == id)[0]
+  if(!user){
+    redirect("/admin/app/mints")
+  }
+  const mints = user.community_badge?user.warrior_badge?2:1:0
+
   return (
     <section>
       <h2 className="text-[#0171F3] text-3xl font-bold">Mints</h2>
@@ -43,7 +50,7 @@ const Mints = ({id}:{id:string}) => {
         <div>
           <h3 className="break-all">Total Mints</h3>
           <div className="flex items-center justify-between w-full">
-            <p className="break-all">{Number(user.total_mints).toLocaleString()} </p>
+            <p className="break-all">{mints} </p>
           </div>
         </div>
       </section>

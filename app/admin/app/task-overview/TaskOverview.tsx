@@ -11,12 +11,21 @@ import tiktok from "@/app/images/socials/TikTokTask.png";
 import medium from "@/app/images/socials/mediumTask.png";
 import yt from "@/app/images/socials/YouTubeTask.png";
 import tg from "@/app/images/socials/telegramTask.png";
+import { IApp, IUser } from "@/declarations";
+import { FaEllipsisVertical } from "react-icons/fa6";
 
-const TaskOverview = () => {
+const TaskOverview =  ({appString,
+usersString,
+}: {
+appString: string;
+usersString: string;
+}) => {
+const app = JSON.parse(appString) as IApp;
+const users = JSON.parse(usersString) as IUser[];
   const downloadCSV = () => {
     const csvData = [
       ["Platform", "Task", "Link","Points", "Status"],
-      ...data.tasks.map((e) => [
+      ...app.tasks.map((e) => [
         e.platform,
         e.task,
         e.link,
@@ -155,7 +164,7 @@ const TaskOverview = () => {
             </thead>
 
             <tbody>
-              {data.tasks.map((e, i) => (
+              {app.tasks.map((e, i) => (
                 <tr key={i}>
                   <td className="w-[80px] text-start p-4 ">
                     <input type="checkbox" className="block cursor-pointer" />
@@ -165,16 +174,27 @@ const TaskOverview = () => {
                   <td className="p-4">{e.link}</td>
                   <td className="p-4">{e.points}</td>
                   <td className="p-4">
-                    {e.status == "active" ? (
+                    {e.status ? (
                       <div className="bg-[#9BFF99] w-full max-w-[100px] text-center text-[#20744A] rounded-3xl px-6 py-2">
-                        {e.status}
+                        active
                       </div>
                     ) : (
                       <div className="bg-[#FF000025] w-full max-w-[100px] text-center text-[#FF0000] rounded-3xl px-6 py-2">
-                        {e.status}
+                        disabled
                       </div>
                     )}
                   </td>
+                  <td className="text-lg py-4 relative">
+                  <FaEllipsisVertical
+                    size={20}
+                    className="text-[#A2A7B4] cursor-pointer"
+                  />
+                  {/* <div className="absolute w-full h-20 z-[5] flex flex-col">
+                    <button>Disable</button>
+                    <button>Delete</button>
+                  </div> */}
+                </td>
+
                 </tr>
               ))}
             </tbody>

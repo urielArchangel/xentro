@@ -2,6 +2,7 @@ import React from 'react'
 import Mints from './Mints'
 
 const page = () => {
+  
   return (
     <section>
         <Mints />

@@ -1,12 +1,12 @@
 import React from "react";
-import Terms from "../src/FE/terms/Terms";
-import Footer from "../src/FE/footer/Footer";
+import Privacy from "@/app/src/FE/privacy/Privacy";
+import Footer from "@/app/src/FE/footer/Footer";
 
 const page = () => {
   return (
     <>
       <div className="body pt-5">
-        <Terms />
+        <Privacy />
         <Footer />
       </div>
     </>

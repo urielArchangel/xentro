@@ -73,7 +73,6 @@ contract XentroBadgeNFT is ERC1155, Ownable,Pausable {
     } 
 
     function mintCommunityBadge() public payable  {
-        require(badgeCount[COMMUNITY_BADGE] < MAX_SUPPLY, "All community badges have been minted");
         require(!hasCommunityBadge[msg.sender], "You already have a community badge");
         require(msg.sender != address(0), "null address cannot mint");
         uint256 fee = getCommissionFee();

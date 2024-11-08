@@ -1,35 +1,58 @@
 "use client";
-import { Minus, Plus, Trash, UserCircle2, XIcon } from "lucide-react";
+import { Check, Minus, Plus, Trash, UserCircle2, XIcon } from "lucide-react";
 import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
 import { FaEllipsisVertical } from "react-icons/fa6";
 import admincss from "@/app/css/admin.module.css";
-import users from "@/app/src/data/database/users.json";
 import AddPointsModal from "@/app/src/FE/admin/miscComponents/AddPointsModal";
 import { ModalCTX } from "@/app/src/FE/admin/miscComponents/ModalContext";
 import RemovePointsModal from "@/app/src/FE/admin/miscComponents/RemovePointsModal";
+import { blockUserAction } from "@/app/src/BE/serveractions";
+import { IUser } from "@/declarations";
+import useMessage from "antd/es/message/useMessage";
 
-const Data = ({ id }: { id: string }) => {
+const Data = ({ userString }: { userString :string }) => {
   const [actionDropdownState, setActionDropdownState] = useState(false);
   const modal = useContext(ModalCTX);
-
+  const user = JSON.parse(userString) as IUser
+  const [blockUserPending,setBlockuserPending] = useState(false)
+  const [message,context] = useMessage()
   const [url, setUrl] = useState("");
   useEffect(() => {
     setUrl(window.location.origin);
   }, []);
-  const user = users.filter((e) => e.ID.toLowerCase() == id.toLowerCase())[0];
 
   const openModal = () => {
-    modal.assignModal(<AddPointsModal />);
+    modal.assignModal(<AddPointsModal userID={user.ID} />);
     modal.openModal();
   };
   const removePoints = () => {
-    modal.assignModal(<RemovePointsModal />);
+    modal.assignModal(<RemovePointsModal userID={user.ID} />);
     modal.openModal();
   };
 
+
+  const blockUnblockuser = async()=>{
+    if(!user){
+      return
+
+    }
+    message.destroy()
+    message.loading("Performing action",10000000)
+    const userID= user.ID
+   const [_,error] =  await blockUserAction(userID)
+   message.destroy()
+
+   if(error){
+    message.error(error)
+    return
+   }
+message.success(user.blocked?`User ${user.ID} blocked`:`User ${user.ID} unblocked`)
+  }
+
   return (
     <>
+    {context}
       <section>
         <h2 className="text-[#0171F3] text-xl md:text-3xl font-bold">Data</h2>
         <p className="text-[#525252] flex items-center ">
@@ -67,11 +90,14 @@ const Data = ({ id }: { id: string }) => {
             <div
               className={`absolute  bg-white ${
                 actionDropdownState ? "" : "hidden"
-              } w-full top-[100%] rounded-xl left-0 p-4 border border-[#CCCCCC]`}
+              } w-[200px] top-[100%] rounded-xl right-0 p-4 border border-[#CCCCCC]`}
             >
-              <button className="flex hover:bg-[#efefef] rounded-lg mx-auto w-full p-2 items-center justify-center py-4 space-x-1">
-                <XIcon className="text-black" />
-                <p>Block User</p>
+             <button onClick={blockUnblockuser} className="flex hover:bg-[#efefef] rounded-lg mx-auto w-full p-2 items-center justify-center py-4 space-x-1">
+                {user.blocked?<>
+                <Check className="text-black" />
+                <p>Unblock User</p>
+                </>:<><XIcon className="text-black" />
+                <p>Block User</p></>}
               </button>
               <button className="text-red-500 rounded-lg hover:border border-red-500 flex items-center justify-center bg-[#FDF2F3] p-2 py-4 mx-auto w-full my-2">
                 <Trash />

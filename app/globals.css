@@ -2,6 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes loading_spin {
+  from{
+    transform: rotateY(0deg);
+  }to{
+    transform: rotateY(359deg);
+
+  }
+}
+
+@keyframes openModal {
+ 
+  0%,40%{
+    transform: scale(0%);
+    
+  }
+  40%,100%{
+    transform: scale(100%);
+  }
+}
+
+
+@keyframes closeModal {
+ 
+  0%,40%{
+    transform: scale(100%);
+    
+  }
+  40%,100%{
+    transform: scale(0%);
+  }
+}
+
 @font-face {
   font-family: "Gilroy Black";
   src: url(./fonts/Gilroy-Black.ttf);
@@ -16,12 +48,16 @@
   src: url(./fonts/Gilroy-Regular.ttf);
 }
 
+
 .body {
   background-image: url(./images/bg.png);
   background-repeat: no-repeat;
   background-size: cover;
   padding-bottom: 20px;
   overflow: hidden;
+}
+button:disabled{
+  cursor: not-allowed;
 }
 .hd-shadow {
   box-shadow: -8px 8px 50px #00000057;
@@ -57,3 +93,26 @@
 #innerAdminPage_id {
   transition: filter 1s ease-in-out;
 }
+
+#modal-inner-container{
+  transition: all 1s ease-in-out;
+}
+
+.modal-open{
+  animation-name: openModal;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+.modal-close{
+  animation-name: closeModal;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;}
+
+  .loading_logo{
+    animation-name: loading_spin;
+    animation-iteration-count: infinite;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+  }

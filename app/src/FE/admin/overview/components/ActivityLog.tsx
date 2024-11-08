@@ -4,14 +4,24 @@ import { ChevronDown, ChevronsUpDownIcon } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import msExcel from "@/app/images/admin/overview/msExcelIcon.png";
-import users from '@/app/src/data/database/users.json';
 import { FaEllipsisVertical } from "react-icons/fa6";
 import Link from "next/link";
+import { IApp, IUser } from "@/declarations";
 
-const ActivityLog = () => {
+const ActivityLog = ({
+  appString,
+  usersString,
+}: {
+  appString: string;
+  usersString: string;
+}) => {
+  const app = JSON.parse(appString) as IApp;
+  const users = JSON.parse(usersString) as IUser[];
   const checkAllBoxes = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const checks = document.querySelectorAll('.checkbox_class') as NodeListOf<HTMLInputElement>;
-
+    const checks = document.querySelectorAll(
+      ".checkbox_class"
+    ) as NodeListOf<HTMLInputElement>;
+ 
     if (e.currentTarget.checked) {
       checks.forEach((e) => {
         e.checked = true;
@@ -52,7 +62,9 @@ const ActivityLog = () => {
     <section className="bg-white rounded-xl my-4 overflow-x-scroll">
       <div className="w-full min-w-[1000px] ">
         <div className="flex justify-between px-8 items-center border-[#CCCCCC] border-b py-4">
-          <h1 className="text-lg md:text-2xl font-semibold">Recent Activity Log</h1>
+          <h1 className="text-lg md:text-2xl font-semibold">
+            Recent Activity Log
+          </h1>
           <div className="flex items-center space-x-6">
             <button className="flex items-center text-lg md:text-xl border space-x-2 border-[#0171F3] text-[#0171F3] p-4 rounded-lg">
               <p>Bulk Action</p>

@@ -1,10 +1,13 @@
 import React from 'react'
 import Data from './Data'
+import { fetchAppData, fetchUsers } from '@/app/src/BE/helpers'
 
-const page = () => {
+const page =async () => {
+  const app  = await fetchAppData()
+  const users = await fetchUsers()
   return (
 <section>
-    <Data />
+    <Data appString={JSON.stringify(app)} usersString={JSON.stringify(users)}  />
 </section>  )
 }
 

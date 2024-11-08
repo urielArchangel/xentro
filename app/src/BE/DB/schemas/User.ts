@@ -6,20 +6,23 @@ const UserSchema = new Schema({
     required: true,
     unique: true,
   },
+  tasks_completed_ids: [String],
+  invite_link: String,
   wallet_address: {
     type: String,
     unique: true,
     required: true,
   },
   referals: {
+    type:{
     count: Number,
     points: Number,
-  },
-  community_badge: Boolean,
-  warrior_badge: Boolean,
+  },default:{count:0,points:0}},
+  community_badge: {type:Boolean,default:false},
+  warrior_badge: {type:Boolean,default:false}, 
   ip: String,
-  status: String,
-  total_points: Number,
+  status: {type:String,default:"qualified"},
+  total_points: {type:Number,default:0},
   blocked: {
     type: Boolean,
     default: false,
@@ -27,7 +30,6 @@ const UserSchema = new Schema({
   last_login: { type: Number, default: Date.now() },
 });
 
+const User = models.User || model("User", UserSchema);
 
-const User = models.User || model("User",UserSchema)
-
-export default User
+export default User;

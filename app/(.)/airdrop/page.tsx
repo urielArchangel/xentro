@@ -1,30 +1,29 @@
 import React from "react";
-import Link from "next/link";
 import homepagestyles from "@/app/css/homepage.module.css";
 import Image from "next/image";
-import AirdropHero from "../src/FE/airdrop/AirdropHero";
-import JoinCommunity from "../src/FE/homepage/components/JoinCommunity";
+import AirdropHero from "../../src/FE/airdrop/AirdropHero";
+import JoinCommunity from "../../src/FE/homepage/components/JoinCommunity";
 import Footer from "@/app/src/FE/footer/Footer";
 import shield from "@/app/images/shield.png";
 import underline from "@/app/images/underline.png";
-import HowtoParticipate from "../src/FE/airdrop/HowtoParticipate";
-import ExclusiveTasks from "../src/FE/airdrop/ExclusiveTasks";
-import MintBadge from "../src/FE/airdrop/MintBadge";
-import { xentroQuestions } from "../src/data/faq/faqQuestions";
-import FaqAccordion from "../src/FE/homepage/components/FaqAccordion";
+import HowtoParticipate from "../../src/FE/airdrop/HowtoParticipate";
+import ExclusiveTasks from "../../src/FE/airdrop/ExclusiveTasks";
+import MintBadge from "../../src/FE/airdrop/MintBadge";
+import { xentroQuestions } from "../../src/data/faq/faqQuestions";
+import FaqAccordion from "../../src/FE/homepage/components/FaqAccordion";
 import { cookies } from "next/headers";
-import { userDataCookieName } from "../src/data/constants";
-import { UserType, verifyUserDataToken } from "../src/BE/userdata/jwt";
+import { userDataCookieName } from "../../src/data/constants";
+import { UserType, verifyUserDataToken } from "../../src/BE/userdata/jwt";
+import { fetchAppData, fetchUsers } from "@/app/src/BE/helpers";
+
 
 
 const page = async() => {
-  let data=null as UserType|null;
-const cookie = (await cookies()).get(userDataCookieName)
-if(cookie && cookie.value){
-  data=verifyUserDataToken(cookie.value)
-}
-  return (
+const app = await fetchAppData();
+
+  return ( 
     <>
+    
       <div className="body pt-5">
         {" "}
         <AirdropHero />
@@ -50,7 +49,7 @@ if(cookie && cookie.value){
           </div>
         </div>
         <HowtoParticipate />
-        <ExclusiveTasks user={data} />
+        <ExclusiveTasks  appString={JSON.stringify(app)} />
         <MintBadge />
         <div>
           <div className="flex flex-col items-center pb-20 pt-24">

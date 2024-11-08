@@ -3,11 +3,23 @@ import React, { useEffect, useState } from "react";
 import { ChevronDown, ChevronsUpDownIcon } from "lucide-react";
 import Image from "next/image";
 import msExcel from "@/app/images/admin/overview/msExcelIcon.png";
-import users from '@/app/src/data/database/users.json'
 import { FaEllipsisVertical } from "react-icons/fa6";
 import Link from "next/link";
+import { IApp, IUser } from "@/declarations";
 
-const Data = () => {
+const sortAlpha = ()=>{
+  
+}
+
+const Data = ({
+  appString,
+  usersString,
+}: {
+  appString: string;
+  usersString: string;
+}) => {
+  const app = JSON.parse(appString) as IApp;
+  const users = JSON.parse(usersString) as IUser[];
   const [url,setUrl]=useState("")
   useEffect(()=>{
 setUrl(window.location.origin)
@@ -24,6 +36,10 @@ setUrl(window.location.origin)
           <button className="flex items-center text-lg md:text-xl border space-x-2 border-[#0171F3] text-[#0171F3] p-4 rounded-lg">
             <p>Bulk Action</p>
             <ChevronDown size={20} />
+            {/* bulk actions */}
+            <section>
+            
+            </section>
           </button>
           <button className="border border-[#20744A] text-lg md:text-xl space-x-2 p-4 flex rounded-lg items-center">
             <Image src={msExcel} alt="MS Excel" />
@@ -76,9 +92,9 @@ setUrl(window.location.origin)
         <tbody>
         {users.map((e,i)=>( <tr key={i}  className="border-b">
             <td className="w-[80px] text-start py-4 pl-4">
-              <input type="checkbox" id="" className="block cursor-pointer checkbox_class" />
+              <input type="checkbox" id={e.ID} className="block cursor-pointer checkbox_class" />
             </td>
-            <td className="text-lg py-4"><Link className="underline block text-blue-500" href={"/admin/app/data/"+e.ID}>{e.ID} </Link></td>
+            <td className="text-lg py-4"><Link target="_blank" className="underline block text-blue-500" href={"/admin/app/data/"+e.ID}>{e.ID} </Link></td>
             <td className="text-lg py-4">{url+"?ref="+e.ID}</td>
             <td className="text-lg py-4">{e.wallet_address}</td>
             <td className="text-lg py-4">{e.total_points}</td>
