@@ -23,7 +23,7 @@ const FaqAccordion: React.FC<FaqAccordionProps> = ({ question, answer }) => {
       className={`mb-2 cursor-pointer min-[1500px]:mb-5 px-8 py-6 text-white  ${homepagestyles.faqAccordion} `}
     >
       <div className="flex justify-between" >
-        <p className="gilroy-bold text-[25px] md:text-[35px]">
+        <p className="gilroy-bold text-[20px] md:text-[22px]">
           {question}
         </p>
         <button >
@@ -33,7 +33,7 @@ const FaqAccordion: React.FC<FaqAccordionProps> = ({ question, answer }) => {
       <p
         className={`${
           isOpen ? null : "hidden"
-        } mt-4 text-[20px] md:tex-[27px] text-[#fff] gilroy-regular`}
+        } mt-4 text-[18px] md:text-[20px] text-[#fff] gilroy-regular`}
       >
         {answer}
       </p>
