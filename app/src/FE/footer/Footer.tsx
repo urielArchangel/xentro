@@ -13,7 +13,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="text-[#ffffff8d] w-[90%] mx-auto gilroy-regular">
+    <footer className="text-[#ffffff8d] w-[90%]  mx-auto gilroy-regular pb-10">
       {/* desktop */}
       <div
         className={

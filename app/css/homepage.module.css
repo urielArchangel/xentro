@@ -1,20 +1,23 @@
 .hero {
-  background-image: url(../images/landingpagebg.png);
-  background-size: 100%; /* Ensure the image covers the entire container */
-  background-position: center; /* Keep the image centered */
+  height: 100%;
+  min-height: 1000px;
+  background-image: url(../images/landing/landingHero.png);
+  background-size: 900px 400px; /* Ensure the image covers the entire container */
+  background-position: bottom; /* Keep the image centered */
   background-repeat: no-repeat; /* Prevent the image from repeating */
-  height: 1000px;
   width: 100%;
 }
-
+.body{
+  background-image: url(../images/landing/landing-bg.png);
+  background-size: 100% 100%; /* Ensure the image covers the entire container */
+  background-position: bottom; /* Keep the image centered */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  width: 100%;
+}
 .faqAccordion {
   border-radius: 1rem;
-  border: 1px solid #6ab3ff;
-  background: linear-gradient(
-    180deg,
-    rgba(2, 84, 169, 0.12) -2%,
-    rgba(0, 49, 100, 0.12) 100.05%
-  );
+  border: 1px solid #001d3a;
+  background-color:#0029521f;
 }
 
 .gradientText {
@@ -50,18 +53,9 @@
   z-index: -10000000000;
 }
 
-@media screen and (max-width: 500px) {
-  .hero {
-    background-image: url(../images/mobilelandingpagebg.png);
-    background-size: 100%;
-    height: 700px;
-  }
-}
-
-@media screen and (min-width: 1500px) {
-  .hero {
-    height: 1300px;
-    background-size: 100%;
+@media screen and (min-width:768px) {
+  .hero{
+    height: 1275px;
   }
 }
 

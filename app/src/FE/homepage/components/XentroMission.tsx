@@ -6,9 +6,9 @@ import Image from "next/image";
 
 const Xentromission = () => {
   return (
-      <div className="w-full mx-auto  py-16 flex md:flex-row flex-col items-center justify-between max-w-[1400px] ">
-        <div className="text-center min-[769px]:text-start">
-          <p className="text-white gilroy-bold text-3xl md:text-4xl lg:text-5xl mb-10 min-[1500px]:text-6xl">
+      <div className="w-full mx-auto flex max-w-[1200px] md:flex-row flex-col items-center md:justify-between my-10 mb-60">
+        <div className="mt-40 md:mt-0">
+          <p className="text-white gilroy-bold text-[30px] md:text-[45px] ">
             <span className="inline-block relative">
               <span
                 className={`${homepagestyles.gradientText} text-white gilroy-bold`}
@@ -20,27 +20,25 @@ const Xentromission = () => {
                 alt="underline"
                 width={300}
                 height={300}
-                className="absolute bottom-[-2] left-0"
+                className="absolute bottom-[0] left-0"
               />
             </span>{" "}
             Mission:
           </p>
-          <p className="mt-3 text-white text-sm sm:text-md md:text-lg gilroy-regular max-w-[550px]">
+          <p className=" text-white text-[19px] md:text-[22px] max-w-[700px]">
             At Xentro, our mission is to revolutionize financial management by
             leveraging the power of blockchain technology. We aim to provide a
             transparent, secure, and user-centric platform that enables you to
             take full control of your financial future.
           </p>
         </div>
-        <div className="min-[1500px]:scale-[1.3] max-[768px]:scale-[0.8] flex justify-center mt-10 min-[769px]:mt-0">
           <Image
             src={mission}
             alt="mission"
             width={300}
             height={300}
-            className="mx-auto w-[300px] h-[300px]"
+            className=" w-[320px] h-[320px] block "
           />
-        </div>
       </div>
   
   );

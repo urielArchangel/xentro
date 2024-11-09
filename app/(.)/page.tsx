@@ -49,16 +49,16 @@ const page = () => {
 
   return (
     <>
-      <main className="body pt-5">
+      <main className={`${homepagestyles.body} py-6 px-4 md:px-0"`}>
         <HomepageHero />
-        <div className="min-[500px]:translate-y-[-200px] min-[800px]:translate-y-[-100px] max-[400px]:translate-y-[px] lg:translate-y-0">
+        <div >
           <Xentromission />
           {/* Feature */}
           <XentroFeatures />
 
           {/* MINT */}
           <div className="flex flex-col items-center pb-20 pt-32">
-            <p className="text-white gilroy-bold text-3xl md:text-4xl lg:text-5xl text-center mb-10 min-[769px]:w-[60%] px-3">
+            <p className="text-white text-[30px] md:text-[40px] font-bold max-w-[680px] text-center">
               Mint your{" "}
               <span className={`${homepagestyles.gradientText}`}>Xentro</span>{" "}
               badge to qualify for the{" "}
@@ -68,23 +68,23 @@ const page = () => {
             <div
               className={
                 homepagestyles.bg_gradient_border +
-                " border-0 p-[0.06em] rounded-full hd-shadow mt-8 inline-block"
+                " border-0 p-[0.07em] rounded-full hd-shadow mt-8 inline-block"
               }
             >
-              <Link href='/airdrop' className="bg-[#070D12] block w-full h-full rounded-full  px-5 py-3 text-white text-xl gilroy-bold">
+              <Link href='/airdrop' className="bg-[#070D12] block w-full h-full rounded-full  px-10 py-3 text-white text-xl gilroy-bold">
                 Join Xentro Airdrop
               </Link>
             </div>
           </div>
           {/* FAQ */}
-          <div className="flex flex-col items-center pb-20 pt-24">
+          <div className="flex flex-col items-center py-4">
             <p className="text-white gilroy-bold px-3 text-3xl md:text-4xl lg:text-5xl  text-center mb-10">
               Frequently Asked Questions{" "}
               <span className={`${homepagestyles.gradientText}`}>
-                (FAQ&apos;s)
+                (FAQs)
               </span>
             </p>
-            <div className="w-[80%]" id="faq">
+            <div className="w-full max-w-[1200px] mb-40" id="faq">
               {faq.faq.map((data: FAQData, index: number) => {
                 return (
                   <FaqAccordion

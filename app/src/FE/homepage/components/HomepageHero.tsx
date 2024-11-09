@@ -7,25 +7,25 @@ import Link from "next/link";
 const HomepageHero = () => {
   return (
     <>
-      <div className={`${homepagestyles.hero} w-full`}>
+      <div className={`${homepagestyles.hero} w-full `}>
         <div
-          className={`flex flex-col items-center gap-2 md:gap-5 pb-20 pt-24 px-[4%] ${homepagestyles.zindex}`}
+          className={`max-w-[1021px]  mx-auto pt-36 text-center`}
         >
-          <h1 className="text-white gilroy-black-bold text-2xl min-[340px]:text-3xl sm:text-4xl md:text-5xl lg:text-6xl min-[1500px]:text-8xl min-[1500px]:pt-20 text-center">
+          <h1 className="text-white gilroy-black-bold my-4 text-[35px] md:text-[65px] leading-[44px] mt-24 md:mt-0">
             Enjoy Finance on a <br /> Freeway with{" "}
             <span className="inline-block relative">
-              <span className={`text-white gilroy-bold`}>XENTRO</span>
+              <span className={`text-white gilroy-bold relative`}>XENTRO</span>
               <Image
                 src={round}
                 alt="underline"
-                className="absolute translate-y-[-30px] min-[340px]:translate-y-[-35px] sm:translate-y-[-38px] md:translate-y-[-50px] lg:translate-y-[-60px] min-[1500px]:translate-y-[-100px] scale-[1.1]"
+                className="absolute top-1 md:top-0 scale-[1.2] "
               />
             </span>{" "}
           </h1>
-          <p className="text-white gilroy-regular md:text-2xl sm:text-xl text-lg lg:text-3xl text-center font-semibold">
+          <p className="text-white gilroy-regular text-2xl md:text-[33px] font-semibold my-4 ">
             Gateway to UNTRAD Banking
           </p>
-          <p className="text-white gilroy-regular text-sm sm:text-md md:text-lg text-center w-[70%] md:w-[60%]">
+          <p className="text-white gilroy-regular w-full text-[20px] my-2 ">
             Unlock vast financial opportunities and effortlessly trade, earn
             interest and borrow assets across multiple blockchains, creating a
             unified and borderless financial network.
@@ -33,10 +33,10 @@ const HomepageHero = () => {
           <div
             className={
               homepagestyles.bg_gradient_border +
-              " border-0 p-[0.07em] rounded-full hd-shadow mt-8 inline-block"
+              " border-0 p-[0.07em] rounded-full hd-shadow mt-4 inline-block"
             }
           >
-            <Link href="/airdrop" className="bg-[#002953] block w-full h-full rounded-full md:px-5 md:py-3 px-2 py-1 text-white text-lg md:text-xl gilroy-regular font-semibold">
+            <Link href="/airdrop" className="bg-[#002953] h-full block rounded-full text-white gilroy-regular py-4 px-6 text-xl font-semibold">
               Join Xentro Airdrop
             </Link>
           </div>

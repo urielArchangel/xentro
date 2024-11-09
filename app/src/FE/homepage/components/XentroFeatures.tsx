@@ -1,49 +1,21 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import homepagestyles from "@/app/css/homepage.module.css";
 import underline from "@/app/images/underline.png";
-import bar from "@/app/images/featureBar.png";
+import bar from "@/app/images/landing/bar.png";
 import dot from "@/app/images/dot.svg";
 import defi from "@/app/images/defi.png";
 import crosschain from "@/app/images/crosschain.png";
-import exclusive from "@/app/images/exclusive.png";
+import exclusive from "@/app/images/landing/exclusive.png";
 import noncustodial from "@/app/images/noncustodial.png";
 import Image from "next/image";
 
 const XentroFeatures = () => {
-  const [imageWidth, setImageWidth] = useState(7);
-
-  const updateImageWidth = () => {
-    const screenWidth = window.innerWidth;
-
-    if (screenWidth <= 556) {
-      setImageWidth(7);
-    } else if (screenWidth <= 768) {
-      setImageWidth(6.7);
-    } else if (screenWidth >= 1109) {
-      setImageWidth(6.5);
-    } else if (screenWidth <= 1023) {
-      setImageWidth(9.4);
-    } else {
-      setImageWidth(7);
-    }
-  };
-
-  useEffect(() => {
-    updateImageWidth();
-
-    window.addEventListener("resize", updateImageWidth);
-
-    return () => {
-      window.removeEventListener("resize", updateImageWidth);
-    };
-  }, []);
-
   return (
     <>
-      <div className="py-16 lg:px-20 md:px-10 px-4">
+      <div className="">
         <div className="flex justify-center">
-          <p className="text-white gilroy-bold text-3xl md:text-4xl lg:text-5xl mb-10 min-[1500px]:text-6xl">
+          <p className="text-white gilroy-bold text-[30px] md:text-[45px] my-2 mb-10">
             <span className="inline-block relative">
               <span
                 className={`${homepagestyles.gradientText} text-white gilroy-bold`}
@@ -55,81 +27,77 @@ const XentroFeatures = () => {
                 alt="underline"
                 width={300}
                 height={300}
-                className="absolute bottom-[-2] left-0"
+                className="absolute bottom-[0] left-0"
               />
             </span>{" "}
             Features
           </p>
         </div>
-        <section className="grid grid-cols-8 lg:grid-cols-7 items-stretch">
-          <div className="h-full">
-            <Image src={bar} alt="mission" width={imageWidth} height={300} />
+        <section className="w-full max-w-[1200px]  flex justify-start mx-auto ">
+
+          <div className="h-full py-4 hidden lg:block">
+            <Image src={bar} alt="bar" className="block  lg:mr-10 h-full mt-1" />
           </div>
-          <div className="col-span-7 lg:col-span-6 h-full">
-            <div className="grid grid-cols-7 md:grid-cols-6 md:mb-32 mt-5">
+          <div className=" flex flex-col justify-between items-center flex-1">
+            <div className="flex justify-between items-center my-6 lg:my-0 " >
               <FeatureCard
-                height="min-[1381px]:h-[232px]"
+                height="max-w-[780px]  lg:mr-10"
                 title="Decentralized Finance (DeFi) Integration"
                 description="Seamlessly Connect with the Future of Finance"
                 explanation="Access a wide range of DeFi services directly from our platform, allowing you to earn, borrow, and invest with unprecedented ease and security."
               />
-              <div className="col-span-7 lg:col-span-2 flex justify-center items-center md:ml-20 mt-10 lg:mt-0">
                 <Image
                   src={defi}
                   alt="mission"
-                  width={270}
+                  width={300}
                   height={300}
-                  className="md:scale-[1] scale-[0.7] translate-x-[-15px] sm:translate-x-[-30px] lg:translate-x-[0]"
+                  className="w-[300px] lg:block hidden "
                 />
-              </div>
             </div>
-            <div className="grid grid-cols-7 lg:grid-cols-6 mb-10 md:mb-32">
+            <div className="flex justify-between items-center my-6 lg:my-0">
               <FeatureCard
+                height="max-w-[780px]  lg:mr-10"
                 title="Non-Custodial Management"
                 description="Retain Full Control Over Your Assets"
                 explanation="Access a curated selection of exclusive, secure investment opportunities with varying yield potentials, tailored to suit different risk profiles and financial goals."
               />
-              <div className="col-span-7 lg:col-span-2 flex justify-center items-center lg:ml-20 mt-10 lg:mt-0">
                 <Image
                   src={noncustodial}
                   alt="mission"
                   width={360}
                   height={300}
-                  className="md:scale-[1] scale-[0.7] translate-x-[-15px] sm:translate-x-[-30px] lg:translate-x-[0]"
+                  className="w-[300px] lg:block hidden  "
                 />
-              </div>
             </div>
-            <div className="grid grid-cols-7 lg:grid-cols-6 md:mb-32">
+            <div className="flex justify-between items-center my-6 lg:my-0 ">
               <FeatureCard
+                height="max-w-[780px]  lg:mr-10"
                 title="Exclusive Investment Opportunities"
                 description="Discover Top-Tier, Secure Yield Options"
                 explanation="Access a curated selection of exclusive, secure investment opportunities with varying yield potentials, tailored to suit different risk profiles and financial goals."
               />
-              <div className="col-span-7 lg:col-span-2 flex justify-center items-center lg:ml-20 mt-10 lg:mt-0">
                 <Image
                   src={exclusive}
                   alt="mission"
                   width={220}
                   height={300}
-                  className="md:scale-[1] scale-[0.7] translate-x-[-15px] sm:translate-x-[-30px] lg:translate-x-[0]"
+                  className="w-[300px] lg:block translate-y-[-40px] hidden "
                 />
-              </div>
             </div>
-            <div className="grid grid-cols-7 lg:grid-cols-6 md:mb-32">
+            <div className="flex justify-between items-center my-6 lg:my-0">
               <FeatureCard
+                height="max-w-[780px]  lg:mr-10"
                 title="Seamless Cross-Chain bridging"
                 description="Effortlessly Connect Assets Across Blockchains"
                 explanation="Access a curated selection of exclusive, secure investment opportunities with varying yield potentials, tailored to suit different risk profiles and financial goals."
               />
-              <div className="col-span-7 lg:col-span-2 flex justify-center items-center lg:ml-5 mt-10 lg:mt-0">
                 <Image
                   src={crosschain}
                   alt="mission"
                   width={360}
                   height={300}
-                  className="md:scale-[1] scale-[0.7] translate-x-[-15px] sm:translate-x-[-30px] lg:translate-x-[0]"
+                  className="w-[300px] lg:block hidden "
                 />
-              </div>
             </div>
           </div>
         </section>
@@ -153,34 +121,32 @@ const FeatureCard: React.FC<FeatureProps> = ({
 }) => {
   return (
     <div
-      className={`rounded-2xl col-span-7 lg:col-span-4 translate-x-[-15px] sm:translate-x-[-30px] lg:translate-x-[-70px] border-[#027EFF] border ${height}  min-[1500px]:h-[235px]`}
+      className={`rounded-[12px] h-fit  border-[#027EFF] border ${height} `}
     >
       <div
-        className={`md:py-7 md:px-5 px-3 py-3 rounded-t-2xl h-auto ${homepagestyles.featureCard}`}
+        className={` rounded-t-[12px]  border-b border-[#027EFF] px-8 py-6 ${homepagestyles.featureCard}`}
       >
-        <p className="text-sm md:text-lg lg:text-2xl uppercase gilroy-black-bold text-white">
+        <h1 className="text-xl lg:text-2xl uppercase gilroy-black-bold text-white text-center md:text-left">
           {title}
-        </p>
-        <div className="flex items-center">
+        </h1>
+        <div className="flex items-start md:items-center justify-center text-center md:justify-start md:text-left">
           <Image
             src={dot}
             alt="mission"
             width={20}
             height={20}
-            className="scale-[0.7] md:scale-[1]"
+            className=""
           />
-          <p className="text-white text-xs md:text-md lg:text-xl gilroy-regular ml-2">
+          <p className="text-white text-lg lg:text-xl gilroy-regular ml-2">
             {description}
           </p>
         </div>
       </div>
-      <div
-        className={`md:py-7 md:px-5 px-3 py-3 rounded-b-2xl border-t border-t-[#027EFF] h-auto ${homepagestyles.featureCard}`}
+      <p
+        className={`px-8 py-6 h-full text-white rounded-b-[12px] text-[19px] lg:text-[22px] ${homepagestyles.featureCard}`}
       >
-        <p className="text-white text-xs md:text-md lg:text-xl gilroy-regular">
           {explanation}
-        </p>
-      </div>
+      </p>
     </div>
   );
 };

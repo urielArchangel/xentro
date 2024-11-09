@@ -3,9 +3,10 @@ import Navbar from "@/app/src/FE/navbar/Navbar";
 
 const layout = ({ children }: { children: ReactNode }) => {
   return (
-    <section>
+    <section  >
       <Navbar />
       {children}
+
     </section>
   );
 };
