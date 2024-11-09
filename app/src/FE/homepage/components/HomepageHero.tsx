@@ -7,11 +7,11 @@ import Link from "next/link";
 const HomepageHero = () => {
   return (
     <>
-      <div className={`${homepagestyles.hero} w-full `}>
+      <div className={`${homepagestyles.hero} `}>
         <div
           className={`max-w-[1021px]  mx-auto pt-36 text-center`}
         >
-          <h1 className="text-white gilroy-black-bold my-4 text-[35px] md:text-[65px] leading-[44px] mt-24 md:mt-0">
+          <h1 className="text-white gilroy-black-bold my-4 text-[35px] md:text-[65px] leading-[44px] md:leading-[64px] mt-24 md:mt-0">
             Enjoy Finance on a <br /> Freeway with{" "}
             <span className="inline-block relative">
               <span className={`text-white gilroy-bold relative`}>XENTRO</span>

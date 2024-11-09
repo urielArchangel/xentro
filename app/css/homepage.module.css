@@ -1,13 +1,25 @@
+
+
+@media (min-width:0px) and (max-width: 768px) {
+  .hero {
+    height: 100%;
+    min-height: 1000px;
+    background-image: url(../images/landing/landingHero.png);
+    background-size: 900px 400px; /* Ensure the image covers the entire container */
+    background-position: bottom; /* Keep the image centered */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    width: 100%;
+  }
+}
 .hero {
-  height: 100%;
-  min-height: 1000px;
+ height: 1250px;
   background-image: url(../images/landing/landingHero.png);
-  background-size: 900px 400px; /* Ensure the image covers the entire container */
+  background-size: 100% contain; /* Ensure the image covers the entire container */
   background-position: bottom; /* Keep the image centered */
   background-repeat: no-repeat; /* Prevent the image from repeating */
   width: 100%;
 }
-.body{
+.body {
   background-image: url(../images/landing/landing-bg.png);
   background-size: 100% 100%; /* Ensure the image covers the entire container */
   background-position: bottom; /* Keep the image centered */
@@ -17,7 +29,7 @@
 .faqAccordion {
   border-radius: 1rem;
   border: 1px solid #001d3a;
-  background-color:#0029521f;
+  background-color: #0029521f;
 }
 
 .gradientText {
@@ -53,15 +65,10 @@
   z-index: -10000000000;
 }
 
-@media screen and (min-width:768px) {
-  .hero{
-    height: 1275px;
-  }
-}
 
-@media (min-width: 769px) and (max-width: 1023px) {
-  /* Apply scale here */
+
+/* @media (min-width: 769px) and (max-width: 1023px) {
   .scale_custom {
     transform: scale(0.8);
   }
-}
+} */
