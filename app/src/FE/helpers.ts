@@ -1,3 +1,5 @@
+import { IUser } from "@/declarations"
+
 export const trauncateAddressMiddle = (s?:string,length?:number)=>{
     if(!s)return null
     if(!length)length =5
@@ -24,7 +26,7 @@ try {
     if(error){
         return [null,error]
     }
-    return [user,null]
+    return [user,null] 
 } catch (error:any) {
     console.log(error.message+"1")
     return [null,error.message]

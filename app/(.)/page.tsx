@@ -8,12 +8,42 @@ import Xentromission from "@/app/src/FE/homepage/components/XentroMission";
 import Footer from "@/app/src/FE/footer/Footer";
 import faq from "@/app/src/data/faq/faq.json";
 import Link from "next/link";
+import { Metadata } from "next";
 
 type FAQData = {
   question: string;
   answer: string;
 };
 
+export const metadata:Metadata={
+  title:"Xentro | Gateway to UNTRAD Banking & Borderless Finance",
+  "description": "Step into the world of Xentro, where finance meets freedom. Enjoy seamless multi-chain trading, earn interest, and access borrowing options all in one unified platform. Join the Xentro Airdrop now.",
+  "keywords": [
+    "Xentro",
+    "UNTRAD Banking",
+    "multi-chain trading",
+    "blockchain finance",
+    "crypto airdrop",
+    "borderless finance",
+    "earn interest",
+    "borrowing assets",
+    "financial network",
+    "decentralized finance"
+  ],
+  openGraph: {
+    "title": "Xentro - Gateway to UNTRAD Banking",
+    "description": "Unlock financial opportunities and navigate a borderless financial network with Xentro. Join our airdrop to start your journey.",
+    "url": "https://joinxentro.com",
+    "type": "website",
+  },
+  twitter: {
+    "title": "Xentro - Gateway to UNTRAD Banking",
+    "description": "Unlock financial opportunities and navigate a borderless financial network with Xentro. Join our airdrop to start your journey.",
+    "card": "summary_large_image",
+  
+  },
+  robots:{ follow:true,index:true}
+}
 const page = () => {
 
 

@@ -9,30 +9,41 @@ import {
   ConnectButton,
   useAccountModal,
   useConnectModal,
+  
 } from "@rainbow-me/rainbowkit";
-import { useAccount } from "wagmi";
+import { useAccount,useDisconnect } from "wagmi";
+import Loading from "@/app/(.)/loading";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   
   const { isConnected, address } = useAccount();
+  const {disconnect} = useDisconnect()
+
   const { openConnectModal } = useConnectModal();
     const { openAccountModal } = useAccountModal();
+    const [loading,setLoading] = useState(true)
   const [hash,setHash] =useState("") 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
+  useEffect(() => {
+    setLoading(false); // Ensure loading only on component mount, not on every render
+  }, []);
   const connectWalletButtonAction = async() => {
-  
+    console.log({openAccountModal})
     if (openAccountModal) {
       openAccountModal();
       return;
     }
+    
     if (openConnectModal) {
       openConnectModal();
       return;
     }
+    disconnect()
+
   };
   useLayoutEffect(()=>{
     
@@ -46,6 +57,7 @@ const Navbar = () => {
 
   return (
     <>
+    {loading?<Loading />:null}
       <nav className=" left-0 bg-[#00295310] bg-opacity-90 backdrop-blur-md fixed w-screen z-[10] top-0 py-4">
         <div className="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-4">
           <Link

@@ -1,7 +1,15 @@
 import AdminNav from "@/app/src/FE/admin/miscComponents/AdminNav";
 import AdminSideNav from "@/app/src/FE/admin/miscComponents/AdminSideNav";
 import ModalContext from "@/app/src/FE/admin/miscComponents/ModalContext";
+import { Metadata } from "next";
 import React, { ReactNode } from "react";
+
+export const metadata: Metadata = {
+  title: "Admin | Xentro - Gateway to UNTRAD Banking",
+
+  robots: { follow: false, index: false },
+};
+
 
 const AdminAppLayout = ({ children }: { children: ReactNode }) => {
   return (

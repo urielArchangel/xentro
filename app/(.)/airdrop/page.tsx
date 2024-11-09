@@ -11,19 +11,50 @@ import ExclusiveTasks from "../../src/FE/airdrop/ExclusiveTasks";
 import MintBadge from "../../src/FE/airdrop/MintBadge";
 import { xentroQuestions } from "../../src/data/faq/faqQuestions";
 import FaqAccordion from "../../src/FE/homepage/components/FaqAccordion";
-import { cookies } from "next/headers";
-import { userDataCookieName } from "../../src/data/constants";
-import { UserType, verifyUserDataToken } from "../../src/BE/userdata/jwt";
-import { fetchAppData, fetchUsers } from "@/app/src/BE/helpers";
+import { fetchAppData } from "@/app/src/BE/helpers";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "Privacy Policy | Xentro - Gateway to UNTRAD Banking",
+  description:
+    "Learn how Xentro collects, uses, and safeguards your personal information. Our Privacy Policy outlines our commitment to transparency, data protection, and privacy standards to ensure a secure experience for all users.",
+  keywords: [
+    "Xentro",
+    "privacy policy",
+    "data protection",
+    "personal information",
+    "user data",
+    "privacy standards",
+    "data security",
+    "data privacy",
+    "Web3 privacy",
+    "information security",
+    "blockchain privacy",
+    "data transparency",
+    "user rights",
+    "secure experience",
+  ],
+  openGraph: {
+    title: "Privacy Policy | Xentro - Gateway to UNTRAD Banking",
+    description:
+      "Understand Xentro's approach to data privacy and security. Our Privacy Policy explains how we protect and handle user information responsibly.",
+    url: "https://joinxentro.com/privacy-policy",
+    type: "website",
+  },
+  twitter: {
+    title: "Privacy Policy | Xentro - Gateway to UNTRAD Banking",
+    description:
+      "Learn about Xentro's Privacy Policy, which details our practices for safeguarding and using user data responsibly.",
+    card: "summary_large_image",
+  },
+  robots: { follow: true, index: true },
+};
 
+const page = async () => {
+  const app = await fetchAppData();
 
-const page = async() => {
-const app = await fetchAppData();
-
-  return ( 
+  return (
     <>
-    
       <div className="body pt-5">
         {" "}
         <AirdropHero />
@@ -49,7 +80,7 @@ const app = await fetchAppData();
           </div>
         </div>
         <HowtoParticipate />
-        <ExclusiveTasks  appString={JSON.stringify(app)} />
+        <ExclusiveTasks appString={JSON.stringify(app)} />
         <MintBadge />
         <div>
           <div className="flex flex-col items-center pb-20 pt-24">

@@ -1,8 +1,8 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 import homepagestyles from "@/app/css/homepage.module.css";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import discord from "@/app/images/socials/Discord.png";
 import medium from "@/app/images/socials/Medium.png";
 import x from "@/app/images/socials/XTask.png";
@@ -13,6 +13,9 @@ import Link from "next/link";
 import { FaSearch } from "react-icons/fa";
 import { useAccount } from "wagmi";
 import { trauncateAddressMiddle } from "../helpers";
+import { ITask } from "@/declarations";
+import { taskCompletedAction } from "../../BE/serveractions";
+import useMessage from "antd/es/message/useMessage";
 
 interface Task {
   id: number;
@@ -21,135 +24,62 @@ interface Task {
   completed: boolean;
   icon: any;
 }
-const AllTasks = () => {
-  const tasksData: Task[] = [
-    {
-      id: 1,
-      task: "Follow Xentro on X",
-      points: 5000,
-      completed: false,
-      icon: x,
-    },
-    {
-      id: 2,
-      task: "Join our Telegram Chat",
-      points: 5000,
-      completed: false,
-      icon: telegram,
-    },
-    {
-      id: 3,
-      task: "Join our Discord",
-      points: 5000,
-      completed: false,
-      icon: discord,
-    },
-    {
-      id: 4,
-      task: "Follow us on Instagram",
-      points: 5000,
-      completed: false,
-      icon: instagram,
-    },
-    {
-      id: 5,
-      task: "Follow us on Medium",
-      points: 5000,
-      completed: false,
-      icon: medium,
-    },
-    {
-      id: 6,
-      task: "Join our YouTube Channel",
-      points: 5000,
-      completed: false,
-      icon: youtube,
-    },
-    {
-      id: 7,
-      task: "Follow Xentro on X",
-      points: 5000,
-      completed: false,
-      icon: x,
-    },
-    {
-      id: 8,
-      task: "Follow Xentro on X",
-      points: 5000,
-      completed: false,
-      icon: x,
-    },
-    {
-      id: 9,
-      task: "Join our Telegram Chat",
-      points: 5000,
-      completed: false,
-      icon: telegram,
-    },
-    {
-      id: 10,
-      task: "Join our Discord",
-      points: 5000,
-      completed: false,
-      icon: discord,
-    },
-    {
-      id: 11,
-      task: "Follow us on Instagram",
-      points: 5000,
-      completed: false,
-      icon: instagram,
-    },
-    {
-      id: 12,
-      task: "Follow us on Medium",
-      points: 5000,
-      completed: false,
-      icon: medium,
-    },
-    {
-      id: 13,
-      task: "Join our YouTube Channel",
-      points: 5000,
-      completed: false,
-      icon: youtube,
-    },
-    {
-      id: 14,
-      task: "Follow Xentro on X",
-      points: 5000,
-      completed: false,
-      icon: x,
-    },
-  ];
+const AllTasks = ({
+  t,
+  completedTasksIds,
+  userTotalPoint,
+}: {
+  t: ITask[];
+  completedTasksIds: string[];
+  userTotalPoint: number;
+}) => {
+  const [completedTasksCount, setCompletedTasksCount] = useState(0);
+  const [message, messageContext] = useMessage();
 
-  const [tasks, setTasks] = useState<Task[]>(tasksData);
+  const handleClickStateUpdate = async (id: string) => {
+    message.loading("Please wait...", 10000000);
 
-  const completedTasks = tasks.filter((task) => task.completed);
-  const handleTaskClick = (id: number) => {
-    setTasks((prevTasks) =>
-      prevTasks.map((task) =>
-        task.id === id ? { ...task, completed: true } : task
-      )
-    );
+    const [res, error] = await taskCompletedAction(id, String(address));
+    message.destroy();
+    if (error) {
+      message.error(error, 2);
+      return;
+    }
+    await message.success(res, 2);
+    setCompletedTasksCount((prev) => (prev += 1));
   };
 
-  const totalPoints = tasks.reduce((acc, task) => {
-    return task.completed ? acc + task.points : acc;
-  }, 0);
+  const taskPlatformIconMapping = (platformName: string) => {
+    const icons: { [id: string]: StaticImageData } = {
+      x,
+      telegram,
+      medium,
+      instagram,
+      discord,
+    };
+    return icons[platformName] || x;
+  };
+  const [tasks, setTasks] = useState<ITask[]>(t);
 
+
+  useEffect(() => {});
+  const isTaskCompleted = useCallback(
+    (id: string) => completedTasksIds.includes(id) ?? false,
+    [completedTasksIds]
+  );
   const handleSearchTasks = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchValue = e.target.value.toLowerCase();
-    const filteredTasks = tasksData.filter((task) =>
+    const filteredTasks = t.filter((task) =>
       task.task.toLowerCase().includes(searchValue)
     );
     setTasks(filteredTasks);
   };
 
-  const {address} = useAccount()
+  const { address } = useAccount();
 
   return (
     <>
+      {messageContext}
       <div className="px-[8%]">
         <div
           className={
@@ -160,10 +90,9 @@ const AllTasks = () => {
           <div className="rounded-xl px-5 py-3 text-white bg-[#092747] gilroy-regular">
             <div className="flex md:flex-row flex-col justify-between">
               <div className="flex flex-row justify-between items-center ">
-             
                 <div className="bg-[#081A2E] border-[#2F95FF] border py-1 px-6 flex items-center rounded-full">
                   <span className="text-xs min-[400px]:text-lg lg:text-xl font-bold tracking-wide">
-                   {trauncateAddressMiddle(address,10)}
+                    {trauncateAddressMiddle(address, 10)}
                   </span>
                 </div>
               </div>
@@ -176,7 +105,7 @@ const AllTasks = () => {
                   <span
                     className={`${homepagestyles.gradientText} text-white gilroy-bold text-lg sm:text-xl md:text-2xl lg:text-3xl tracking-wider`}
                   >
-                    {2000000 + totalPoints}
+                    {userTotalPoint}
                   </span>
                 </p>
               </div>
@@ -257,7 +186,7 @@ const AllTasks = () => {
                 >
                   <span className="text-xs max-[599px]:text-md min-[600px]:text-lg flex items-center  w-[33%] ">
                     <Image
-                      src={task.icon}
+                      src={taskPlatformIconMapping(task.platform)}
                       alt="task"
                       className="w-[15px] md:w-[25px] mx-2"
                     />
@@ -266,17 +195,20 @@ const AllTasks = () => {
                   <span className="text-xs max-[599px]:text-md min-[600px]:text-lg flex items-center place-self-center  w-[33%]">
                     {task.points}
                   </span>
-                  <button
-                    className={`px-4 py-2 text-white rounded-full font-bold place-self-end text-xs max-[599px]:text-md min-[600px]:text-lg ${
-                      task.completed
+                  <Link
+                    target="_blank"
+                    onClick={() => {
+                      handleClickStateUpdate(task.id);
+                    }}
+                    className={`px-4 py-2 text-white rounded-full font-bold ${
+                      isTaskCompleted(task.id)
                         ? "bg-gray-500 cursor-not-allowed"
                         : "bg-[#004995] glow"
                     }`}
-                    onClick={() => handleTaskClick(task.id)}
-                    disabled={task.completed}
+                    href={task.link}
                   >
-                    {task.completed ? "Done" : "Start"}
-                  </button>
+                    {isTaskCompleted(task.id) ? "Done" : "Start"}
+                  </Link>
                 </li>
               </div>
             ))}
