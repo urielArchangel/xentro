@@ -100,7 +100,7 @@ const XentroBadge: React.FC<MintBadgeProps> = ({ title, description,mints,unlock
         >
           <div className="flex flex-col justify-end items-center font-bold">
             <ul className="flex min-[480px]:space-x-5 space-x-1 gilroy-bold min-[480px]:text-3xl text-xl min-[480px]:mb-10 mb-4">
-            {mints.split("").map( (e)=>( <li className="p-1 min-[480px]:w-10 min-[480px]:h-12 w-8 h-8 text-center rounded-md bg-[#254367]">
+            {mints.split("").map( (e,i)=>( <li key={i} className="p-1 min-[480px]:w-10 min-[480px]:h-12 w-8 h-8 text-center rounded-md bg-[#254367]">
                 {e}
               </li>))}
              
