@@ -143,7 +143,7 @@ const FeatureCard: React.FC<FeatureProps> = ({
         </div>
       </div>
       <p
-        className={`px-8 py-6 h-full text-white rounded-b-[12px] text-[19px] lg:text-[22px] bg-[#0254a91f]`}
+        className={`px-8 text-center md:text-left py-6 h-full text-white rounded-b-[12px] text-[19px] lg:text-[22px] bg-[#0254a91f]`}
       >
           {explanation}
       </p>

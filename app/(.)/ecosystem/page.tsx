@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     title: "Ecosystem | Xentro - Gateway to UNTRAD Banking",
     description:
       "Discover the Xentro ecosystem, designed to offer secure, borderless financial services and seamless interoperability across multiple blockchains.",
-    url: "https://joinxentro.com/ecosystem",
+    url: "https://www.joinxentro.com/ecosystem",
     type: "website",
   },
   twitter: {

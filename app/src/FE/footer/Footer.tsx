@@ -35,7 +35,7 @@ const Footer = () => {
                 Xentro
               </h6>
               <section>
-                <ul className="flex items-center space-x-5 my-4">
+                <ul className=" items-center space-x-5 my-4 min-[1200px]:flex hidden">
                   <li>
                   <Link href="https://medium.com/@joinxentro" target="_blank">
 
@@ -71,10 +71,45 @@ const Footer = () => {
                   </li>
                 </ul>
               </section>
+           <div className=" text-[20px] font-semibold w-full max-w-[400px] block min-[1200px]:hidden ">
+              <h6 className="text-white mb-4 mt-8 italic">Quick links</h6>
+              <ul className="grid grid-cols-2 gap-4 ">
+                <li>
+                  <Link href="/ecosystem">Ecosystem</Link>
+                </li>
+                <li>
+                  <Link href="" className="opacity-[0.5]">
+                    Stake
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/airdrop">Airdrop</Link>
+                </li>
+                <li>
+                  <Link href="" className="opacity-[0.5]">
+                    Bridge{" "}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#faq"> FAQ </Link>
+                </li>
+                <li>
+                  <Link href="" className="opacity-[0.5]">
+                    LaunchPad
+                  </Link>
+                </li>
+                <li>
+                  <Link href={"/terms-and-condition"}>Terms & Conditions</Link>
+                </li>
+                <li>
+                  <Link href={"/privacy-policy"}>Privacy Policy</Link>
+                </li>
+              </ul>
+            </div>
             </div>
 
-            <div className=" text-[20px] font-semibold w-full max-w-[400px]  ">
-              <h6 className="text-white mb-4">Quick links</h6>
+            <div className=" text-[20px] font-semibold w-full max-w-[400px]  min-[1200px]:block hidden ">
+              <h6 className="text-white mb-4 italic">Quick links</h6>
               <ul className="grid grid-cols-2 gap-4 ">
                 <li>
                   <Link href="/ecosystem">Ecosystem</Link>
@@ -108,6 +143,43 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
+            <section>
+                <ul className="flex items-center space-x-5 my-4 min-[1200px]:hidden w-full max-w-[400px]" >
+                  <li>
+                  <Link href="https://medium.com/@joinxentro" target="_blank">
+
+                    <Image src={medium} alt="medium" className="w-10" />
+                    </Link>
+                  </li>
+                  <li>
+                  <Link href="" className="opacity-[0.5]">
+
+                    <Image src={discord} alt="discord" className="w-10" />
+                    </Link>
+                  </li>
+                  <li>
+                  <Link href="https://twitter.com/joinxentro" target="_blank">
+
+                    <Image src={x} alt="x" className="w-10" />
+                    </Link>
+                  </li>
+                  <li>
+                  <Link href="https://t.me/joinxentro" target="_blank"> 
+                    <Image src={telegram} alt="telegram" className="w-10" />
+                    </Link>
+                  </li>
+                  <li>
+                  <Link href="https://www.instagram.com/joinxentro/" target="_blank">
+                    <Image src={instagram} alt="instagram" className="w-10" />
+                    </Link>
+                  </li>
+                  <li>
+                  <Link href="" className="opacity-[0.5]">
+                    <Image src={star} alt="star" className="w-10" />
+                    </Link>
+                  </li>
+                </ul>
+              </section>
           <div className="min-[1200px]:max-w-[300px] text-center min-[1200px]:text-left max-w-[400px] w-full">
             <h6 className="text-[20px] text-white pt-8 font-semibold mx-5">
               For partnerships, please get in touch with us at

@@ -25,7 +25,7 @@ const HomepageHero = () => {
           <p className="text-white gilroy-regular text-2xl md:text-[33px] font-semibold my-4 ">
             Gateway to UNTRAD Banking
           </p>
-          <p className="text-white gilroy-regular w-full text-[20px] my-2 ">
+          <p className="text-white gilroy-regular w-full text-[14px] md:text-[20px] my-2 ">
             Unlock vast financial opportunities and effortlessly trade, earn
             interest and borrow assets across multiple blockchains, creating a
             unified and borderless financial network.

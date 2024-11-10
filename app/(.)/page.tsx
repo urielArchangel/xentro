@@ -33,7 +33,7 @@ export const metadata:Metadata={
   openGraph: {
     "title": "Xentro - Gateway to UNTRAD Banking",
     "description": "Unlock financial opportunities and navigate a borderless financial network with Xentro. Join our airdrop to start your journey.",
-    "url": "https://joinxentro.com",
+    "url": "https://www.joinxentro.com",
     "type": "website",
   },
   twitter: {
@@ -70,6 +70,7 @@ const page = () => {
                 homepagestyles.bg_gradient_border +
                 " border-0 p-[0.07em] rounded-full hd-shadow mt-8 inline-block"
               }
+              id="faq"
             >
               <Link href='/airdrop' className="bg-[#070D12] block w-full h-full rounded-full  px-10 py-3 text-white text-xl gilroy-bold">
                 Join Xentro Airdrop
@@ -84,7 +85,7 @@ const page = () => {
                 (FAQs)
               </span>
             </p>
-            <div className="w-full max-w-[1200px] mb-40" id="faq">
+            <div className="w-full max-w-[1200px] mb-40">
               {faq.faq.map((data: FAQData, index: number) => {
                 return (
                   <FaqAccordion

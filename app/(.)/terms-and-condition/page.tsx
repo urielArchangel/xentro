@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     title: "Terms and Conditions | Xentro - Gateway to UNTRAD Banking",
     description:
       "Understand the terms governing your use of Xentro's platform. By engaging with our services, you agree to abide by our outlined conditions.",
-    url: "https://joinxentro.com/terms-and-conditions",
+    url: "https://www.joinxentro.com/terms-and-conditions",
     type: "website",
   },
   twitter: {

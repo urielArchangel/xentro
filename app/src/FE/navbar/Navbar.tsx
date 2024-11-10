@@ -6,7 +6,6 @@ import Image from "next/image";
 import logo from "@/app/images/xentroLogoWNameWhite.png";
 import homepagestyles from "@/app/css/homepage.module.css";
 import {
-  ConnectButton,
   useAccountModal,
   useConnectModal,
   
@@ -14,6 +13,7 @@ import {
 import { useAccount,useDisconnect } from "wagmi";
 import Loading from "@/app/(.)/loading";
 import { MenuIcon } from "lucide-react";
+import { trauncateAddressMiddle } from "../helpers";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -29,9 +29,11 @@ const Navbar = () => {
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
+
   useEffect(() => {
     setLoading(false); // Ensure loading only on component mount, not on every render
-  }, []);
+    setIsMobileMenuOpen(false)
+  }, [pathname]);
   const connectWalletButtonAction = async() => {
     console.log({openAccountModal})
     if (openAccountModal) {
@@ -122,24 +124,22 @@ const Navbar = () => {
                   Airdrop
                 </Link>
               </li>
-              <li>
-                <Link href="/stake" className="hover:text-blue-400">
+              <li className="opacity-[0.5]">
+                <Link href="" className="hover:text-blue-400">
                   Stake
                 </Link>
               </li>
-              <li>
-                <Link href="/bridge" className="hover:text-blue-400">
+              <li className="opacity-[0.5]">
+                <Link href="" className="hover:text-blue-400">
                   Bridge
                 </Link>
               </li>
               <li>
-                <Link href="/faq" className="hover:text-blue-400">
+                <Link href="#faq" className="hover:text-blue-400">
                   FAQ
                 </Link>
               </li>
-              <li className="mt-8">
-            
-              </li>
+             
             </ul>
           </div>
 
@@ -176,7 +176,7 @@ const Navbar = () => {
                   className="bg-white h-[5px] absolute w-full bottom-0 rounded-tl-[10px] rounded-tr-[10px]"
                 ></span>
               </li>
-              <li className=" w-[80px] relative h-full ">
+              <li className=" w-[80px] relative h-full opacity-[0.5]">
                 <Link
                   href="/stake"
                   className={`h-full flex items-center justify-center py-2 px-3 bg-blue-700 md:bg-transparent md:p-0 `}
@@ -188,9 +188,9 @@ const Navbar = () => {
                   className="bg-white h-[5px] absolute w-full bottom-0 rounded-tl-[10px] rounded-tr-[10px]"
                 ></span>
               </li>
-              <li className=" w-[80px] relative h-full ">
+              <li className=" w-[80px] relative h-full opacity-[0.5]">
                 <Link
-                  href="/bridge"
+                  href=""
                   className={` h-full flex items-center justify-center py-2 px-3 bg-blue-700 md:bg-transparent md:p-0 `}
                 >
                   Bridge
@@ -202,7 +202,7 @@ const Navbar = () => {
               </li>
               <li className=" w-[80px] relative h-full ">
                 <Link
-                  href="/#faq"
+                  href="#faq"
                   className={` h-full flex items-center justify-center py-2 px-3 bg-blue-700 md:bg-transparent md:p-0 `}
                 >
                   FAQ
@@ -225,7 +225,7 @@ const Navbar = () => {
               onClick={connectWalletButtonAction}
               className="bg-[#002953] w-full h-full rounded-full overflow-hidden text-ellipsis px-4 md:px-5 py-2 text-white text-[14px] md:text-lg gilroy-regular font-semibold"
             >
-              {isConnected ? address : "Connect Wallet"}
+              {isConnected ? trauncateAddressMiddle(address,4) : "Connect Wallet"}
             </button>
           </div>
 
