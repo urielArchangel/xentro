@@ -5,7 +5,7 @@ import logo from "@/app/images/xentroLogoWNameWhite.png";
 import airdropcss from "@/app/css/airdrop.module.css";
 import discord from "@/app/images/socials/Discord.png";
 import medium from "@/app/images/socials/Medium.png";
-import x from "@/app/images/socials/Twitter.png";
+import x from "@/app/images/socials/XTask.png";
 import telegram from "@/app/images/socials/Telegram.png";
 import instagram from "@/app/images/socials/Instagram.png";
 import star from "@/app/images/socials/Star.png";
@@ -13,48 +13,93 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="text-[#ffffff8d] w-[90%]  mx-auto gilroy-regular pb-10">
+    <footer className="text-[#ffffff8d] w-[90%]  mx-auto gilroy-regular pb-8">
       {/* desktop */}
       <div
         className={
           footercss.bg_gradient_border +
-          " border-0 p-[0.07em] rounded-[18px] hd-shadow min-[933px]:block hidden"
+          " border-0 p-[0.07em] rounded-[18px] hd-shadow block "
         }
       >
         <section
           className={
             footercss.innterContainerBG +
-            " relative py-28 flex-wrap flex justify-around w-full h-full rounded-[18px] px-14 "
+            " relative p-10 pt-20 flex-col flex items-between w-full h-full rounded-[18px] "
           }
         >
-          <div className="self-start">
-            <Image src={logo} alt="xentro" className="block mb-8" />
-            <h6 className="text-[18px] text-white max-w-[400px]">
-              Gateway to UNTRAD Banking <br /> Enjoy Finance on a Freeway with
-              Xentro
-            </h6>
-            <section>
-              <ul className="flex items-center space-x-5 my-10">
+          <div className=" flex items-center flex-col gap-10 min-[1200px]:gap-0  w-full min-[1200px]:flex-row min-[1200px]:justify-around min-[1200px]:w-full max-w-[1300px] mx-auto" >
+            <div className=" max-w-[400px] w-full ">
+              <Image src={logo} alt="xentro" className="block mb-8" />
+              <h6 className="text-[18px] text-white max-w-[400px]">
+                Gateway to UNTRAD Banking <br /> Enjoy Finance on a Freeway with
+                Xentro
+              </h6>
+              <section>
+                <ul className="flex items-center space-x-5 my-4">
+                  <li>
+                  <Link href="https://medium.com/@joinxentro" target="_blank">
+
+                    <Image src={medium} alt="medium" className="w-10" />
+                    </Link>
+                  </li>
+                  <li>
+                  <Link href="" className="opacity-[0.5]">
+
+                    <Image src={discord} alt="discord" className="w-10" />
+                    </Link>
+                  </li>
+                  <li>
+                  <Link href="https://twitter.com/joinxentro" target="_blank">
+
+                    <Image src={x} alt="x" className="w-10" />
+                    </Link>
+                  </li>
+                  <li>
+                  <Link href="https://t.me/joinxentro" target="_blank"> 
+                    <Image src={telegram} alt="telegram" className="w-10" />
+                    </Link>
+                  </li>
+                  <li>
+                  <Link href="https://www.instagram.com/joinxentro/" target="_blank">
+                    <Image src={instagram} alt="instagram" className="w-10" />
+                    </Link>
+                  </li>
+                  <li>
+                  <Link href="" className="opacity-[0.5]">
+                    <Image src={star} alt="star" className="w-10" />
+                    </Link>
+                  </li>
+                </ul>
+              </section>
+            </div>
+
+            <div className=" text-[20px] font-semibold w-full max-w-[400px]  ">
+              <h6 className="text-white mb-4">Quick links</h6>
+              <ul className="grid grid-cols-2 gap-4 ">
                 <li>
-                  <Image src={medium} alt="medium" />
+                  <Link href="/ecosystem">Ecosystem</Link>
                 </li>
                 <li>
-                  <Image src={discord} alt="discord" />
+                  <Link href="" className="opacity-[0.5]">
+                    Stake
+                  </Link>
                 </li>
                 <li>
-                  <Image src={x} alt="x" />
+                  <Link href="/airdrop">Airdrop</Link>
                 </li>
                 <li>
-                  <Image src={telegram} alt="telegram" />
+                  <Link href="" className="opacity-[0.5]">
+                    Bridge{" "}
+                  </Link>
                 </li>
                 <li>
-                  <Image src={instagram} alt="instagram" />
+                  <Link href="/faq"> FAQ </Link>
                 </li>
                 <li>
-                  <Image src={star} alt="star" />
+                  <Link href="" className="opacity-[0.5]">
+                    LaunchPad
+                  </Link>
                 </li>
-              </ul>
-              <ul className="text-[20px] font-bold space-y-4 my-10">
                 <li>
                   <Link href={"/terms-and-condition"}>Terms & Conditions</Link>
                 </li>
@@ -62,34 +107,15 @@ const Footer = () => {
                   <Link href={"/privacy-policy"}>Privacy Policy</Link>
                 </li>
               </ul>
-            </section>
-          </div>
-          <div className="flex text-[20px] font-semibold items-center justify-between w-full max-w-[320px] self-center mx-10">
-            <ul className="space-y-4">
-              <li>Medium</li>
-              <li>Discord</li>
-              <li>Twitter</li>
-              <li>Telegram</li>
-              <li>Instagram</li>
-              <li>TrustPilot</li>
-            </ul>
-            <ul className="space-y-4">
-              <li>Ecosystem</li>
-              <li>Airdrop</li>
-              <li>Stake</li>
-              <li>Bridge</li>
-              <li>LaunchPad</li>
-              <li>FAQ</li>
-            </ul>
-          </div>
-          <div className="self-center">
-            <h6 className="max-w-[300px] text-[20px] font-semibold mx-5">
+            </div>
+          <div className="min-[1200px]:max-w-[300px] text-center min-[1200px]:text-left max-w-[400px] w-full">
+            <h6 className="text-[20px] text-white pt-8 font-semibold mx-5">
               For partnerships, please get in touch with us at
             </h6>
             <div
               className={
                 airdropcss.bg_gradient_border +
-                " border-0 p-[0.06em] rounded-[11px] hd-shadow mt-8"
+                " border-0 p-[0.07em] w-full rounded-[11px] hd-shadow mt-8"
               }
             >
               <button className="bg-[#021327] block w-full h-full rounded-[11px] px-6 py-4 text-white text-[20px] font-bold">
@@ -97,97 +123,8 @@ const Footer = () => {
               </button>
             </div>
           </div>
-          <p className="text-center absolute left-0 right-0 mx-auto bottom-6 text-[20px]">
-            Copyright © 2024 Xentro. All rights reserved.
-          </p>
-        </section>
-      </div>
-      {/* mobile */}
-      <div
-        className={
-          footercss.bg_gradient_border +
-          " border-0 p-[0.07em] rounded-[18px] hd-shadow min-[933px]:hidden block"
-        }
-      >
-        <section
-          className={
-            footercss.innterContainerBG +
-            " relative py-28 flex-col items-center flex justify-center w-full h-full rounded-[18px] px-5"
-          }
-        >
-          <div className="flex flex-col justify-center items-center">
-            <Image src={logo} alt="xentro" className="block mb-8 w-[200px]" />
-            <h6 className="text-base md:text-lg text-white text-center mb-8">
-              Gateway to UNTRAD Banking <br /> Enjoy Finance on a Freeway with
-              Xentro
-            </h6>
-          </div>
-          <div className="flex text-base md:text-lg font-semibold items-center justify-around w-full max-w-[320px] self-center">
-            <ul className="space-y-4">
-              <li>Medium</li>
-              <li>Discord</li>
-              <li>Twitter</li>
-              <li>Telegram</li>
-              <li>Instagram</li>
-              <li>TrustPilot</li>
-            </ul>
-            <ul className="space-y-4">
-              <li>Ecosystem</li>
-              <li>Airdrop</li>
-              <li>Stake</li>
-              <li>Bridge</li>
-              <li>LaunchPad</li>
-              <li>FAQ</li>
-            </ul>
-          </div>
-          <div>
-            <section>
-              <ul className="flex items-center space-x-5 my-10">
-                <li>
-                  <Image src={medium} alt="medium" />
-                </li>
-                <li>
-                  <Image src={discord} alt="discord" />
-                </li>
-                <li>
-                  <Image src={x} alt="x" />
-                </li>
-                <li>
-                  <Image src={telegram} alt="telegram" />
-                </li>
-                <li>
-                  <Image src={instagram} alt="instagram" />
-                </li>
-                <li>
-                  <Image src={star} alt="star" />
-                </li>
-              </ul>
-              <ul className="text-base md:text-lg font-bold space-y-4 my-10 text-center">
-                <li>
-                  <Link href={"/terms-and-condition"}>Terms & Conditions</Link>
-                </li>
-                <li>
-                  <Link href={"/privacy-policy"}>Privacy Policy</Link>
-                </li>
-              </ul>
-            </section>
-          </div>
-          <div className="self-center">
-            <h6 className="text-base md:text-lg font-semibold text-center mt-8">
-              For partnerships, please get in touch with us at
-            </h6>
-            <div
-              className={
-                airdropcss.bg_gradient_border +
-                " border-0 p-[0.06em] rounded-[11px] hd-shadow mt-8"
-              }
-            >
-              <button className="bg-[#021327] block w-full h-full rounded-[11px] px-6 py-4 text-white text-base md:text-lg font-bold">
-                info@joinxentro.com
-              </button>
-            </div>
-          </div>
-          <p className="text-center absolute left-0 right-0 mx-auto bottom-6 text-base md:text-lg">
+        </div>
+          <p className="text-center mx-auto  text-[20px] mt-10 md:mt-10 ">
             Copyright © 2024 Xentro. All rights reserved.
           </p>
         </section>

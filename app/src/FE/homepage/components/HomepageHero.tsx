@@ -7,9 +7,9 @@ import Link from "next/link";
 const HomepageHero = () => {
   return (
     <>
-      <div className={`${homepagestyles.hero} `}>
+      <div className={`${homepagestyles.hero} min-h-[70vh] md:h-[80vh] lg:h-[100vh]`}>
         <div
-          className={`max-w-[1021px]  mx-auto pt-36 text-center`}
+          className={`max-w-[1021px] mt-24 md:mt-40 mx-auto text-center`}
         >
           <h1 className="text-white gilroy-black-bold my-4 text-[35px] md:text-[65px] leading-[44px] md:leading-[64px] mt-24 md:mt-0">
             Enjoy Finance on a <br /> Freeway with{" "}

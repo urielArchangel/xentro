@@ -120,11 +120,11 @@ const FeatureCard: React.FC<FeatureProps> = ({
   height,
 }) => {
   return (
-    <div
-      className={`rounded-[12px] h-fit  border-[#027EFF] border ${height} `}
+    <section
+      className={`rounded-[12px]   border-[#027EFF] border ${height} `}
     >
       <div
-        className={` rounded-t-[12px]  border-b border-[#027EFF] px-8 py-6 ${homepagestyles.featureCard}`}
+        className={` rounded-t-[12px] bg-[#0254a91f] border-b border-[#027EFF] px-8 py-6 ${homepagestyles.featureCard}`}
       >
         <h1 className="text-xl lg:text-2xl uppercase gilroy-black-bold text-white text-center md:text-left">
           {title}
@@ -143,11 +143,11 @@ const FeatureCard: React.FC<FeatureProps> = ({
         </div>
       </div>
       <p
-        className={`px-8 py-6 h-full text-white rounded-b-[12px] text-[19px] lg:text-[22px] ${homepagestyles.featureCard}`}
+        className={`px-8 py-6 h-full text-white rounded-b-[12px] text-[19px] lg:text-[22px] bg-[#0254a91f]`}
       >
           {explanation}
       </p>
-    </div>
+    </section>
   );
 };
 

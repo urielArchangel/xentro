@@ -13,6 +13,7 @@ import {
 } from "@rainbow-me/rainbowkit";
 import { useAccount,useDisconnect } from "wagmi";
 import Loading from "@/app/(.)/loading";
+import { MenuIcon } from "lucide-react";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -58,11 +59,11 @@ const Navbar = () => {
   return (
     <>
     {loading?<Loading />:null}
-      <nav className=" left-0 bg-[#00295310] bg-opacity-90 backdrop-blur-md fixed w-screen z-[10] top-0 py-4">
+      <nav className=" left-0 px-2 bg-[#00295310] bg-opacity-90 backdrop-blur-md fixed w-screen z-[10] top-0 py-4">
         <div className="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-4">
           <Link
             href="/"
-            className="flex items-center space-x-3 rtl:space-x-reverse"
+            className="flex items-center "
           >
             <Image
               src={logo}
@@ -73,37 +74,10 @@ const Navbar = () => {
           <button
             onClick={toggleMobileMenu}
             type="button"
-            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg min-[1200px]:hidden focus:outline-none"
+            className="hidden md:block min-[1200px]:hidden"
+            
           >
-            <svg
-              width="26"
-              height="30"
-              viewBox="0 0 26 30"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g clipPath="url(#clip0_7_1977)">
-                <path
-                  opacity="0.4"
-                  d="M0.723633 15.0672C0.723633 14.0713 1.52829 13.2666 2.52427 13.2666H24.132C25.128 13.2666 25.9326 14.0713 25.9326 15.0672C25.9326 16.0632 25.128 16.8679 24.132 16.8679H2.52427C1.52829 16.8679 0.723633 16.0632 0.723633 15.0672Z"
-                  fill="white"
-                />
-                <path
-                  d="M25.9326 6.06334C25.9326 5.06736 25.128 4.2627 24.132 4.2627H2.52427C1.52829 4.2627 0.723633 5.06736 0.723633 6.06334C0.723633 7.05932 1.52829 7.86398 2.52427 7.86398H24.132C25.128 7.86398 25.9326 7.05932 25.9326 6.06334ZM25.9326 24.0698C25.9326 23.0738 25.128 22.2691 24.132 22.2691H2.52427C1.52829 22.2691 0.723633 23.0738 0.723633 24.0698C0.723633 25.0657 1.52829 25.8704 2.52427 25.8704H24.132C25.128 25.8704 25.9326 25.0657 25.9326 24.0698Z"
-                  fill="white"
-                />
-              </g>
-              <defs>
-                <clipPath id="clip0_7_1977">
-                  <rect
-                    width="25.209"
-                    height="28.8103"
-                    fill="white"
-                    transform="translate(0.723633 0.661133)"
-                  />
-                </clipPath>
-              </defs>
-            </svg>
+           <MenuIcon size={40} className=" text-white" />
           </button>
 
           {/* Mobile Navbar */}
@@ -164,17 +138,7 @@ const Navbar = () => {
                 </Link>
               </li>
               <li className="mt-8">
-                <div
-                  className={
-                    homepagestyles.bg_gradient_border +
-                    " border-0 p-[0.06em] rounded-full hd-shadow inline-block"
-                  }
-                >
-                  <ConnectButton />
-                  {/* <button className="bg-[#002953] w-full h-full rounded-full  px-5 py-3 text-white text-lg gilroy-regular font-semibold">
-                    Connect Wallet
-                  </button> */}
-                </div>
+            
               </li>
             </ul>
           </div>
@@ -259,11 +223,20 @@ const Navbar = () => {
           >
             <button
               onClick={connectWalletButtonAction}
-              className="bg-[#002953] w-full h-full rounded-full overflow-hidden text-ellipsis px-5 py-3 text-white text-lg gilroy-regular font-semibold"
+              className="bg-[#002953] w-full h-full rounded-full overflow-hidden text-ellipsis px-4 md:px-5 py-2 text-white text-[14px] md:text-lg gilroy-regular font-semibold"
             >
               {isConnected ? address : "Connect Wallet"}
             </button>
           </div>
+
+          <button
+            onClick={toggleMobileMenu}
+            type="button"
+            className="md:hidden"
+            
+          >
+           <MenuIcon size={40} className=" text-white" />
+          </button>
         </div>
       </nav>
     </>

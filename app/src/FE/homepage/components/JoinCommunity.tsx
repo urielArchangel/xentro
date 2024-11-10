@@ -54,10 +54,10 @@ const JoinCommunity = () => {
             <div
               className={
                 homepagestyles.bg_gradient_border +
-                " border-0 p-[0.07em] rounded-full hd-shadow h-14  w-full max-w-[200px] mx-auto"
+                " border-0 p-[0.07em] rounded-full hd-shadow h-14  w-full max-w-[200px] mx-auto my-10 md:my-0"
               }
             >
-              <button className="bg-[#021327] w-full  h-full rounded-full text-xl text-white gilroy-bold">
+              <button className="bg-[#021327] w-full  h-full rounded-full text-xl text-white gilroy-bold ">
                 Subscribe
               </button>
             </div>

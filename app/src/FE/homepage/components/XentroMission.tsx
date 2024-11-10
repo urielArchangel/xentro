@@ -6,8 +6,8 @@ import Image from "next/image";
 
 const Xentromission = () => {
   return (
-      <div className="w-full mx-auto flex max-w-[1200px] md:flex-row flex-col items-center md:justify-between my-10 mb-60">
-        <div className="mt-40 md:mt-0">
+      <div className="w-full mx-auto flex max-w-[1200px] md:flex-row flex-col items-center md:justify-between my-10 mb-20 md:mb-40">
+        <div className="mt-10 md:mt-0">
           <p className="text-white gilroy-bold text-[30px] md:text-[45px] ">
             <span className="inline-block relative">
               <span
@@ -37,7 +37,7 @@ const Xentromission = () => {
             alt="mission"
             width={300}
             height={300}
-            className=" w-[320px] h-[320px] block "
+            className=" w-[320px] h-[320px] block my-10 md:my-0"
           />
       </div>
   

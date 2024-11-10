@@ -1,20 +1,9 @@
 
 
-@media (min-width:0px) and (max-width: 768px) {
-  .hero {
-    height: 100%;
-    min-height: 1000px;
-    background-image: url(../images/landing/landingHero.png);
-    background-size: 900px 400px; /* Ensure the image covers the entire container */
-    background-position: bottom; /* Keep the image centered */
-    background-repeat: no-repeat; /* Prevent the image from repeating */
-    width: 100%;
-  }
-}
+
 .hero {
- height: 1250px;
   background-image: url(../images/landing/landingHero.png);
-  background-size: 100% contain; /* Ensure the image covers the entire container */
+  background-size: 100% ; /* Ensure the image covers the entire container */
   background-position: bottom; /* Keep the image centered */
   background-repeat: no-repeat; /* Prevent the image from repeating */
   width: 100%;
@@ -47,14 +36,7 @@
   margin-bottom: 100px;
 }
 
-.featureCard {
-  background: linear-gradient(
-    180deg,
-    rgba(2, 84, 169, 0.12) -2%,
-    rgba(0, 49, 100, 0.12) 100.05%
-  );
-  backdrop-filter: blur(26.5px);
-}
+
 
 .bg_gradient_border {
   background-image: linear-gradient(to right, #0477ef, #ffffff);
@@ -66,7 +48,13 @@
 }
 
 
+@media screen and (max-width: 768px) {
+  .hero {
 
+    /* background-size: 100% contain; Ensure the image covers the entire container */
+  
+  }
+}
 /* @media (min-width: 769px) and (max-width: 1023px) {
   .scale_custom {
     transform: scale(0.8);
