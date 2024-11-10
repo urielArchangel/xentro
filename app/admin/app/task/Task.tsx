@@ -11,8 +11,10 @@ import tg from "@/app/images/socials/telegramTask.png";
 import { submitTaskAction } from "@/app/src/BE/serveractions";
 import { acceptedTaskOptions } from "@/app/src/data/constants";
 import useMessage from "antd/es/message/useMessage";
+import { useRouter } from "next/navigation";
 
 const Task = () => {
+  const router = useRouter()
   const [message, c] = useMessage();
   const [selectedPlatform, setSeletedPlatform] = useState<
     "x" | "discord" | "instagram" | "telegram" | "youtube" | "medium" | "tiktok"
@@ -77,6 +79,8 @@ const Task = () => {
       return;
     }
     message.success("Task created successfully");
+    router.push('/admin/app/task')
+
   };
 
   return (

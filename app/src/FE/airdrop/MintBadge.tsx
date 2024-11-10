@@ -41,7 +41,7 @@ const MintBadge = ({communityMints,warriorMints}:{communityMints:string,warriorM
   return (
     <>
     {loading?<Loading />:null}
-      <section className="px-[8%] pt-[8%]">
+      <section className="mt-20">
         <h3 className="text-white gilroy-bold text-3xl md:text-4xl lg:text-5xl mb-10 text-center">
           Mint Your{" "}
           <span className="inline-block relative">

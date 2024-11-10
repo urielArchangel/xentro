@@ -91,7 +91,7 @@ const page = async () => {
           <div className="flex flex-col items-center pb-20 pt-24">
             <p className="text-white gilroy-bold text-3xl md:text-4xl lg:text-5xl min-[1500px]:text-6xl mb-10">
               <span className="inline-block relative">
-                <span
+                <span id="faq"
                   className={`${homepagestyles.gradientText} text-white gilroy-bold`}
                 >
                   Xentro

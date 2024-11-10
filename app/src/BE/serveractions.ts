@@ -144,6 +144,7 @@ export const submitTaskAction = async (
       status: true,
       exclusive,
     });
+    revalidatePath("/admin/app/task")
     await app.save();
     return [true, null];
   } catch (error: any) {

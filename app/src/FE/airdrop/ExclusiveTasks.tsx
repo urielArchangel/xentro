@@ -12,7 +12,7 @@ import Link from "next/link";
 import { useAccount } from "wagmi";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import Web3 from "web3";
-import xentrologo from "@/app/images/herologo.png";
+import xentrologo from "@/app/images/airdrop/xentroLogoWhite.png";
 import NFTMetatdata from "@/app/src/BE/web3/artifacts/Metadata.json";
 import {
   NFTContractAddress,
@@ -30,6 +30,7 @@ import { IApp, ITask, IUser } from "@/declarations";
 import { fetchUserClient } from "../helpers";
 import { useRouter, useSearchParams } from "next/navigation";
 import Loading from "@/app/(.)/loading";
+import { Tooltip } from "antd";
 
 const ExclusiveTasks = ({ appString }: { appString: string }) => {
   const taskPlatformIconMapping = (platformName: string) => {
@@ -78,7 +79,6 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
     };
     initData();
     if (app && user) {
-      
       let counter = 0;
       app.tasks.map((e) => {
         if (e.exclusive && e.status) {
@@ -90,20 +90,19 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
       setCompletedTasksCount(counter);
     }
     setLoading(false);
-  }, [address, appString, message, ref,completedTasksCount]);
+  }, [address, appString, message, ref, completedTasksCount]);
 
   const handleClickStateUpdate = async (id: string) => {
     message.loading("Please wait...", 10000000);
-  
+
     const [res, error] = await taskCompletedAction(id, String(address));
     message.destroy();
     if (error) {
       message.error(error, 2);
       return;
     }
-   await message.success(res, 2);
-   setCompletedTasksCount(prev=>(prev+=1))
-
+    await message.success(res, 2);
+    setCompletedTasksCount((prev) => (prev += 1));
   };
 
   const mintCommunityBadge = async () => {
@@ -215,7 +214,7 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
     <>
       {messageContext}
       {loading ? <Loading /> : null}
-      <section className="px-[8%] pt-[10%]">
+      <section className="px-[8%] pt-[10%] ">
         <h3 className="text-white gilroy-bold text-3xl md:text-4xl lg:text-5xl min-[1500px]:text-6xl mb-8 text-center min-[401px]:text-start">
           <span className="inline-block relative">
             <span
@@ -247,8 +246,8 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
               <span className="font-bold">{completedTasksCount}</span> out of{" "}
               <span className="font-bold">{tasks.length}</span>
             </h4>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-stretch">
-              <div className="text-white gilroy-regular h-full">
+            <div className="flex flex-col space-y-4 lg:space-y-0 lg:space-x-8 lg:items-start lg:flex-row " >
+              <div className="text-white gilroy-regular h-full w-full justify-around ">
                 <ul className="space-y-4">
                   {tasks.map((task, index) => {
                     if (!task.status) return <></>;
@@ -264,7 +263,7 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
                           key={task.id || index}
                           className="flex items-center justify-between bg-[#0B1219] rounded-lg p-3"
                         >
-                          <span className="text-xs max-[599px]:text-md min-[600px]:text-lg flex items-center gap-3">
+                          <span className="text-lg max-[599px]:text-md min-[600px]:text-lg flex items-center gap-3">
                             <Image
                               src={
                                 task.platform
@@ -274,7 +273,9 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
                               alt="task"
                               width={30}
                               height={30}
-                              className={task.platform ? "w-6 ml-4" : "w-10"}
+                              className={
+                                task.platform ? "w-6 ml-2 h-6" : "w-6 ml-2 h-6"
+                              }
                             />
                             {task.platform
                               ? taskNameToDescriptionMap[task.task]
@@ -334,7 +335,18 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
                   })}
                 </ul>
               </div>
-              <div>
+              {viewAllTask() && isConnected && (
+          <div
+            className={`${homepagestyles.bg_gradient_border} p-[0.07em]  lg:hidden rounded-full hd-shadow w-[50%] mx-auto `}
+          >
+            <Link href="/airdrop/tasks">
+              <button className="bg-[#081A2E] w-full py-3 text-lg md:text-xl rounded-full font-semibold text-[#0477EF]">
+                View All Tasks
+              </button>
+            </Link>
+          </div>
+        )}
+              <div className=" lg:w-[48%]">
                 <WalletInfo user={user} />
               </div>
             </div>
@@ -385,10 +397,10 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
               </div>
             </div>
           </div>
-        </div>
+        </div> 
         {viewAllTask() && isConnected && (
           <div
-            className={`${homepagestyles.bg_gradient_border} p-[0.06em] rounded-full hd-shadow w-[50%] mx-auto mt-16`}
+            className={`${homepagestyles.bg_gradient_border} p-[0.07em] hidden lg:block rounded-full hd-shadow w-full max-w-[300px] mx-auto mt-16`}
           >
             <Link href="/airdrop/tasks">
               <button className="bg-[#081A2E] w-full py-3 text-lg md:text-xl rounded-full font-semibold text-[#0477EF]">
@@ -425,7 +437,7 @@ const WalletInfo = ({ user }: { user: IUser | null }) => {
   const { address } = useAccount();
 
   return (
-    <div className="rounded-xl text-white mx-auto gilroy-regular border-[#027EFF] border h-full">
+    <div className="rounded-xl text-white mx-auto gilroy-regular border-[#027EFF] border h-fit py-8">
       {/* Connected Wallet */}
       <div className="border-b border-[#027EFF]">
         <div className="px-6 py-6">
@@ -451,9 +463,9 @@ const WalletInfo = ({ user }: { user: IUser | null }) => {
 
           {/* Referrals */}
           <div>
-            <span className="text-xl">
+            <span className="text-[18px] md:text-[20px]">
               {" "}
-              <span className="font-semibold">Number of Referrals:</span>{" "}
+              <span className="font-semibold ">Number of Referrals:</span>{" "}
               {user ? user.referals.count : 0}
             </span>
           </div>
@@ -464,44 +476,57 @@ const WalletInfo = ({ user }: { user: IUser | null }) => {
         <div className="px-6 py-6">
           {/* Invite Link */}
           <div className="mb-6">
-            <span className="text-xl block mb-2 font-semibold">
+            <span className="text-[18px] md:text-[20px] block mb-2 font-semibold">
               Invite Link
             </span>
             <div className="bg-transparent border-white border p-3 flex justify-between items-center rounded-full">
-              <span className="truncate text-xs min-[400px]:text-lg lg:text-xl">
-                {user ? inviteLink : ""}
-              </span>
-              <button onClick={handleCopyClick} className="text-[#027EFF] p-1">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="30"
-                  viewBox="0 0 31 34"
-                  fill="none"
+              {user && user.invite_link ? (
+                <span className="truncate text-[18px] md:text-[20px]">
+                  {user ? inviteLink : ""}
+                </span>
+              ) : (
+                <Tooltip title="Mint both badges to get invite link">
+                  <span className="truncate text-[18px] md:text-[20px]">
+                    {user ? inviteLink : ""}
+                  </span>
+                </Tooltip>
+              )}
+              {user && user.invite_link ? (
+                <button
+                  onClick={handleCopyClick}
+                  className="text-[#027EFF] p-1"
                 >
-                  <g clipPath="url(#clip0_7_1390)">
-                    <path
-                      opacity="0.4"
-                      d="M0.855957 11.6875V30.8125C0.855957 32.5723 2.29569 34 4.07024 34H19.0702C20.8448 34 22.2845 32.5723 22.2845 30.8125V27.625H17.9988V29.75H5.14167V12.75H9.42739V8.5H4.07024C2.29569 8.5 0.855957 9.92773 0.855957 11.6875Z"
-                      fill="#027EFF"
-                    />
-                    <path
-                      d="M11.5708 3.1875C11.5708 1.42773 13.0105 0 14.7851 0H23.0954C23.9458 0 24.7628 0.338672 25.3654 0.936328L29.9123 5.44531C30.515 6.04297 30.8565 6.85313 30.8565 7.69648V22.3125C30.8565 24.0723 29.4168 25.5 27.6422 25.5H14.7851C13.0105 25.5 11.5708 24.0723 11.5708 22.3125V3.1875Z"
-                      fill="#027EFF"
-                    />
-                  </g>
-                  <defs>
-                    <clipPath id="clip0_7_1390">
-                      <rect
-                        width="30"
-                        height="34"
-                        fill="white"
-                        transform="translate(0.855957)"
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="30"
+                    viewBox="0 0 31 34"
+                    fill="none"
+                  >
+                    <g clipPath="url(#clip0_7_1390)">
+                      <path
+                        opacity="0.4"
+                        d="M0.855957 11.6875V30.8125C0.855957 32.5723 2.29569 34 4.07024 34H19.0702C20.8448 34 22.2845 32.5723 22.2845 30.8125V27.625H17.9988V29.75H5.14167V12.75H9.42739V8.5H4.07024C2.29569 8.5 0.855957 9.92773 0.855957 11.6875Z"
+                        fill="#027EFF"
                       />
-                    </clipPath>
-                  </defs>
-                </svg>
-              </button>
+                      <path
+                        d="M11.5708 3.1875C11.5708 1.42773 13.0105 0 14.7851 0H23.0954C23.9458 0 24.7628 0.338672 25.3654 0.936328L29.9123 5.44531C30.515 6.04297 30.8565 6.85313 30.8565 7.69648V22.3125C30.8565 24.0723 29.4168 25.5 27.6422 25.5H14.7851C13.0105 25.5 11.5708 24.0723 11.5708 22.3125V3.1875Z"
+                        fill="#027EFF"
+                      />
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_7_1390">
+                        <rect
+                          width="30"
+                          height="34"
+                          fill="white"
+                          transform="translate(0.855957)"
+                        />
+                      </clipPath>
+                    </defs>
+                  </svg>
+                </button>
+              ) : null}
             </div>
             {copySuccess && (
               <span className="text-green-400 mt-2 block">{copySuccess}</span>
@@ -514,10 +539,10 @@ const WalletInfo = ({ user }: { user: IUser | null }) => {
         <div className="px-6 py-6">
           {/* Points */}
           <div className="mb-4">
-            <span className="text-xl font-semibold">XENTRO Points</span>
+            <span className="text-[18px] md:text-[20px] font-semibold">XENTRO Points</span>
             <h3
               className={
-                "text-4xl font-black gilroy-black-bold tracking-wider " +
+                "text-[30px] md:text-[35px] font-black gilroy-black-bold tracking-wider " +
                 homepagestyles.gradientText
               }
             >
@@ -531,7 +556,7 @@ const WalletInfo = ({ user }: { user: IUser | null }) => {
       <div>
         <div className="px-6 py-5">
           <div className="mb-6">
-            <span className="text-xl font-semibold">XENTRO Tokens</span>
+            <span className="text-[18px] md:text-[20px]  font-semibold">XENTRO Tokens</span>
             <p>Coming Soon!</p>
           </div>
 
