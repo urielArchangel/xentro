@@ -9,7 +9,7 @@ import underline from "@/app/images/underline.png";
 import HowtoParticipate from "../../src/FE/airdrop/HowtoParticipate";
 import ExclusiveTasks from "../../src/FE/airdrop/ExclusiveTasks";
 import MintBadge from "../../src/FE/airdrop/MintBadge";
-import { xentroQuestions } from "../../src/data/faq/faqQuestions";
+import faq from "../../src/data/faq/airdropFAQ.json";
 import FaqAccordion from "../../src/FE/homepage/components/FaqAccordion";
 import { fetchAppData } from "@/app/src/BE/helpers";
 import { Metadata } from "next";
@@ -86,7 +86,7 @@ const page = async () => {
         </div>
         <HowtoParticipate />
         <ExclusiveTasks appString={JSON.stringify(app)} />
-        <MintBadge />
+        <MintBadge communityMints={String(app.mints.filter(e=>e.task.includes("community")).length)} warriorMints={String(app.mints.filter(e=>e.task.includes("warrior")))} />
         <div>
           <div className="flex flex-col items-center pb-20 pt-24">
             <p className="text-white gilroy-bold text-3xl md:text-4xl lg:text-5xl min-[1500px]:text-6xl mb-10">
@@ -106,13 +106,13 @@ const page = async () => {
               </span>{" "}
               Airdrop FAQs
             </p>
-            <div className="w-[80%]">
-              {xentroQuestions.map((question, index) => (
+            <div className="w-[80%] ">
+              {faq.faq.map(({question,answer}, index) => (
                 <FaqAccordion
                   key={index}
                   question={question}
                   answer={
-                    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, quis ut facere nulla, error ipsam nisi rerum aut reprehenderit libero non ipsum? Blanditiis, voluptate qui."
+                    answer
                   }
                 />
               ))}

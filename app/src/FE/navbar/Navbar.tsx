@@ -18,6 +18,7 @@ import { trauncateAddressMiddle } from "../helpers";
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+
   
   const { isConnected, address } = useAccount();
   const {disconnect} = useDisconnect()
@@ -33,6 +34,14 @@ const Navbar = () => {
   useEffect(() => {
     setLoading(false); // Ensure loading only on component mount, not on every render
     setIsMobileMenuOpen(false)
+    const links = document.querySelectorAll(".mobileNavLink") as NodeListOf<HTMLAnchorElement>
+    links.forEach(e=>{
+      e.addEventListener('click',()=>{
+        setIsMobileMenuOpen(false)
+        setLoading(true)
+      })
+    })
+    
   }, [pathname]);
   const connectWalletButtonAction = async() => {
     console.log({openAccountModal})
@@ -115,27 +124,27 @@ const Navbar = () => {
             </button>
             <ul className="space-y-6 mt-12 text-lg">
               <li>
-                <Link href="/ecosystem" className="hover:text-blue-400">
+                <Link href="/ecosystem" className="hover:text-blue-400 mobileNavLink" >
                   Ecosystem
                 </Link>
               </li>
               <li>
-                <Link href="/airdrop" className="hover:text-blue-400">
+                <Link href="/airdrop" className="hover:text-blue-400 mobileNavLink">
                   Airdrop
                 </Link>
               </li>
               <li className="opacity-[0.5]">
-                <Link href="" className="hover:text-blue-400">
+                <Link href="" className="hover:text-blue-400 mobileNavLink">
                   Stake
                 </Link>
               </li>
               <li className="opacity-[0.5]">
-                <Link href="" className="hover:text-blue-400">
+                <Link href="" className="hover:text-blue-400 mobileNavLink">
                   Bridge
                 </Link>
               </li>
               <li>
-                <Link href="#faq" className="hover:text-blue-400">
+                <Link href="#faq" className="hover:text-blue-400 mobileNavLink">
                   FAQ
                 </Link>
               </li>

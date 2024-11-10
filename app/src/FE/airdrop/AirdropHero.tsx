@@ -4,8 +4,9 @@ import Image from "next/image";
 import ecosystemstyles from "@/app/css/ecosystem.module.css";
 import homepagestyles from "@/app/css/homepage.module.css";
 import heroimage from "@/app/images/airdrophero.png";
-import slider from "@/app/images/airdropslider.png";
+import slider from "@/app/images/airdrop/xentroLogoSlider.png";
 import underline from "@/app/images/underline.png";
+import airdropcss from '@/app/css/airdrop.module.css'
 
 const AirdropHero = () => {
   return (
@@ -57,7 +58,16 @@ const AirdropHero = () => {
           <Image src={heroimage} alt="heroimage" />
         </div>
       </section>
-      <Image src={slider} alt="slider" />
+      <section className="relative w-full  h-[60px] md:h-[100px] lg:h-[120px] flex items-center my-12 md:my-20">
+        <Image src={slider} alt="slider"  className="block mx-auto absolute  left-0 right-0 w-28 md:w-44"/>
+     <div className="absolute text-white flex justify-around w-full top-0 bg-[#00000020] backdrop-blur-[20px] h-full items-center text-[19px] md:text-[28px] lg:text-[35px] font-semibold overflow-hidden">
+      <p className={airdropcss.XENTRO_text + '  ' + airdropcss.slideranimation} >AIRDROP INCOMING!</p>
+      <p className={airdropcss.XENTRO_text + '  ' + airdropcss.slideranimation}>AIRDROP INCOMING!</p>
+      <p className={airdropcss.XENTRO_text + '  ' + airdropcss.slideranimation}>AIRDROP INCOMING!</p>
+
+     </div>
+      </section>
+      
     </>
   );
 };

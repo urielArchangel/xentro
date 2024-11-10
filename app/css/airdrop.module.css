@@ -1,4 +1,47 @@
 
+@keyframes slider {
+    from{
+        left: -500px;
+        
+    }to{
+        left: 99%;
+    }
+}
+.slideranimation{
+position: absolute;
+
+animation-name: slider;
+animation-duration: 9s;
+width: 500px;
+animation-iteration-count: infinite;
+animation-delay: var(--delay);
+animation-timing-function: linear;
+}
+.slideranimation:nth-child(1){
+    --delay:0s;
+    /* --durartion:3s; */
+}
+
+.slideranimation:nth-child(2){
+    --delay:3s;
+    /* --durartion:4s; */
+
+}
+
+.slideranimation:nth-child(3){
+    --delay:6s;
+    /* --durartion:5s; */
+
+}
+
+.body{
+    background-image: url(../images/airdrop/airdropBg.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+
+}
+
+
 .bg_gradient_border{
     background-image: linear-gradient(to right,#0477EF,#FFFFFF);
     border: 0;
@@ -100,4 +143,26 @@
         background-image: url(../images/section6bg.png);
         background-position: center;
         background-repeat: no-repeat;
+    }
+
+    @media screen and (max-width:640px) {
+        .slideranimation{
+            animation-duration: 4s;
+        }
+        .slideranimation:nth-child(1){
+            --delay:0s;
+            /* --durartion:3s; */
+        }
+        
+        .slideranimation:nth-child(2){
+            --delay:2s;
+            /* --durartion:4s; */
+        
+        }
+        
+        .slideranimation:nth-child(3){
+            --delay:4s;
+            /* --durartion:5s; */
+        
+        }
     }
