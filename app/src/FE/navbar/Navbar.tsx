@@ -38,7 +38,9 @@ const Navbar = () => {
     links.forEach(e=>{
       e.addEventListener('click',()=>{
         setIsMobileMenuOpen(false)
-        setLoading(true)
+      
+        // setLoading(true)
+        
       })
     })
     

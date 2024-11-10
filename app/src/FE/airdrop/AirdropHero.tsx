@@ -39,7 +39,7 @@ const AirdropHero = () => {
               " border-0 p-[0.07em] rounded-full hd-shadow inline-block"
             }
           >
-            < Link href="#exclusive" className="bg-[#091420] w-full h-full rounded-full  px-5 py-3 text-white text-xl gilroy-bold">
+            < Link href="#exclusive" className="bg-[#091420] w-full h-full rounded-full  px-5 py-3 text-white text-xl gilroy-bold block">
               Join Xentro
             </  Link>
           </div>

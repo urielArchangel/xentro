@@ -44,13 +44,13 @@ const FaqAccordion: React.FC<FaqAccordionProps> = ({ question, answer }) => {
         <p className="gilroy-bold text-[20px] md:text-[22px]">{question}</p>
         <button>{isOpen ? <Close /> : <Open />}</button>
       </div>
-      <p
+      <section
         className={`${
           isOpen ? null : "hidden"
         } mt-4 text-[18px] md:text-[20px] text-[#fff] gilroy-regular`}
       >
         {itemizeLists(answer)}
-      </p>
+      </section>
     </div>
   );
 };

@@ -23,7 +23,6 @@ import {
   updateCommunityBadgeMintDBAction,
   updateWarriorBadgeMintDBAction,
 } from "../../BE/serveractions";
-import { UserType } from "../../BE/userdata/jwt";
 import useMessage from "antd/es/message/useMessage";
 import { useModal } from "../misc/modals/ModalProvider";
 import { IApp, ITask, IUser } from "@/declarations";
@@ -52,6 +51,7 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
   const [app, setApp] = useState<IApp | null>(null);
   const [user, setUser] = useState<IUser | null>(null);
   const [completedTasksCount, setCompletedTasksCount] = useState(0);
+  const [tasks, setTasks] = useState<ITask[]>([]);
   const router = useRouter();
   const viewAllTask = useCallback(() => {
     return app?.tasks.some(
@@ -78,16 +78,20 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
       }
     };
     initData();
-    if (app && user) {
-      let counter = 0;
-      app.tasks.map((e) => {
-        if (e.exclusive && e.status) {
-          if (user.tasks_completed_ids.includes(e.id)) {
-            counter++;
+    if (app) {
+      setTasks(app.tasks.reverse());
+
+      if (user) {
+        let counter = 0;
+        app.tasks.map((e) => {
+          if (e.exclusive && e.status) {
+            if (user.tasks_completed_ids.includes(e.id)) {
+              counter++;
+            }
           }
-        }
-      });
-      setCompletedTasksCount(counter);
+        });
+        setCompletedTasksCount(counter);
+      }
     }
     setLoading(false);
   }, [address, appString, message, ref, completedTasksCount]);
@@ -193,8 +197,6 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
   //   openModal()
   // }
 
-  const tasks: ITask[] = app ? app.tasks : [];
-
   const handleConnectWallet = () => {
     if (openConnectModal) {
       openConnectModal();
@@ -214,8 +216,8 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
     <>
       {messageContext}
       {loading ? <Loading /> : null}
-      <section className="px-[8%] pt-[10%] ">
-        <h3 className="text-white gilroy-bold text-3xl md:text-4xl lg:text-5xl min-[1500px]:text-6xl mb-8 text-center min-[401px]:text-start">
+      <section className="px-[8%] pt-[10%] max-w-[1600px] mx-auto ">
+        <h3 className="text-white gilroy-bold text-3xl md:text-4xl lg:text-5xl min-[1500px]:text-6xl mb-8 text-start">
           <span className="inline-block relative">
             <span
               className={`${homepagestyles.gradientText} text-white gilroy-bold`}
@@ -246,7 +248,7 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
               <span className="font-bold">{completedTasksCount}</span> out of{" "}
               <span className="font-bold">{tasks.length}</span>
             </h4>
-            <div className="flex flex-col space-y-4 lg:space-y-0 lg:space-x-8 lg:items-start lg:flex-row " >
+            <div className="flex flex-col space-y-8 lg:space-y-0 lg:space-x-8 lg:items-start lg:flex-row  lg:justify-around ">
               <div className="text-white gilroy-regular h-full w-full justify-around ">
                 <ul className="space-y-4">
                   {tasks.map((task, index) => {
@@ -336,17 +338,17 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
                 </ul>
               </div>
               {viewAllTask() && isConnected && (
-          <div
-            className={`${homepagestyles.bg_gradient_border} p-[0.07em]  lg:hidden rounded-full hd-shadow w-[50%] mx-auto `}
-          >
-            <Link href="/airdrop/tasks">
-              <button className="bg-[#081A2E] w-full py-3 text-lg md:text-xl rounded-full font-semibold text-[#0477EF]">
-                View All Tasks
-              </button>
-            </Link>
-          </div>
-        )}
-              <div className=" lg:w-[48%]">
+                <div
+                  className={`${homepagestyles.bg_gradient_border} p-[0.07em]  lg:hidden rounded-full hd-shadow w-[50%] mx-auto mb-20`}
+                >
+                  <Link href="/airdrop/tasks">
+                    <button className="bg-[#081A2E] w-full py-3 text-lg md:text-xl rounded-full font-semibold text-[#0477EF]">
+                      View All Tasks
+                    </button>
+                  </Link>
+                </div>
+              )}
+              <div className=" lg:w-[48%] ">
                 <WalletInfo user={user} />
               </div>
             </div>
@@ -397,7 +399,7 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
               </div>
             </div>
           </div>
-        </div> 
+        </div>
         {viewAllTask() && isConnected && (
           <div
             className={`${homepagestyles.bg_gradient_border} p-[0.07em] hidden lg:block rounded-full hd-shadow w-full max-w-[300px] mx-auto mt-16`}
@@ -539,7 +541,9 @@ const WalletInfo = ({ user }: { user: IUser | null }) => {
         <div className="px-6 py-6">
           {/* Points */}
           <div className="mb-4">
-            <span className="text-[18px] md:text-[20px] font-semibold">XENTRO Points</span>
+            <span className="text-[18px] md:text-[20px] font-semibold">
+              XENTRO Points
+            </span>
             <h3
               className={
                 "text-[30px] md:text-[35px] font-black gilroy-black-bold tracking-wider " +
@@ -556,7 +560,9 @@ const WalletInfo = ({ user }: { user: IUser | null }) => {
       <div>
         <div className="px-6 py-5">
           <div className="mb-6">
-            <span className="text-[18px] md:text-[20px]  font-semibold">XENTRO Tokens</span>
+            <span className="text-[18px] md:text-[20px]  font-semibold">
+              XENTRO Tokens
+            </span>
             <p>Coming Soon!</p>
           </div>
 
