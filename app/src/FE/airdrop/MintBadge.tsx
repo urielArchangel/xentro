@@ -17,11 +17,13 @@ const MintBadge = ({communityMints,warriorMints}:{communityMints:string,warriorM
   const [loading,setLoading] = useState(true)
   const [hasUserMintedCommunityBadge,setHasUserMintedCommunityBadge] = useState(false)
   const [hasUserMintedWarriorBadge,setHasUserMintedWarriorBadge] = useState(false)
+  const [user,setUser]= useState<IUser>()
 
   const {address} = useAccount()
   useEffect(()=>{
     const run =async()=>{
     const [user,error] = await fetchUserClient(String(address)) as [IUser,any]
+    setUser(user)
     if(error){
       throw new Error(error)
     }
@@ -38,6 +40,22 @@ const MintBadge = ({communityMints,warriorMints}:{communityMints:string,warriorM
     run()
     setLoading(false)
   },[address])
+  useEffect(()=>{
+    const run =async()=>{
+  if(user){
+    if(user.community_badge){
+      setHasUserMintedCommunityBadge(true)
+    }
+    if(user.warrior_badge){
+      setHasUserMintedWarriorBadge(true)
+    }
+
+
+    }
+
+      }    
+  },[user])
+  
   return (
     <>
     {loading?<Loading />:null}

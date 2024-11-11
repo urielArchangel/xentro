@@ -140,10 +140,11 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
         const [res, error] = await taskCompletedAction("0", String(address));
         if (error) {
           message.destroy();
-          message.error(error, 3);
+          await message.error(error, 3);
           return;
         }
-        message.success(res);
+        message.destroy();
+       await message.success(res);
         router.refresh();
       });
   };
