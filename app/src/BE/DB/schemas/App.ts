@@ -1,3 +1,4 @@
+import { exclusiveTasksDefault } from "@/app/src/data/database/defaultTasksExclusive";
 import { Schema, model, models } from "mongoose";
 
 const AppSchema = new Schema({
@@ -18,25 +19,7 @@ const AppSchema = new Schema({
         mintBadge: String,
       },
     ],
-    default: [{
-      id:"0",
-      platform:"",
-      task:"Mint community badge",
-      points:40000,
-      status:true,
-      exclusive:true,
-      mint:true,
-      mintBadge:"community"
-    },{
-      id:"1",
-      platform:"",
-      task:"Mint warrior badge",
-      points:40000,
-      status:true,
-      exclusive:true,
-      mint:true,
-      mintBadge:"warrior"
-    }],
+    default: exclusiveTasksDefault,
   },
   mints: {
     type: [

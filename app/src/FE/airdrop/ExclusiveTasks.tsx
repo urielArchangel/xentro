@@ -83,7 +83,7 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
   
   useEffect(() => {
     if (app) {
-      setTasks([...app.tasks].reverse());
+      setTasks([...app.tasks]);
   
       if (user) {
         let counter = 0;
