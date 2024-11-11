@@ -1,3 +1,4 @@
+'use client'
 import React from "react";
 import homepagestyles from "@/app/css/homepage.module.css";
 import underline from "@/app/images/underline.png";
