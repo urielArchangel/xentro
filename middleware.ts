@@ -5,7 +5,7 @@ import { adminCookieName } from './app/src/data/constants'
  
 // This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
-  if(request.url.includes("/admin")){
+  if(request.url.includes("/admin") && !request.url.includes("/auth")){
   const cookie = (await cookies()).get(adminCookieName)
   if(!cookie||!cookie.value){
     return NextResponse.redirect(new URL("/admin/auth",request.nextUrl))
@@ -27,5 +27,5 @@ return NextResponse.next()
  
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: '/admin/:path',
+  matcher: '/admin/:path+',
 }
