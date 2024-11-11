@@ -279,9 +279,8 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
                                 task.platform ? "w-6 ml-2 h-6" : "w-6 ml-2 h-6"
                               }
                             />
-                            {task.platform
-                              ? taskNameToDescriptionMap[task.task]
-                              : task.task}
+                            {task.task}
+                              
                           </span>
                           {task.mint ? (
                             <button

@@ -14,24 +14,27 @@ import useMessage from "antd/es/message/useMessage";
 import { useRouter } from "next/navigation";
 
 const Task = () => {
-  const router = useRouter()
+  const router = useRouter();
   const [message, c] = useMessage();
   const [selectedPlatform, setSeletedPlatform] = useState<
     "x" | "discord" | "instagram" | "telegram" | "youtube" | "medium" | "tiktok"
   >("x");
   const taskLinkRef = useRef<HTMLInputElement>(null);
   const taskPointRef = useRef<HTMLInputElement>(null);
+  const taskRef = useRef<HTMLInputElement>(null);
   const exclusiveRef = useRef<HTMLInputElement>(null);
   let activeRadioOption = "";
   const handleCreateTask = async () => {
-    console.log("starr")
     if (
       !taskLinkRef ||
       !taskLinkRef.current ||
       !taskPointRef ||
       !taskPointRef.current ||
       !exclusiveRef ||
-      !exclusiveRef.current
+      !exclusiveRef.current ||
+      !taskRef ||
+      !taskRef.current
+      
     ) {
       message.error("invalid inputs");
       return;
@@ -44,10 +47,7 @@ const Task = () => {
         activeRadioOption = e.id.replace("_id", "");
       }
     });
-    if (!acceptedTaskOptions.includes(activeRadioOption)) {
-      message.error("invalid task");
-      return;
-    }
+  
     if (
       !selectedPlatform ||
       !taskLinkRef.current.value ||
@@ -60,7 +60,7 @@ const Task = () => {
     message.destroy();
     message.loading("Creating task, please wait...", 10000000);
     const points = Number(taskPointRef.current.value);
-    const task = activeRadioOption;
+    const task = taskRef.current.value;
     const link = taskLinkRef.current.value;
     const platorm = selectedPlatform;
     const exclusive = exclusiveRef.current.checked;
@@ -72,15 +72,14 @@ const Task = () => {
       exclusive
     );
     message.destroy();
-    console.log("done")
+    console.log("done");
     if (error) {
       message.error(error);
       console.log(error);
       return;
     }
     message.success("Task created successfully");
-    router.push('/admin/app/task')
-
+    router.push("/admin/app/task");
   };
 
   return (
@@ -196,64 +195,18 @@ const Task = () => {
         <section className="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:items-start md:justify-center border-b border-[#CCCCCC] py-10">
           <div className="w-fit md:w-[50%] text-center  ">
             <h2 className="text-center md:text-start text-xl font-bold ">
-              Select Action
+               Action
             </h2>
           </div>
           <div className="flex w-full  md:w-[50%]">
             <div className="flex items-center flex-wrap justify-center md:justify-between w-full gap-4">
               <div className="flex space-x-2 items-center text-xl font-semibold  rounded-lg px-4 py-1">
-                <label
-                  htmlFor="followPage_id"
-                  className="cursor-pointer text-black"
-                >
-                  Follow this Page
-                </label>
-                <input type="radio" name="task_radio" id="followPage_id" />
-              </div>
-              <div className="flex space-x-2 items-center text-xl font-semibold  rounded-lg px-4 py-1">
-                <label
-                  htmlFor="joinPage_id"
-                  className="cursor-pointer text-black"
-                >
-                  Join this Page
-                </label>
-                <input type="radio" name="task_radio" id="joinPage_id" />
-              </div>
-              <div className="flex space-x-2 items-center text-xl font-semibold  rounded-lg px-4 py-1">
-                <label
-                  htmlFor="retweetPost_id"
-                  className="cursor-pointer text-black"
-                >
-                  Retweet this Post
-                </label>
-                <input type="radio" name="task_radio" id="retweetPost_id" />
-              </div>
-              <div className="flex space-x-2 items-center text-xl font-semibold  rounded-lg px-4 py-1">
-                <label
-                  htmlFor="sharePost_id"
-                  className="cursor-pointer text-black"
-                >
-                  Share this Post
-                </label>
-                <input type="radio" name="task_radio" id="sharePost_id" />
-              </div>
-              <div className="flex space-x-2 items-center text-xl font-semibold  rounded-lg px-4 py-1">
-                <label
-                  htmlFor="engagePost_id"
-                  className="cursor-pointer text-black"
-                >
-                  Engage this Post
-                </label>
-                <input type="radio" name="task_radio" id="engagePost_id" />
-              </div>
-              <div className="flex space-x-2 items-center text-xl font-semibold rounded-lg px-4 py-1">
-                <label
-                  htmlFor="commentPost_id"
-                  className="cursor-pointer text-black"
-                >
-                  Comment on this Post
-                </label>
-                <input type="radio" name="task_radio" id="commentPost_id" />
+                <input
+                  type="text"
+                  placeholder="Task description"
+                  className="h-16 w-full block px-4 bg-transparent border border-[#DADCDD] max-w-[400px] outline-none rounded-sm"
+                  ref={taskRef}
+                />
               </div>
             </div>
           </div>

@@ -69,7 +69,7 @@ export const EcosystemFeaturesTemplate: React.FC<FeatureProps> = ({
               homepagestyles.scale_custom
             }`}
           >
-            <Image src={image} alt="token" width={300} height={300} />
+            <Image src={image} alt="token" width={300} height={300}  />
           </div>
           <div className="flex justify-center flex-col text-white text-center min-[769px]:text-end">
             <h3 className="text-2xl sm:text-3xl md:text-4xl gilroy-bold mb-5">
@@ -106,7 +106,7 @@ const AlternateEcosystemFeaturesTemplate: React.FC<FeatureProps> = ({
           <div
             className={`flex justify-end ${
               title === "Funjies" && "min-[769px]:translate-x-10 scale-[1.2]"
-            } flex justify-center mb-10 order-first min-[769px]:order-last max-[600px]:scale-[0.8] ${
+            } flex justify-center mb-10 max-[600px]:scale-[0.8] ${
               homepagestyles.scale_custom
             }`}
           >

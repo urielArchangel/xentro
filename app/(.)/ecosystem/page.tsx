@@ -48,7 +48,7 @@ export const metadata: Metadata = {
 const page = () => {
   return (
     <>
-      <main className={ecosystemcss.body+ " pt-36 sm:pt-16 px-4"}>
+      <main className={ecosystemcss.body+ " pt-20 sm:pt-16 px-4"}>
         <EcosystemHero />
         <EcosystemFeatures />
         <JoinCommunity />
