@@ -72,30 +72,32 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
           String(address),
           ref ? ref : undefined
         );
-
+  
         if (error) message.error(error);
         else setUser(fetchedUser);
       }
     };
+  
     initData();
+  }, [address, appString, message, ref]); // Separate out user-dependent logic
+  
+  useEffect(() => {
     if (app) {
-      setTasks(app.tasks.reverse());
-
+      setTasks([...app.tasks].reverse());
+  
       if (user) {
         let counter = 0;
-        app.tasks.map((e) => {
-          if (e.exclusive && e.status) {
-            if (user.tasks_completed_ids.includes(e.id)) {
-              counter++;
-            }
+        app.tasks.forEach((e) => {
+          if (e.exclusive && e.status && user.tasks_completed_ids.includes(e.id)) {
+            counter++;
           }
         });
         setCompletedTasksCount(counter);
       }
     }
     setLoading(false);
-  }, [address, appString, message, ref, completedTasksCount]);
-
+  }, [app, user, completedTasksCount]); // user is safe to add here
+  
   const handleClickStateUpdate = async (id: string) => {
     message.loading("Please wait...", 10000000);
 
@@ -192,10 +194,7 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
       });
   };
 
-  // const followOnX =async(id:number)=>{
-  //   setModal(<TwitterFollowChecker taskID={id} />)
-  //   openModal()
-  // }
+ 
 
   const handleConnectWallet = () => {
     if (openConnectModal) {
