@@ -3,6 +3,8 @@ import Terms from "@/app/src/FE/terms/Terms";
 import { Metadata } from "next";
 import React from "react";
 
+import tandCcSS from '@/app/css/t&c.module.css'
+
 export const metadata: Metadata = {
   title: "Terms and Conditions | Xentro - Gateway to UNTRAD Banking",
   description:
@@ -43,7 +45,7 @@ const page = () => {
 
   return (
     <>
-      <div className="body pt-5">
+      <div className={tandCcSS.body+ " pt-20 sm:pt-10"}>
         <Terms />
         <Footer />
       </div>

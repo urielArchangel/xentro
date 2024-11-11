@@ -42,7 +42,7 @@ const Terms = () => {
         >
           TERMS & CONDITIONS
         </h1>
-        <div className="text-sm md:text-md lg:text-lg xl:text-xl">
+        <div className="text-[18px] md:text-[19px] lg:text-[20px] ">
           <div className="mb-10 tracking-wider md:tracking-wide">
             <h2 className="font-bold text-md md:text-lg lg:text-xl xl:text-2xl mb-2">
               1. INTRODUCTION

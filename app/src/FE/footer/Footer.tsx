@@ -75,7 +75,7 @@ const Footer = () => {
               <h6 className="text-white mb-4 mt-8 italic">Quick links</h6>
               <ul className="grid grid-cols-2 gap-4 ">
                 <li>
-                  <Link href="/ecosystem">Ecosystem</Link>
+                  <Link href="/ecosystem" className="text-white">Ecosystem</Link>
                 </li>
                 <li>
                   <Link href="" className="opacity-[0.5]">
@@ -83,7 +83,7 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/airdrop">Airdrop</Link>
+                  <Link href="/airdrop" className="text-white">Airdrop</Link>
                 </li>
                 <li>
                   <Link href="" className="opacity-[0.5]">
@@ -91,7 +91,7 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link href="#faq"> FAQ </Link>
+                  <Link href="#faq" className="text-white"> FAQ </Link>
                 </li>
                 <li>
                   <Link href="" className="opacity-[0.5]">
@@ -99,10 +99,10 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link href={"/terms-and-condition"}>Terms & Conditions</Link>
+                  <Link href={"/terms-and-condition"} className="text-white">Terms & Conditions</Link>
                 </li>
                 <li>
-                  <Link href={"/privacy-policy"}>Privacy Policy</Link>
+                  <Link href={"/privacy-policy"} className="text-white">Privacy Policy</Link>
                 </li>
               </ul>
             </div>

@@ -24,7 +24,7 @@ const AllTasksComponent =  ({appString}:{appString:string}) => {
   useEffect(() => {
     const run = async () => {
       if (!address) {
-        router.push("/airdrop");
+        window.location.href ="/airdrop";
       }
       if (address) {
         const exclusiveTasksLength = app.tasks.filter(
@@ -32,11 +32,11 @@ const AllTasksComponent =  ({appString}:{appString:string}) => {
         ).length;
         const [user,error] = await fetchUserClient(address) as [user:IUser,error:any];
         if(error){
-          router.push("/airdrop");
+          window.location.href =("/airdrop");
 
         }
         if (user.tasks_completed_ids.length < exclusiveTasksLength) {
-          router.push("/airdrop");
+          window.location.href = ("/airdrop");
         } else {
           setCompletedTasksIds(user.tasks_completed_ids);
           setUserPoints(user.total_points);
