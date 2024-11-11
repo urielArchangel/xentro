@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import homepagestyles from "@/app/css/homepage.module.css";
-import heroimage from "@/app/images/ecosystem.png";
+import heroimage from "@/app/images/ecosystem/ecosystem.png";
 import slider from "@/app/images/xentroslider.png";
 
 const EcosystemHero = () => {

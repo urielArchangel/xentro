@@ -10,7 +10,7 @@ import funjies from "@/app/images/funjies.png";
 
 const EcosystemFeatures = () => {
   return (
-    <>
+    <div className="w-full max-w-[1500px] mx-auto mt-20 ">
       <EcosystemFeaturesTemplate
         title="Token"
         description="The Xentro Token is the cornerstone of our ecosystem, designed for seamless transactions and staking opportunities. Its deflationary model ensures long-term value appreciation, providing ultimate benefits to early adopters and long-term holders."
@@ -41,7 +41,7 @@ const EcosystemFeatures = () => {
         image={loans}
         description="Xentro Loans provides a decentralized platform for borrowing and lending, leveraging smart contracts to offer competitive interest rates and flexible terms. Its risk management features ensure safe and profitable lending opportunities for all participants."
       />
-    </>
+    </div>
   );
 };
 
@@ -59,7 +59,7 @@ export const EcosystemFeaturesTemplate: React.FC<FeatureProps> = ({
   return (
     <>
       <div className="px-[8%]">
-        <div className="grid grid-cols-1 min-[769px]:grid-cols-2">
+        <div className="flex justify-between items-center flex-col lg:flex-row">
           <div
             className={`${
               title === "Bridge" ? "scale-[1.2] max-[450px]:scale-[1]" : ""
@@ -76,7 +76,7 @@ export const EcosystemFeaturesTemplate: React.FC<FeatureProps> = ({
               <span className={`${homepagestyles.gradientText}`}>XENTRO</span>{" "}
               {title}
             </h3>
-            <p className="gilroy-regular text-sm sm:text-md md:text-xl">
+            <p className="gilroy-regular text-sm sm:text-md md:text-xl max-w-[600px] ">
               {description}
             </p>
           </div>
@@ -93,13 +93,13 @@ const AlternateEcosystemFeaturesTemplate: React.FC<FeatureProps> = ({
   return (
     <>
       <div className="p-[8%]">
-        <div className="grid grid-cols-1 min-[769px]:grid-cols-2">
+        <div className="flex justify-between items-center flex-col-reverse lg:flex-row">
           <div className="flex justify-center flex-col text-white text-center min-[769px]:text-start">
             <h3 className="text-2xl sm:text-3xl md:text-4xl gilroy-bold mb-5">
               <span className={`${homepagestyles.gradientText}`}>XENTRO</span>{" "}
               {title}
             </h3>
-            <p className="gilroy-regular text-sm sm:text-md md:text-xl">
+            <p className="gilroy-regular text-sm sm:text-md md:text-xl max-w-[600px]">
               {description}
             </p>
           </div>
