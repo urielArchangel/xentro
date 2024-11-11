@@ -181,7 +181,7 @@ const AllTasks = ({
               >
                 <li
                   key={task.id || index}
-                  className="flex items-center bg-[#092747] rounded-lg py-3 px-[5%] justify-between "
+                  className="flex items-center bg-[#092747] rounded-lg py-3 px-4 pr-8 md:px-16 md:pr-12 justify-between "
                 >
                   <span className="text-[14px] max-[599px]:text-md min-[600px]:text-lg flex items-center  w-[33%] ">
                     <Image
