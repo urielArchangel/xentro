@@ -15,10 +15,11 @@ type FAQData = {
   answer: string;
 };
 
-export const metadata:Metadata={
-  title:"Xentro | Gateway to UNTRAD Banking & Borderless Finance",
-  "description": "Step into the world of Xentro, where finance meets freedom. Enjoy seamless multi-chain trading, earn interest, and access borrowing options all in one unified platform. Join the Xentro Airdrop now.",
-  "keywords": [
+export const metadata: Metadata = {
+  title: "Xentro | Gateway to UNTRAD Banking & Borderless Finance",
+  description:
+    "Step into the world of Xentro, where finance meets freedom. Enjoy seamless multi-chain trading, earn interest, and access borrowing options all in one unified platform. Join the Xentro Airdrop now.",
+  keywords: [
     "Xentro",
     "UNTRAD Banking",
     "multi-chain trading",
@@ -28,30 +29,29 @@ export const metadata:Metadata={
     "earn interest",
     "borrowing assets",
     "financial network",
-    "decentralized finance"
+    "decentralized finance",
   ],
   openGraph: {
-    "title": "Xentro - Gateway to UNTRAD Banking",
-    "description": "Unlock financial opportunities and navigate a borderless financial network with Xentro. Join our airdrop to start your journey.",
-    "url": "https://www.joinxentro.com",
-    "type": "website",
+    title: "Xentro - Gateway to UNTRAD Banking",
+    description:
+      "Unlock financial opportunities and navigate a borderless financial network with Xentro. Join our airdrop to start your journey.",
+    url: "https://www.joinxentro.com",
+    type: "website",
   },
   twitter: {
-    "title": "Xentro - Gateway to UNTRAD Banking",
-    "description": "Unlock financial opportunities and navigate a borderless financial network with Xentro. Join our airdrop to start your journey.",
-    "card": "summary_large_image",
-  
+    title: "Xentro - Gateway to UNTRAD Banking",
+    description:
+      "Unlock financial opportunities and navigate a borderless financial network with Xentro. Join our airdrop to start your journey.",
+    card: "summary_large_image",
   },
-  robots:{ follow:true,index:true}
-}
+  robots: { follow: true, index: true },
+};
 const page = () => {
-
-
   return (
     <>
       <main className={`${homepagestyles.body} py-6 px-4 md:px-0"`}>
         <HomepageHero />
-        <div >
+        <div>
           <Xentromission />
           {/* Feature */}
           <XentroFeatures />
@@ -72,7 +72,10 @@ const page = () => {
               }
               id="faq"
             >
-              <Link href='/airdrop' className="bg-[#070D12] block w-full h-full rounded-full  px-10 py-3 text-white text-xl gilroy-bold">
+              <Link
+                href="/airdrop"
+                className="bg-[#070D12] block w-full h-full rounded-full  px-10 py-3 text-white text-xl gilroy-bold"
+              >
                 Join Xentro Airdrop
               </Link>
             </div>
@@ -81,15 +84,12 @@ const page = () => {
           <div className="flex flex-col items-center py-4">
             <p className="text-white gilroy-bold px-3 text-3xl md:text-4xl lg:text-5xl  text-center mb-10">
               Frequently Asked Questions{" "}
-              <span className={`${homepagestyles.gradientText}`}>
-                (FAQs)
-              </span>
+              <span className={`${homepagestyles.gradientText}`}>(FAQs)</span>
             </p>
             <div className="w-full max-w-[1200px] mb-40">
               {faq.faq.map((data: FAQData, index: number) => {
                 return (
                   <FaqAccordion
-                  
                     key={index}
                     question={data.question}
                     answer={data.answer}

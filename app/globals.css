@@ -3,33 +3,32 @@
 @tailwind utilities;
 
 @keyframes loading_spin {
-  from{
+  from {
     transform: rotateY(0deg);
-  }to{
+  }
+  to {
     transform: rotateY(359deg);
-
   }
 }
 
 @keyframes openModal {
- 
-  0%,40%{
+  0%,
+  40% {
     transform: scale(0%);
-    
   }
-  40%,100%{
+  40%,
+  100% {
     transform: scale(100%);
   }
 }
 
-
 @keyframes closeModal {
- 
-  0%,40%{
+  0%,
+  40% {
     transform: scale(100%);
-    
   }
-  40%,100%{
+  40%,
+  100% {
     transform: scale(0%);
   }
 }
@@ -48,13 +47,19 @@
   src: url(./fonts/Gilroy-Regular.ttf);
 }
 
-
-
-button:disabled{
+button:disabled {
   cursor: not-allowed;
 }
 .hd-shadow {
   box-shadow: -8px 8px 50px #00000057;
+}
+
+.body {
+  background-image: url(./images/bg.png);
+  background-size: 100% 100%; /* Ensure the image covers the entire container */
+  background-position: bottom; /* Keep the image centered */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  width: 100%;
 }
 
 .glow {
@@ -88,25 +93,26 @@ button:disabled{
   transition: filter 1s ease-in-out;
 }
 
-#modal-inner-container{
+#modal-inner-container {
   transition: all 1s ease-in-out;
 }
 
-.modal-open{
+.modal-open {
   animation-name: openModal;
   animation-duration: 1s;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }
-.modal-close{
+.modal-close {
   animation-name: closeModal;
   animation-duration: 1s;
   animation-iteration-count: 1;
-  animation-fill-mode: forwards;}
+  animation-fill-mode: forwards;
+}
 
-  .loading_logo{
-    animation-name: loading_spin;
-    animation-iteration-count: infinite;
-    animation-duration: 1s;
-    animation-timing-function: linear;
-  }
+.loading_logo {
+  animation-name: loading_spin;
+  animation-iteration-count: infinite;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+}
