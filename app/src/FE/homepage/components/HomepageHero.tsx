@@ -36,7 +36,7 @@ const HomepageHero = () => {
               " border-0 p-[0.07em] rounded-full hd-shadow mt-4 inline-block"
             }
           >
-            <Link href="/airdrop" className="bg-[#002953] h-full block rounded-full text-white gilroy-regular py-2 px-4 text-lg md:py-4 md:px-6 md:text-xl font-semibold">
+            <Link href="/airdrop" className="bg-[#002953] h-full block rounded-full text-white gilroy-regular p-2 text-[13px] md:py-4 md:px-6 md:text-xl font-semibold">
               Join Xentro Airdrop
             </Link>
           </div>

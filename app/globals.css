@@ -116,3 +116,27 @@ button:disabled {
   animation-duration: 1s;
   animation-timing-function: linear;
 }
+
+/* Custom scrollbar styling for webkit browsers */
+::-webkit-scrollbar {
+  width: 6px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #000000; /* Black background for the track */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #0171f3; /* Scrollbar thumb color */
+  border-radius: 10px; /* Rounded edges for the thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #005bb5; /* Darker shade on hover */
+}
+
+/* For Firefox (only works in 96+ versions) */
+* {
+  scrollbar-width: thin; /* Makes scrollbar thinner */
+  scrollbar-color: #0171f3 #000000; /* Thumb color and black track color */
+}

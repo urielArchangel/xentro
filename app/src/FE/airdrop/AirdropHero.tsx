@@ -36,22 +36,22 @@ const AirdropHero = () => {
           <div
             className={
               homepagestyles.bg_gradient_border +
-              " border-0 p-[0.06em] rounded-full hd-shadow inline-block"
+              " border-0 p-[0.07em] rounded-full hd-shadow inline-block"
             }
           >
-            <button className="bg-[#091420] w-full h-full rounded-full  px-5 py-3 text-white text-xl gilroy-bold">
+            < Link href="#exclusive" className="bg-[#091420] w-full h-full rounded-full  px-5 py-3 text-white text-xl gilroy-bold block">
               Join Xentro
-            </button>
+            </  Link>
           </div>
           <div
             className={
               homepagestyles.bg_gradient_border +
-              " border-0 p-[0.06em] rounded-full hd-shadow inline-block ml-5"
+              " border-0 p-[0.07em] rounded-full hd-shadow inline-block ml-5"
             }
           >
-            <button className="bg-[#091420] w-full h-full rounded-full  px-5 py-3 text-white text-xl gilroy-bold">
+            <Link href="#faq" className="bg-[#091420] w-full h-full rounded-full  px-5 py-3 text-white text-xl gilroy-bold block">
               FAQ
-            </button>
+            </Link>
           </div>
         </div>
         <div className="min-[769px]:col-span-2 scale-[0.7] min-[769px]:scale-[1]">

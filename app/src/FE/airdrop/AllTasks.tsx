@@ -62,7 +62,6 @@ const AllTasks = ({
   const [tasks, setTasks] = useState<ITask[]>(t);
 
 
-  useEffect(() => {});
   const isTaskCompleted = useCallback(
     (id: string) => completedTasksIds.includes(id) ?? false,
     [completedTasksIds]
@@ -80,24 +79,24 @@ const AllTasks = ({
   return (
     <>
       {messageContext}
-      <div className="px-[8%]">
+      <div >
         <div
           className={
             homepagestyles.bg_gradient_border +
-            " border-0 p-[0.06em] rounded-xl hd-shadow mb-10"
+            " border-0 p-[0.07em] rounded-xl hd-shadow mb-10"
           }
         >
           <div className="rounded-xl px-5 py-3 text-white bg-[#092747] gilroy-regular">
             <div className="flex md:flex-row flex-col justify-between">
               <div className="flex flex-row justify-between items-center ">
-                <div className="bg-[#081A2E] border-[#2F95FF] border py-1 px-6 flex items-center rounded-full">
-                  <span className="text-xs min-[400px]:text-lg lg:text-xl font-bold tracking-wide">
-                    {trauncateAddressMiddle(address, 10)}
+                <div className="bg-[#081A2E] border-[#2F95FF] border py-1 px-6 flex items-center rounded-full my-2 md:my-0">
+                  <span className="text-[16px] sm:text-[20px] md:text-[22px]">
+                    {trauncateAddressMiddle(address, 4)}
                   </span>
                 </div>
               </div>
               <div className="flex flex-row justify-between md:justify-normal items-center md:items-end md:flex-col gilroy-regular gap-3">
-                <p className="text-xs min-[400px]:text-lg lg:text-xl font-semibold text-end tracking-wide">
+                <p className="text-[16px] sm:text-[20px] md:text-[22px] font-semibold text-end tracking-wide">
                   Total Points
                 </p>
                 <p>
@@ -117,7 +116,7 @@ const AllTasks = ({
           <div
             className={
               homepagestyles.bg_gradient_border +
-              " border-0 p-[0.06em] rounded-lg hd-shadow"
+              " border-0 p-[0.07em] rounded-lg hd-shadow"
             }
           >
             <div className="relative w-full">
@@ -137,7 +136,7 @@ const AllTasks = ({
           <div
             className={
               homepagestyles.bg_gradient_border +
-              " border-0 p-[0.06em] rounded-lg hd-shadow my-2"
+              " border-0 p-[0.07em] rounded-lg hd-shadow my-2"
             }
           >
             <li className="flex justify-between bg-[#092747] rounded-lg py-3 px-[5%] font-semibold">
@@ -171,20 +170,20 @@ const AllTasks = ({
               </span>
             </li>
           </div>
-          <ul className="space-y-2">
+          <ul className="space-y-2 mb-10">
             {tasks.map((task, index) => (
               <div
                 key={index}
                 className={
                   homepagestyles.bg_gradient_border +
-                  " border-0 p-[0.06em] rounded-lg hd-shadow"
+                  " border-0 p-[0.07em] rounded-lg hd-shadow"
                 }
               >
                 <li
                   key={task.id || index}
-                  className="flex items-center bg-[#092747] rounded-lg py-3 px-[5%] justify-between "
+                  className="flex items-center bg-[#092747] rounded-lg py-3 px-4 pr-8 md:px-16 md:pr-12 justify-between "
                 >
-                  <span className="text-xs max-[599px]:text-md min-[600px]:text-lg flex items-center  w-[33%] ">
+                  <span className="text-[14px] max-[599px]:text-md min-[600px]:text-lg flex items-center  w-[33%] ">
                     <Image
                       src={taskPlatformIconMapping(task.platform)}
                       alt="task"
@@ -200,7 +199,7 @@ const AllTasks = ({
                     onClick={() => {
                       handleClickStateUpdate(task.id);
                     }}
-                    className={`px-4 py-2 text-white rounded-full font-bold ${
+                    className={`px-4 py-2 text-white rounded-full font-bold text-[10px] sm:text-[16px] ${
                       isTaskCompleted(task.id)
                         ? "bg-gray-500 cursor-not-allowed"
                         : "bg-[#004995] glow"

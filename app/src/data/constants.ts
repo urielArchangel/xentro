@@ -20,3 +20,13 @@ export const taskNameToDescriptionMap:
     "commentPost" :"Comment on this post"
 
 }
+
+export const constructTask = (platform:string,taskOption:string)=>{
+    const firstchar = platform[0].toUpperCase()
+    const convert =  firstchar+platform.slice(1,)
+switch (taskOption){
+    case "joinPage":
+        return `Join our ${convert} `
+
+}
+}

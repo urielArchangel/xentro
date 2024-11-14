@@ -42,7 +42,7 @@ const Privacy = () => {
         >
           PRIVACY POLICY
         </h1>
-        <div className="text-sm md:text-md lg:text-lg xl:text-xl">
+        <div className="text-[18px] md:text-[19px] lg:text-[20px]">
           <p className="mb-10 font-semibold tracking-wider md:tracking-wide">
             The privacy policy herein has been put together to soothingly serve
             concerned parties about how their “Personal Identifiable

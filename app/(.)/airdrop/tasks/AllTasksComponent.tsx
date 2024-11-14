@@ -17,45 +17,46 @@ const AllTasksComponent =  ({appString}:{appString:string}) => {
   const router = useRouter();
   const { address } = useAccount();
   const [loading, setLoading] = useState(true);
-  const [valid, setValidity] = useState(false);
+  const [valid, setValidity] = useState(true);
   const allNonExclusiveTaks = app.tasks.filter((e) => !e.exclusive);
   const [completedTasksIds, setCompletedTasksIds] = useState<string[]>([]);
   const [userPoints, setUserPoints] = useState(0);
   useEffect(() => {
     const run = async () => {
-      if (!address) {
-        router.push("/airdrop");
-      }
+      // alert(address)
+    
       if (address) {
         const exclusiveTasksLength = app.tasks.filter(
           (e) => e.exclusive
         ).length;
         const [user,error] = await fetchUserClient(address) as [user:IUser,error:any];
         if(error){
-          router.push("/airdrop");
+          // window.location.href =("/airdrop");
 
         }
-        if (user.tasks_completed_ids.length < exclusiveTasksLength) {
-          router.push("/airdrop");
-        } else {
+        console.log({user})
+        // if (user.tasks_completed_ids.length < exclusiveTasksLength) {
+          // window.location.href = ("/airdrop");
+        // } else {
           setCompletedTasksIds(user.tasks_completed_ids);
           setUserPoints(user.total_points);
-          setValidity(true);
-        }
+          // setValidity(true);
+        // }
       }
     };
     run();
 
+
     setLoading(false);
-  }, [valid]);
+  }, [valid,address,userPoints]);
   return (
     <>
       {loading ? <Loading /> : null}
       {valid ? (
-        <div className="body pt-5">
-          <section className="px-[8%] pt-[15%] min-[769px]:pt-[8%] min-[1500px]:pt-[6%] text-white gilroy-regular">
+        <div className=" pt-24 md:pt-26 max-w-[1000px] mx-auto px-2">
+          <section className="px-4  text-white gilroy-regular">
             <button>
-              <Link href="/">
+              <Link href="/airdrop">
                 <span className="text-white text-md md:text-lg flex gap-1 items-center mt-4">
                   <svg
                     width="17"
@@ -86,11 +87,11 @@ const AllTasksComponent =  ({appString}:{appString:string}) => {
               </Link>
             </button>
             <h1
-              className={`${homepagestyles.gradientText} gilroy-black-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl min-[1500px]:text-6xl text-center min-[769px]:text-start mb-3`}
+              className={`${homepagestyles.gradientText} gilroy-black-bold text-[25px] md:text-[35px]`}
             >
               EARN XENTRO POINTS
             </h1>
-            <p>Complete all tasks to earn rewards</p>
+            <p className="mb-4"> Complete all tasks to earn rewards</p>
           </section>
           <AllTasks
             userTotalPoint={userPoints}

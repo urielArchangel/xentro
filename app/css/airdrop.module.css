@@ -1,17 +1,20 @@
 
 @keyframes slider {
     from{
+        opacity: 1;
         left: -500px;
         
     }to{
+        opacity: 1;
         left: 99%;
     }
 }
 .slideranimation{
 position: absolute;
-
+opacity: 0;
 animation-name: slider;
 animation-duration: 9s;
+animation-fill-mode: forwards;
 width: 500px;
 animation-iteration-count: infinite;
 animation-delay: var(--delay);
@@ -34,6 +37,11 @@ animation-timing-function: linear;
 
 }
 
+.tasksBody{
+    background-image: url(../images/airdrop/task/airdropTasksBG.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat; 
+}
 .body{
     background-image: url(../images/airdrop/airdropBg.png);
     background-size: 100% 100%;

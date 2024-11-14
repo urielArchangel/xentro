@@ -13,6 +13,7 @@ import faq from "../../src/data/faq/airdropFAQ.json";
 import FaqAccordion from "../../src/FE/homepage/components/FaqAccordion";
 import { fetchAppData } from "@/app/src/BE/helpers";
 import { Metadata } from "next";
+import airdropcss from '@/app/css/airdrop.module.css'
 
 export const metadata: Metadata = {
   title: "Airdrop | Xentro - Gateway to UNTRAD Banking",
@@ -57,9 +58,8 @@ export const metadata: Metadata = {
 
 const page = async () => {
   const app = await fetchAppData();
-
   return (
-    <>
+    <section className={airdropcss.body + ' pt-10 h-full px-4'}>
       <div className="body pt-5">
         {" "}
         <AirdropHero />
@@ -86,12 +86,12 @@ const page = async () => {
         </div>
         <HowtoParticipate />
         <ExclusiveTasks appString={JSON.stringify(app)} />
-        <MintBadge communityMints={String(app.mints.filter(e=>e.task.includes("community")).length)} warriorMints={String(app.mints.filter(e=>e.task.includes("warrior")))} />
+        <MintBadge communityMints={String(app.mints.filter(e=>e.task.toLowerCase().includes("community")).length)} warriorMints={String(app.mints.filter(e=>e.task.toLowerCase().includes("warrior")).length)} />
         <div>
           <div className="flex flex-col items-center pb-20 pt-24">
             <p className="text-white gilroy-bold text-3xl md:text-4xl lg:text-5xl min-[1500px]:text-6xl mb-10">
               <span className="inline-block relative">
-                <span
+                <span id="faq"
                   className={`${homepagestyles.gradientText} text-white gilroy-bold`}
                 >
                   Xentro
@@ -122,7 +122,7 @@ const page = async () => {
         <JoinCommunity />
         <Footer />
       </div>
-    </>
+</section>
   );
 };
 

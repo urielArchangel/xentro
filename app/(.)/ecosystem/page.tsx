@@ -4,6 +4,7 @@ import JoinCommunity from "@/app/src/FE/homepage/components/JoinCommunity";
 import Footer from "@/app/src/FE/footer/Footer";
 import EcosystemFeatures from "@/app/src/FE/ecosystem/EcosystemFeatures";
 import { Metadata } from "next";
+import ecosystemcss from '@/app/css/ecosystem.module.css'
 
 export const metadata: Metadata = {
   title: "Ecosystem | Xentro - Gateway to UNTRAD Banking",
@@ -47,7 +48,7 @@ export const metadata: Metadata = {
 const page = () => {
   return (
     <>
-      <main className="body pt-5">
+      <main className={ecosystemcss.body+ " pt-20 sm:pt-16 px-4"}>
         <EcosystemHero />
         <EcosystemFeatures />
         <JoinCommunity />

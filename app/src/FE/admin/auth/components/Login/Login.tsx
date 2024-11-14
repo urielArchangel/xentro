@@ -3,9 +3,11 @@ import React, { useRef, useState } from "react";
 import loginAdmin from "@/app/css/admin.module.css";
 import { EyeClosed, EyeIcon } from "lucide-react";
 import { _AdminLogin } from "@/app/src/BE/auth/serveractions";
-import { message } from "antd";
+import useMessage from "antd/es/message/useMessage";
 
 const Login = () => {
+  const [message, c] = useMessage();
+
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const emailRef = useRef<HTMLInputElement>(null);
   const pwdRef = useRef<HTMLInputElement>(null);
@@ -35,8 +37,7 @@ const Login = () => {
 
     
   };
-  return (
-    <section className="flex items-center h-[100vh] ">
+  return (<>  {c}  <section className="flex items-center h-[100vh] ">
       <div className="w-full lg:w-[40%] h-full text-black bg-[#F1F6FA] flex items-center">
         <form
           action=""
@@ -106,7 +107,7 @@ const Login = () => {
           }
         ></div>
       </div>
-    </section>
+    </section></>
   );
 };
 

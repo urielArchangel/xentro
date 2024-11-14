@@ -2,6 +2,7 @@ import React from "react";
 import Privacy from "@/app/src/FE/privacy/Privacy";
 import Footer from "@/app/src/FE/footer/Footer";
 import { Metadata } from "next";
+import privacyCSS from '@/app/css/t&c.module.css'
 
 
 export const metadata: Metadata = {
@@ -42,7 +43,7 @@ export const metadata: Metadata = {
 const page = () => {
   return (
     <>
-      <div className="body pt-5">
+      <div className={privacyCSS.body+ " pt-20 sm:pt-10"}>
         <Privacy />
         <Footer />
       </div>
