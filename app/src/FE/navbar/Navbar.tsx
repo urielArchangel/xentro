@@ -4,93 +4,111 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import logo from "@/app/images/xentroLogoWNameWhite.png";
+import logo1 from "@/app/images/airdrop/xentroLogoBlue.png";
 import homepagestyles from "@/app/css/homepage.module.css";
-import {
-  useAccountModal,
-  useConnectModal,
-  
-} from "@rainbow-me/rainbowkit";
-import { useAccount,useDisconnect } from "wagmi";
+import { useAccountModal, useConnectModal } from "@rainbow-me/rainbowkit";
+import { useAccount, useDisconnect } from "wagmi";
 import Loading from "@/app/(.)/loading";
 import { MenuIcon } from "lucide-react";
 import { trauncateAddressMiddle } from "../helpers";
+import Aos from 'aos'
+import "aos/dist/aos.css"; 
+
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  
   const { isConnected, address } = useAccount();
-  const {disconnect} = useDisconnect()
+  const { disconnect } = useDisconnect();
 
   const { openConnectModal } = useConnectModal();
-    const { openAccountModal } = useAccountModal();
-    const [loading,setLoading] = useState(true)
-  const [hash,setHash] =useState("") 
+  const { openAccountModal } = useAccountModal();
+  const [loading, setLoading] = useState(true);
+  const [faqHref,setFaqHref]=useState("#faq")
+  const [hash, setHash] = useState("");
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
-
+  const isPageEcosystem=()=>{
+    if (window.location.pathname.includes("ecosystem")){
+      setFaqHref("/#faq")
+    }else{setFaqHref("#faq")}
+  }
   useEffect(() => {
-    setLoading(false); // Ensure loading only on component mount, not on every render
-    setIsMobileMenuOpen(false)
-    const links = document.querySelectorAll(".mobileNavLink") as NodeListOf<HTMLAnchorElement>
-    links.forEach(e=>{
-      e.addEventListener('click',()=>{
-        setIsMobileMenuOpen(false)
-      
+    Aos.init({duration:1000,once:true})
+    isPageEcosystem()
+
+    setIsMobileMenuOpen(false);
+    const links = document.querySelectorAll(
+      ".mobileNavLink"
+    ) as NodeListOf<HTMLAnchorElement>;
+    links.forEach((e) => {
+      e.addEventListener("click", () => {
+        setIsMobileMenuOpen(false);
+
         // setLoading(true)
-        
-      })
-    })
+      });
+    });
+    if(window.location.hash){
+     const id = window.location.hash.replace("#","")
+     const scrollDoc = document.getElementById(id) as HTMLElement
+     console.log({id,scrollDoc})
+     if(scrollDoc){
+     scrollDoc.scrollIntoView({behavior:"smooth"})
     
+    }
+  }
+  setLoading(false); // Ensure loading only on component mount, not on every render
+
+
   }, [pathname]);
-  const connectWalletButtonAction = async() => {
-    console.log({openAccountModal})
+  const connectWalletButtonAction = async () => {
+    console.log({ openAccountModal });
     if (openAccountModal) {
       openAccountModal();
       return;
     }
-    
+
     if (openConnectModal) {
       openConnectModal();
       return;
     }
-    disconnect()
-
+    disconnect();
   };
-  useLayoutEffect(()=>{
-    
-    if(window.location.hash){
-  setHash( window.location.hash.replace("#",''))
-    }else{
-      setHash("")
-    }
 
-  },[hash,pathname])
+ 
+  useLayoutEffect(() => {
+    if (window.location.hash) {
+      setHash(window.location.hash.replace("#", ""));
+    } else {
+      setHash("");
+    }
+  }, [hash, pathname]);
 
   return (
     <>
-    {loading?<Loading />:null}
+      {loading ? <Loading /> : null}
       <nav className=" left-0 px-2 bg-[#00295310] bg-opacity-90 backdrop-blur-md fixed w-screen z-[10] top-0 py-4">
         <div className="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <Link
-            href="/"
-            className="flex items-center "
-          >
+          <Link href="/" className="flex items-center ">
             <Image
               src={logo}
               alt="xentro"
-              className="mx-auto w-[130px] md:w-[200px]"
+              className="mx-auto w-[130px] md:w-[200px] hidden sm:block"
+            />
+            <Image
+              src={logo1}
+              alt="xentro"
+              className="mx-auto w-[30px] sm:hidden"
             />
           </Link>
           <button
             onClick={toggleMobileMenu}
             type="button"
             className="hidden md:block min-[1200px]:hidden"
-            
           >
-           <MenuIcon size={40} className=" text-white" />
+            <MenuIcon size={40} className=" text-white" />
           </button>
 
           {/* Mobile Navbar */}
@@ -103,7 +121,11 @@ const Navbar = () => {
               href="/"
               className="flex items-center space-x-3 rtl:space-x-reverse absolute top-6 left-6"
             >
-              <Image src={logo} alt="xentro" className="mx-auto w-[80px]" />
+              <Image
+                src={logo}
+                alt="xentro"
+                className="mx-auto w-[130px] "
+              />
             </Link>
             <button
               className="absolute top-6 right-6 text-white"
@@ -126,12 +148,18 @@ const Navbar = () => {
             </button>
             <ul className="space-y-6 mt-12 text-lg">
               <li>
-                <Link href="/ecosystem" className="hover:text-blue-400 mobileNavLink" >
+                <Link
+                  href="/ecosystem"
+                  className="hover:text-blue-400 mobileNavLink"
+                >
                   Ecosystem
                 </Link>
               </li>
               <li>
-                <Link href="/airdrop" className="hover:text-blue-400 mobileNavLink">
+                <Link
+                  href="/airdrop"
+                  className="hover:text-blue-400 mobileNavLink"
+                >
                   Airdrop
                 </Link>
               </li>
@@ -146,11 +174,11 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <Link href="#faq" className="hover:text-blue-400 mobileNavLink">
+                <Link href={faqHref} className={"hover:text-blue-400 mobileNavLink"}>
                   FAQ
                 </Link>
               </li>
-             
+           
             </ul>
           </div>
 
@@ -213,13 +241,13 @@ const Navbar = () => {
               </li>
               <li className=" w-[80px] relative h-full ">
                 <Link
-                  href="#faq"
+                  href={faqHref}
                   className={` h-full flex items-center justify-center py-2 px-3 bg-blue-700 md:bg-transparent md:p-0 `}
                 >
                   FAQ
                 </Link>
                 <span
-                  hidden ={hash != "faq"}
+                  hidden={hash != "faq"}
                   className="bg-white h-[5px] absolute w-full bottom-0 rounded-tl-[10px] rounded-tr-[10px]"
                 ></span>
               </li>
@@ -236,7 +264,9 @@ const Navbar = () => {
               onClick={connectWalletButtonAction}
               className="bg-[#002953] w-full h-full rounded-full overflow-hidden text-ellipsis px-4 md:px-5 py-2 text-white text-[14px] md:text-lg gilroy-regular font-semibold"
             >
-              {isConnected ? trauncateAddressMiddle(address,4) : "Connect Wallet"}
+              {isConnected
+                ? trauncateAddressMiddle(address, 4)
+                : "Connect Wallet"}
             </button>
           </div>
 
@@ -244,9 +274,8 @@ const Navbar = () => {
             onClick={toggleMobileMenu}
             type="button"
             className="md:hidden"
-            
           >
-           <MenuIcon size={40} className=" text-white" />
+            <MenuIcon size={40} className=" text-white" />
           </button>
         </div>
       </nav>

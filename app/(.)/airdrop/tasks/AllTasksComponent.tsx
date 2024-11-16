@@ -5,55 +5,12 @@ import JoinCommunity from "@/app/src/FE/homepage/components/JoinCommunity";
 import Link from "next/link";
 import homepagestyles from "@/app/css/homepage.module.css";
 import AllTasks from "@/app/src/FE/airdrop/AllTasks";
-import { useAccount } from "wagmi";
-import { useRouter } from "next/navigation";
-import { fetchAppData } from "@/app/src/BE/helpers";
-import Loading from "../../loading";
-import { fetchUserClient } from "@/app/src/FE/helpers";
-import { IApp, IUser } from "@/declarations";
 
-const AllTasksComponent =  ({appString}:{appString:string}) => {
-  const app = JSON.parse(appString) as IApp
-  const router = useRouter();
-  const { address } = useAccount();
-  const [loading, setLoading] = useState(true);
-  const [valid, setValidity] = useState(true);
-  const allNonExclusiveTaks = app.tasks.filter((e) => !e.exclusive);
-  const [completedTasksIds, setCompletedTasksIds] = useState<string[]>([]);
-  const [userPoints, setUserPoints] = useState(0);
-  useEffect(() => {
-    const run = async () => {
-      // alert(address)
-    
-      if (address) {
-        const exclusiveTasksLength = app.tasks.filter(
-          (e) => e.exclusive
-        ).length;
-        const [user,error] = await fetchUserClient(address) as [user:IUser,error:any];
-        if(error){
-          // window.location.href =("/airdrop");
-
-        }
-        console.log({user})
-        // if (user.tasks_completed_ids.length < exclusiveTasksLength) {
-          // window.location.href = ("/airdrop");
-        // } else {
-          setCompletedTasksIds(user.tasks_completed_ids);
-          setUserPoints(user.total_points);
-          // setValidity(true);
-        // }
-      }
-    };
-    run();
-
-
-    setLoading(false);
-  }, [valid,address,userPoints]);
+const AllTasksComponent = ({ appString }: { appString: string }) => {
+ 
   return (
     <>
-      {loading ? <Loading /> : null}
-      {valid ? (
-        <div className=" pt-24 md:pt-26 max-w-[1000px] mx-auto px-2">
+        <div className=" pt-24 md:pt-32 max-w-[1000px] mx-auto px-2">
           <section className="px-4  text-white gilroy-regular">
             <button>
               <Link href="/airdrop">
@@ -94,16 +51,12 @@ const AllTasksComponent =  ({appString}:{appString:string}) => {
             <p className="mb-4"> Complete all tasks to earn rewards</p>
           </section>
           <AllTasks
-            userTotalPoint={userPoints}
-            t={allNonExclusiveTaks}
-            completedTasksIds={completedTasksIds}
+          appString={appString}
           />
           <JoinCommunity />
           <Footer />
         </div>
-      ) : (
-        <></>
-      )}
+  
     </>
   );
 };

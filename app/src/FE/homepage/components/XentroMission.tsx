@@ -6,7 +6,7 @@ import Image from "next/image";
 
 const Xentromission = () => {
   return (
-      <div className="w-full mx-auto flex max-w-[1200px] md:flex-row flex-col items-center md:justify-between my-10 mb-20 md:mb-40">
+      <div className="w-full mx-auto flex max-w-[1200px] md:flex-row flex-col items-center md:justify-between my-10 mb-20 md:mb-40" data-aos="slide-right" data-aos-duration="400">
         <div className="mt-10 md:mt-0">
           <p className="text-white gilroy-bold hidden md:block md:text-[45px] ">
             <span className="inline-block relative">

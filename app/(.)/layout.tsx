@@ -3,7 +3,7 @@ import Navbar from "@/app/src/FE/navbar/Navbar";
 
 const layout = ({ children }: { children: ReactNode }) => {
   return (
-    <section  >
+    <section  className="overflow-x-hidden">
       <Navbar />
       {children}
 

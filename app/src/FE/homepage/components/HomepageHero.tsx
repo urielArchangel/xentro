@@ -7,7 +7,7 @@ import Link from "next/link";
 const HomepageHero = () => {
   return (
     <>
-      <div className={`${homepagestyles.hero} min-h-[70vh] md:h-[80vh] lg:h-[100vh]`}>
+      <div className={`${homepagestyles.hero} min-h-[70vh] md:h-[80vh] lg:h-[100vh]`} data-aos="fade-up">
         <div
           className={`max-w-[1021px] mt-24 md:mt-40 mx-auto text-center`}
         >

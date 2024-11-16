@@ -16,7 +16,6 @@ import xentrologo from "@/app/images/airdrop/xentroLogoWhite.png";
 import NFTMetatdata from "@/app/src/BE/web3/artifacts/Metadata.json";
 import {
   NFTContractAddress,
-  taskNameToDescriptionMap,
 } from "../../data/constants";
 import {
   taskCompletedAction,
@@ -83,7 +82,7 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
   
   useEffect(() => {
     if (app) {
-      setTasks([...app.tasks]);
+      setTasks([...app.tasks.filter(e=>e.exclusive)]);
   
       if (user) {
         let counter = 0;
@@ -123,6 +122,7 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
       NFTMetatdata.output.abi,
       NFTContractAddress
     );
+    let mintTaskDone=false
     const priceInWei = BigInt(
       await contract.methods.getCommissionFee().call()
     ).toString();
@@ -137,7 +137,8 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
         await updateCommunityBadgeMintDBAction(String(address));
         message.destroy();
         message.success("community badge minted", 3);
-        const [res, error] = await taskCompletedAction("0", String(address));
+        if(mintTaskDone)return
+        const [res, error] = await taskCompletedAction("6", String(address));
         if (error) {
           message.destroy();
           await message.error(error, 3);
@@ -145,6 +146,7 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
         }
         message.destroy();
        await message.success(res);
+       mintTaskDone=true
         router.refresh();
       });
   };
@@ -184,7 +186,7 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
         await updateWarriorBadgeMintDBAction(String(address));
         message.destroy();
         message.success("warrior badge minted", 3);
-        const [res, error] = await taskCompletedAction("1", String(address));
+        const [res, error] = await taskCompletedAction("7", String(address));
         if (error) {
           message.destroy();
           message.error(error, 3);
@@ -253,8 +255,11 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
                 <ul className="space-y-4">
                   {tasks.map((task, index) => {
                     if (!task.status) return <></>;
+                    if(!task.exclusive) return <></>
                     return (
                       <div
+                      data-aos="fade-right"
+                      data-aos-delay={`${index * 10}`}
                         key={index}
                         className={
                           homepagestyles.bg_gradient_border +
@@ -417,7 +422,6 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
 
 const WalletInfo = ({ user }: { user: IUser | null }) => {
   const [copySuccess, setCopySuccess] = useState<string>("");
-  console.log({ i: user?.invite_link, u: user });
   const inviteLink =
     user && user.invite_link
       ? user.invite_link
@@ -438,7 +442,7 @@ const WalletInfo = ({ user }: { user: IUser | null }) => {
   const { address } = useAccount();
 
   return (
-    <div className="rounded-xl text-white mx-auto gilroy-regular border-[#027EFF] border h-fit py-8">
+    <div data-aos="fade-down" className="rounded-xl text-white mx-auto gilroy-regular border-[#027EFF] border h-fit py-8">
       {/* Connected Wallet */}
       <div className="border-b border-[#027EFF]">
         <div className="px-6 py-6">

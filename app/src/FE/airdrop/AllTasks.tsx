@@ -12,30 +12,23 @@ import youtube from "@/app/images/socials/yt.png";
 import Link from "next/link";
 import { FaSearch } from "react-icons/fa";
 import { useAccount } from "wagmi";
-import { trauncateAddressMiddle } from "../helpers";
-import { ITask } from "@/declarations";
+import { fetchUserClient, trauncateAddressMiddle } from "../helpers";
+import { IApp, ITask, IUser } from "@/declarations";
 import { taskCompletedAction } from "../../BE/serveractions";
 import useMessage from "antd/es/message/useMessage";
+import Loading from "@/app/(.)/loading";
 
-interface Task {
-  id: number;
-  task: string;
-  points: number;
-  completed: boolean;
-  icon: any;
-}
+
 const AllTasks = ({
-  t,
-  completedTasksIds,
-  userTotalPoint,
+ appString
 }: {
-  t: ITask[];
-  completedTasksIds: string[];
-  userTotalPoint: number;
+  appString:string
 }) => {
   const [completedTasksCount, setCompletedTasksCount] = useState(0);
   const [message, messageContext] = useMessage();
-
+  const [app, setApp] = useState<IApp | null>(null);
+  const [user, setUser] = useState<IUser | null>(null);
+const [loading,setLoading] =useState(true)
   const handleClickStateUpdate = async (id: string) => {
     message.loading("Please wait...", 10000000);
 
@@ -46,7 +39,7 @@ const AllTasks = ({
       return;
     }
     await message.success(res, 2);
-    setCompletedTasksCount((prev) => (prev += 1));
+    // setCompletedTasksCount((prev) => (prev += 1));
   };
 
   const taskPlatformIconMapping = (platformName: string) => {
@@ -59,16 +52,16 @@ const AllTasks = ({
     };
     return icons[platformName] || x;
   };
-  const [tasks, setTasks] = useState<ITask[]>(t);
+  const [tasks, setTasks] = useState<ITask[]>([]);
 
 
   const isTaskCompleted = useCallback(
-    (id: string) => completedTasksIds.includes(id) ?? false,
-    [completedTasksIds]
+    (id: string) => user?.tasks_completed_ids.includes(id) ?? false,
+    [user]
   );
   const handleSearchTasks = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchValue = e.target.value.toLowerCase();
-    const filteredTasks = t.filter((task) =>
+    const filteredTasks = tasks.filter((task) =>
       task.task.toLowerCase().includes(searchValue)
     );
     setTasks(filteredTasks);
@@ -76,8 +69,49 @@ const AllTasks = ({
 
   const { address } = useAccount();
 
+
+  useEffect(() => {
+    const initData = async () => {
+      setApp(JSON.parse(appString));
+      if (address) {
+        const [fetchedUser, error] = await fetchUserClient(
+          String(address),
+        );
+  
+        if (error) message.error(error);
+        else setUser(fetchedUser);
+      }
+    };
+  
+    initData();
+  }, [address, appString, message]); // Separate out user-dependent logic
+  
+
+
+  useEffect(() => {
+    if (app) {
+      setTasks([...app.tasks.filter(e=>!e.exclusive)]);
+  
+      if (user) {
+        let counter = 0;
+        app.tasks.forEach((e) => {
+          if (e.exclusive && e.status && user.tasks_completed_ids.includes(e.id)) {
+            counter++;
+          }
+        });
+        setCompletedTasksCount(counter);
+      }
+    }
+    setLoading(false);
+  }, [app, user, completedTasksCount]); // user is safe to add here
+  
+
+
+
+
   return (
     <>
+    {loading? <Loading />:null}
       {messageContext}
       <div >
         <div
@@ -104,7 +138,7 @@ const AllTasks = ({
                   <span
                     className={`${homepagestyles.gradientText} text-white gilroy-bold text-lg sm:text-xl md:text-2xl lg:text-3xl tracking-wider`}
                   >
-                    {userTotalPoint}
+                    {user?user.total_points:0}
                   </span>
                 </p>
               </div>
@@ -139,8 +173,8 @@ const AllTasks = ({
               " border-0 p-[0.07em] rounded-lg hd-shadow my-2"
             }
           >
-            <li className="flex justify-between bg-[#092747] rounded-lg py-3 px-[5%] font-semibold">
-              <span className="text-xs max-[599px]:text-md min-[600px]:text-lg flex items-center gap-3 place-self-start">
+            <li className="flex justify-between bg-[#092747] rounded-lg py-3 px-2 sm:px-6 md:px-10 font-semibold">
+              <span className="text-xs max-[599px]:text-md min-[600px]:text-lg flex items-center">
                 Task
               </span>
               <span className="text-xs max-[599px]:text-md min-[600px]:text-lg flex items-center self-center">
@@ -165,7 +199,7 @@ const AllTasks = ({
                   />
                 </svg>
               </span>
-              <span className="text-xs max-[599px]:text-md min-[600px]:text-lg flex items-center gap-3 place-self-end mr-3">
+              <span className="text-xs max-[599px]:text-md min-[600px]:text-lg flex items-center gap-3 place-self-end">
                 Action
               </span>
             </li>
@@ -181,13 +215,13 @@ const AllTasks = ({
               >
                 <li
                   key={task.id || index}
-                  className="flex items-center bg-[#092747] rounded-lg py-3 px-4 pr-8 md:px-16 md:pr-12 justify-between "
+                  className="flex items-center bg-[#092747] rounded-lg py-3 px-2 justify-between sm:px-6 md:px-10 "
                 >
-                  <span className="text-[14px] max-[599px]:text-md min-[600px]:text-lg flex items-center  w-[33%] ">
+                  <span className="text-[14px] max-[599px]:text-md min-[600px]:text-lg flex items-center w-[32%]  ">
                     <Image
                       src={taskPlatformIconMapping(task.platform)}
                       alt="task"
-                      className="w-[15px] md:w-[25px] mx-2"
+                      className="w-[15px] md:w-[25px] mr-1"
                     />
                     {task.task}
                   </span>
@@ -208,7 +242,9 @@ const AllTasks = ({
                   >
                     {isTaskCompleted(task.id) ? "Done" : "Start"}
                   </Link>
+                    
                 </li>
+             
               </div>
             ))}
           </ul>

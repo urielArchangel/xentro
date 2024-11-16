@@ -69,9 +69,9 @@ export const EcosystemFeaturesTemplate: React.FC<FeatureProps> = ({
               homepagestyles.scale_custom
             }`}
           >
-            <Image src={image} alt="token" width={300} height={300}  />
+            <Image src={image} alt="token" width={300} height={300} data-aos="slide-right" />
           </div>
-          <div className="flex justify-center flex-col text-white text-center min-[769px]:text-end">
+          <div className="flex justify-center flex-col text-white text-center min-[769px]:text-end" data-aos="slide-left" >
             <h3 className="text-2xl sm:text-3xl md:text-4xl gilroy-bold mb-5">
               <span className={`${homepagestyles.gradientText}`}>XENTRO</span>{" "}
               {title}
@@ -94,7 +94,7 @@ const AlternateEcosystemFeaturesTemplate: React.FC<FeatureProps> = ({
     <>
       <div className="p-[8%]">
         <div className="flex justify-between items-center flex-col-reverse lg:flex-row">
-          <div className="flex justify-center flex-col text-white text-center min-[769px]:text-start">
+          <div className="flex justify-center flex-col text-white text-center min-[769px]:text-start" data-aos="slide-right" >
             <h3 className="text-2xl sm:text-3xl md:text-4xl gilroy-bold mb-5">
               <span className={`${homepagestyles.gradientText}`}>XENTRO</span>{" "}
               {title}
@@ -110,7 +110,7 @@ const AlternateEcosystemFeaturesTemplate: React.FC<FeatureProps> = ({
               homepagestyles.scale_custom
             }`}
           >
-            <Image src={image} alt="token" width={400} height={300} />
+            <Image src={image} alt="token" width={400} height={300} data-aos="slide-left"  />
           </div>
         </div>
       </div>

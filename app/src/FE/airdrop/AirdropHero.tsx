@@ -12,7 +12,7 @@ const AirdropHero = () => {
   return (
     <>
       <section className="grid grid-cols-1 min-[769px]:grid-cols-5 px-[8%] pt-[15%] min-[769px]:pt-[10%] min-[1500px]:pt-[6%] place-items-center">
-        <div className="min-[769px]:col-span-3 text-center min-[769px]:text-start">
+        <div className="min-[769px]:col-span-3 text-center min-[769px]:text-start" data-aos="slide-right">
           <h1 className="text-white gilroy-black-bold text-4xl lg:text-6xl min-[1500px]:text-7xl text-center min-[769px]:text-start mb-10">
             <span className="inline-block relative">
               <span
@@ -55,7 +55,7 @@ const AirdropHero = () => {
           </div>
         </div>
         <div className="min-[769px]:col-span-2 scale-[0.7] min-[769px]:scale-[1]">
-          <Image src={heroimage} alt="heroimage" />
+          <Image src={heroimage} alt="heroimage" data-aos="zoom-in" data-aos-delay="100" />
         </div>
       </section>
       <section className="relative w-full  h-[60px] md:h-[100px] lg:h-[120px] flex items-center my-12 md:my-20">

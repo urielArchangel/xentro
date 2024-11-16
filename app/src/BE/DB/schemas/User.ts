@@ -30,6 +30,7 @@ const UserSchema = new Schema({
   last_login: { type: Number, default: Date.now() },
 });
 
-const User = models.User || model("User", UserSchema);
+const User = process.env.NODE_ENV  != "production"? ( models.UserDev || model("UserDev", UserSchema)): ( models.User || model("User", UserSchema));
+
 
 export default User;

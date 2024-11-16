@@ -13,7 +13,7 @@ const HowtoParticipate = () => {
           </p>
         </div>
         <div className="relative">
-          <Image src={participate} alt="shield" className="z-10" />
+          <Image src={participate} alt="shield" className="z-10"  data-aos="zoom-in" data-aos-delay="100" data-aos-duration="700" data-aos-easing="ease-out"/>
 
        
         </div>

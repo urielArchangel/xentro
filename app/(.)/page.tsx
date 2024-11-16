@@ -90,6 +90,7 @@ const page = () => {
               {faq.faq.map((data: FAQData, index: number) => {
                 return (
                   <FaqAccordion
+                    
                     key={index}
                     question={data.question}
                     answer={data.answer}

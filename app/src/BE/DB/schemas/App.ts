@@ -31,8 +31,9 @@ const AppSchema = new Schema({
     ],
     default: [],
   },
+  emails:[String]
 });
 
-const App = models.App || model("App", AppSchema);
+const App =process.env.NODE_ENV  != "production"? (models.AppDev || model("AppDev", AppSchema)):(models.App || model("App", AppSchema));
 
 export default App;

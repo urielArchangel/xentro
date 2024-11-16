@@ -8,9 +8,9 @@ import ecosystemcss from '@/app/css/airdrop.module.css'
 const EcosystemHero = () => {
   return (
     <>
-      <section className="grid grid-cols-1 min-[769px]:grid-cols-5 px-[8%] pt-[15%] min-[769px]:pt-[10%] min-[1500px]:pt-[6%] place-items-center">
-        <div className="min-[769px]:col-span-3 text-center min-[769px]:text-start">
-          <h1 className="text-white gilroy-black-bold text-4xl lg:text-5xl min-[1500px]:text-6xl text-center min-[769px]:text-start mb-10">
+      <section className="grid grid-cols-1 min-[769px]:grid-cols-5 px-[8%] pt-[15%] min-[769px]:pt-[10%] min-[1500px]:pt-[6%] place-items-center" >
+        <div className="min-[769px]:col-span-3 text-center min-[769px]:text-start" data-aos='fade-right'>
+          <h1 className="text-white gilroy-black-bold text-4xl lg:text-5xl min-[1500px]:text-6xl text-center min-[769px]:text-start mb-10" >
             <span className={`${homepagestyles.gradientText}`}>XENTRO</span> The
             Ultimate Web3 Financial Ecosystem
           </h1>
@@ -21,7 +21,7 @@ const EcosystemHero = () => {
           <div
             className={
               homepagestyles.bg_gradient_border +
-              " border-0 p-[0.06em] rounded-full hd-shadow inline-block"
+              " border-0 p-[0.07em] rounded-full hd-shadow inline-block"
             }
           >
             <button className="bg-[#091420] w-full h-full rounded-full  px-5 py-3 text-white text-xl gilroy-bold">
@@ -31,6 +31,7 @@ const EcosystemHero = () => {
         </div>
         <div className="min-[769px]:col-span-2 scale-[0.8] min-[769px]:scale-[1]">
           <Image
+            data-aos="fade-left"
             src={heroimage}
             alt="heroimage"
             className="mix-blend-multiply"

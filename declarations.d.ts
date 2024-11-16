@@ -41,6 +41,7 @@ export interface IApp {
   tasks_completed: number;
   tasks: ITask[];
   mints: IMint[];
+  emails:string[];
   save:()=>Promise<void>
 }
 

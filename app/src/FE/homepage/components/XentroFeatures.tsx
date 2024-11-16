@@ -41,12 +41,14 @@ const XentroFeatures = () => {
           <div className=" flex flex-col justify-between items-center flex-1">
             <div className="flex justify-between items-center my-6 lg:my-0 " >
               <FeatureCard
+
                 height="max-w-[780px]  lg:mr-10"
                 title="Decentralized Finance (DeFi) Integration"
                 description="Seamlessly Connect with the Future of Finance"
                 explanation="Access a wide range of DeFi services directly from our platform, allowing you to earn, borrow, and invest with unprecedented ease and security."
               />
                 <Image
+                data-aos="fade-left"
                   src={defi}
                   alt="mission"
                   width={300}
@@ -62,6 +64,7 @@ const XentroFeatures = () => {
                 explanation="Access a curated selection of exclusive, secure investment opportunities with varying yield potentials, tailored to suit different risk profiles and financial goals."
               />
                 <Image
+                data-aos="fade-left"
                   src={noncustodial}
                   alt="mission"
                   width={360}
@@ -77,6 +80,7 @@ const XentroFeatures = () => {
                 explanation="Access a curated selection of exclusive, secure investment opportunities with varying yield potentials, tailored to suit different risk profiles and financial goals."
               />
                 <Image
+                data-aos="fade-left"
                   src={exclusive}
                   alt="mission"
                   width={220}
@@ -92,6 +96,7 @@ const XentroFeatures = () => {
                 explanation="Access a curated selection of exclusive, secure investment opportunities with varying yield potentials, tailored to suit different risk profiles and financial goals."
               />
                 <Image
+                data-aos="fade-left"
                   src={crosschain}
                   alt="mission"
                   width={360}
@@ -120,7 +125,7 @@ const FeatureCard: React.FC<FeatureProps> = ({
   height,
 }) => {
   return (
-    <section
+    <section data-aos="flip-up"
       className={`rounded-[12px]   border-[#027EFF] border ${height} `}
     >
       <div

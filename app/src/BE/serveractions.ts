@@ -112,7 +112,10 @@ export const taskCompletedAction = async (
       await user.save();
       await app.save();
       revalidatePath("/airdrop");
+      revalidatePath("/airdrop/tasks");
+
       revalidateTag("fetchUser_client");
+
       return ["Task completed!", null];
     } else {
       return [null, "Task has already been done"];
@@ -193,3 +196,22 @@ export const removePointsAction = async (ID: string, points: number) => {
     return [null, error.message];
   }
 };
+
+
+export const subscribeEmail = async(email:string)=>{
+try {
+  await mongoDBConnect()
+  let app = await App.findOne({}) as IApp
+  if(!app){
+    await App.create({})
+  }
+  app = await App.findOne({}) as IApp
+  app.emails.push(email)
+  await app.save()
+
+  return [true,null]
+} catch (error:any) {
+  console.log(error.message)
+return [null,error.message]
+}
+}

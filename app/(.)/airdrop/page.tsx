@@ -65,10 +65,10 @@ const page = async () => {
         <AirdropHero />
         <div className="px-[8%] pt-[8%]">
           <div className="grid grid-cols-1 min-[769px]:grid-cols-2">
-            <div className="min-[1500px]:scale-[1.3] min-[1500px]:translate-x-[200px] flex justify-center min-[769px]:justify-start mt-10 min-[769px]:mt-0 scale-custom scale-[0.7] min-[769px]:scale-[1]">
+            <div className="min-[1500px]:scale-[1.3] min-[1500px]:translate-x-[200px] flex justify-center min-[769px]:justify-start mt-10 min-[769px]:mt-0 scale-custom scale-[0.7] min-[769px]:scale-[1]" data-aos="fade-down">
               <Image src={shield} alt="token" width={300} height={300} />
             </div>
-            <div className="flex justify-center flex-col text-white text-center min-[769px]:text-end order-first min-[769px]:order-last">
+            <div className="flex justify-center flex-col text-white text-center min-[769px]:text-end order-first min-[769px]:order-last" data-aos="fade-up">
               <p className="text-white gilroy-bold text-4xl md:text-5xl min-[1500px]:text-6xl mb-10">
                 Become a{" "}
                 <span className={`${homepagestyles.gradientText} gilroy-bold`}>

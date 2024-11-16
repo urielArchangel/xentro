@@ -1,13 +1,36 @@
 'use client'
-import React from "react";
+import React, { useRef } from "react";
 import homepagestyles from "@/app/css/homepage.module.css";
 import underline from "@/app/images/underline.png";
 import check from "@/app/images/check.svg";
 import Image from "next/image";
+import useMessage from "antd/es/message/useMessage";
+import { subscribeEmail } from "@/app/src/BE/serveractions";
 
 const JoinCommunity = () => {
+const emailRef = useRef<HTMLInputElement>(null)
+const [message,context] = useMessage()
+  const handleSaveEmail = async(e:React.MouseEvent<HTMLButtonElement>)=>{
+    e.preventDefault()
+    if(!emailRef || !emailRef.current){
+      message.destroy()
+      message.error("Invalid email address",2)
+      return
+    }
+    message.loading("Subscribing please wait",100000000000)
+    const [_,error] = await subscribeEmail(emailRef.current.value)
+    message.destroy()
+
+    if(error){
+      message.error(error,2)
+      return
+
+    }
+    message.success("Email subscription successful",2)
+  }
   return (
     <>
+    {context}
       <section
         className={` py-16 ${homepagestyles.community}`}
       >
@@ -49,6 +72,7 @@ const JoinCommunity = () => {
           <div className=" w-full flex justify-center  md:flex-row flex-col max-w-[800px] my-6">
             <input
               type="email"
+              ref={emailRef}
               placeholder="Email Address"
               className="gilroy-regular w-full px-4 py-3 md:py-4 rounded-full  bg-[#1a2b3d42] border border-[#151515] focus:outline-none text-white placeholder:text-lg text-lg"
             />
@@ -58,9 +82,7 @@ const JoinCommunity = () => {
                 " border-0 p-[0.07em] rounded-full hd-shadow h-14  w-full max-w-[200px] mx-auto my-10 md:my-0"
               }
             >
-              <button onClick={(e)=>{
-                e.preventDefault()
-              }} className="bg-[#021327] w-full  h-full rounded-full text-xl text-white gilroy-bold ">
+              <button onClick={handleSaveEmail} className="bg-[#021327] w-full  h-full rounded-full text-xl text-white gilroy-bold ">
                 Subscribe
               </button>
             </div>

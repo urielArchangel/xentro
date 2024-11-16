@@ -103,7 +103,7 @@ interface MintBadgeProps {
 
 const XentroBadge: React.FC<MintBadgeProps> = ({ title, description,mints,unlocked }) => {
   return (
-    <div className="bg-[#0028511f] p-5 rounded-xl text-white border border-[#002953] min-[480px]:h-[530px] min-[480px]:relative w-[90%] min-[480px]:w-max">
+    <div data-aos={title.toLowerCase().includes("warrior")?"slide-left":"slide-right"} className="bg-[#0028511f] p-5 rounded-xl text-white border border-[#002953] min-[480px]:h-[530px] min-[480px]:relative w-[90%] min-[480px]:w-max">
       <div className="group relative">
         <div className={`blur-sm p-1`}>
           <Image
@@ -118,9 +118,10 @@ const XentroBadge: React.FC<MintBadgeProps> = ({ title, description,mints,unlock
         >
           <div className="flex flex-col justify-end items-center font-bold">
             <ul className="flex min-[480px]:space-x-5 space-x-1 gilroy-bold min-[480px]:text-3xl text-xl min-[480px]:mb-10 mb-4">
-            {mints.split("").map( (e,i)=>( <li key={i} className="p-1 min-[480px]:w-10 min-[480px]:h-12 w-8 h-8 text-center rounded-md bg-[#254367]">
+            {mints.split("").map( (e,i)=>{
+              return ( <li key={i} data-aos="fade-down" data-aos-delay={`${ i * 100 }`} className="p-1 min-[480px]:w-10 min-[480px]:h-12 w-8 h-8 text-center rounded-md bg-[#254367]">
                 {e}
-              </li>))}
+              </li>)})}
              
             </ul>
           </div>
