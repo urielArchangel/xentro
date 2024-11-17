@@ -133,7 +133,14 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
         message.destroy();
         message.loading("confirming task...", 1000000);
       })
-      .on("receipt", async () => {
+      .on("receipt", async (receipt) => {
+        if (!receipt.status) {
+          // Transaction failed at contract execution level
+          message.destroy();
+          message.error("Transaction failed. Please try again.", 3);
+          console.error("Transaction receipt shows failure:", receipt);
+          return;
+        }
         await updateCommunityBadgeMintDBAction(String(address));
         message.destroy();
         message.success("community badge minted", 3);
@@ -182,7 +189,14 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
         message.destroy();
         message.loading("confirming task...", 1000000);
       })
-      .on("receipt", async () => {
+      .on("receipt", async (receipt) => {
+        if (!receipt.status) {
+          // Transaction failed at contract execution level
+          message.destroy();
+          message.error("Transaction failed. Please try again.", 3);
+          console.error("Transaction receipt shows failure:", receipt);
+          return;
+        }
         await updateWarriorBadgeMintDBAction(String(address));
         message.destroy();
         message.success("warrior badge minted", 3);
@@ -194,6 +208,11 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
         }
         message.success(res);
         router.refresh();
+      }) .on("error", (error) => {
+        // Transaction failed
+        message.destroy();
+        message.error("Transaction failed. Please try again.", 3);
+        console.error("Minting error:", error);
       });
   };
 
@@ -218,7 +237,7 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
     <>
       {messageContext}
       {loading ? <Loading /> : null}
-      <section className="px-[8%] pt-[10%] max-w-[1600px] mx-auto ">
+      <section  className="px-[8%] pt-[10%] max-w-[1600px] mx-auto ">
         <h3 className="text-white gilroy-bold text-3xl md:text-4xl lg:text-5xl min-[1500px]:text-6xl mb-8 text-start">
           <span className="inline-block relative">
             <span
@@ -250,9 +269,8 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
               <span className="font-bold">{completedTasksCount}</span> out of{" "}
               <span className="font-bold">{tasks.length}</span>
             </h4>
-            <div className="flex flex-col space-y-8 lg:space-y-0 lg:space-x-8 lg:items-start lg:flex-row  lg:justify-around ">
-              <div className="text-white gilroy-regular h-full w-full justify-around ">
-                <ul className="space-y-4">
+            <div className="flex flex-col space-y-8 lg:space-y-0 lg:space-x-8 lg:items-start lg:flex-row  lg:justify-around  lg:h-[700px] ">
+                <ul className="flex flex-col justify-between text-white gilroy-regular h-full w-full  b">
                   {tasks.map((task, index) => {
                     if (!task.status) return <></>;
                     if(!task.exclusive) return <></>
@@ -340,7 +358,6 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
                     );
                   })}
                 </ul>
-              </div>
               {viewAllTask() && isConnected && (
                 <div
                   className={`${homepagestyles.bg_gradient_border} p-[0.07em]  lg:hidden rounded-full hd-shadow w-[50%] mx-auto mb-20`}
@@ -352,7 +369,7 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
                   </Link>
                 </div>
               )}
-              <div className=" lg:w-[48%] ">
+              <div className=" lg:w-[48%]  h-full">
                 <WalletInfo user={user} />
               </div>
             </div>
@@ -442,7 +459,7 @@ const WalletInfo = ({ user }: { user: IUser | null }) => {
   const { address } = useAccount();
 
   return (
-    <div data-aos="fade-down" className="rounded-xl text-white mx-auto gilroy-regular border-[#027EFF] border h-fit py-8">
+    <div data-aos="fade-down" className="rounded-xl text-white mx-auto gilroy-regular border-[#027EFF] border h-fit lg:h-full  py-8">
       {/* Connected Wallet */}
       <div className="border-b border-[#027EFF]">
         <div className="px-6 py-6">

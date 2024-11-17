@@ -13,7 +13,7 @@ import faq from "../../src/data/faq/airdropFAQ.json";
 import FaqAccordion from "../../src/FE/homepage/components/FaqAccordion";
 import { fetchAppData } from "@/app/src/BE/helpers";
 import { Metadata } from "next";
-import airdropcss from '@/app/css/airdrop.module.css'
+import airdropcss from "@/app/css/airdrop.module.css";
 
 export const metadata: Metadata = {
   title: "Airdrop | Xentro - Gateway to UNTRAD Banking",
@@ -59,16 +59,22 @@ export const metadata: Metadata = {
 const page = async () => {
   const app = await fetchAppData();
   return (
-    <section className={airdropcss.body + ' pt-10 h-full px-4'}>
+    <section className={airdropcss.body + " pt-10 h-full px-4"}>
       <div className="body pt-5">
         {" "}
         <AirdropHero />
         <div className="px-[8%] pt-[8%]">
           <div className="grid grid-cols-1 min-[769px]:grid-cols-2">
-            <div className="min-[1500px]:scale-[1.3] min-[1500px]:translate-x-[200px] flex justify-center min-[769px]:justify-start mt-10 min-[769px]:mt-0 scale-custom scale-[0.7] min-[769px]:scale-[1]" data-aos="fade-down">
+            <div
+              className="min-[1500px]:scale-[1.3] min-[1500px]:translate-x-[200px] flex justify-center min-[769px]:justify-start mt-10 min-[769px]:mt-0 scale-custom scale-[0.7] min-[769px]:scale-[1]"
+              data-aos="fade-down"
+            >
               <Image src={shield} alt="token" width={300} height={300} />
             </div>
-            <div className="flex justify-center flex-col text-white text-center min-[769px]:text-end order-first min-[769px]:order-last" data-aos="fade-up">
+            <div
+              className="flex justify-center flex-col text-white text-center min-[769px]:text-end order-first min-[769px]:order-last"
+              data-aos="fade-up"
+            >
               <p className="text-white gilroy-bold text-4xl md:text-5xl min-[1500px]:text-6xl mb-10">
                 Become a{" "}
                 <span className={`${homepagestyles.gradientText} gilroy-bold`}>
@@ -77,7 +83,7 @@ const page = async () => {
                 <br />
                 Early Adopter
               </p>
-              <p className="gilroy-regular text-xl min-[1500px]:text-2xl">
+              <p id="exclusive" className="gilroy-regular text-xl min-[1500px]:text-2xl">
                 Be among the first to secure early access to Xentro <br /> and
                 earn rewards
               </p>
@@ -86,12 +92,21 @@ const page = async () => {
         </div>
         <HowtoParticipate />
         <ExclusiveTasks appString={JSON.stringify(app)} />
-        <MintBadge communityMints={String(app.mints.filter(e=>e.task.toLowerCase().includes("community")).length)} warriorMints={String(app.mints.filter(e=>e.task.toLowerCase().includes("warrior")).length)} />
-        <div>
-          <div className="flex flex-col items-center pb-20 pt-24">
+        <MintBadge
+          communityMints={String(
+            app.mints.filter((e) => e.task.toLowerCase().includes("community"))
+              .length
+          )}
+          warriorMints={String(
+            app.mints.filter((e) => e.task.toLowerCase().includes("warrior"))
+              .length
+          )}
+        />
+        <div id="faq">
+          <div className="flex flex-col items-center pb-20 pt-40">
             <p className="text-white gilroy-bold text-3xl md:text-4xl lg:text-5xl min-[1500px]:text-6xl mb-10">
               <span className="inline-block relative">
-                <span id="faq"
+                <span
                   className={`${homepagestyles.gradientText} text-white gilroy-bold`}
                 >
                   Xentro
@@ -107,14 +122,8 @@ const page = async () => {
               Airdrop FAQs
             </p>
             <div className="w-[80%] ">
-              {faq.faq.map(({question,answer}, index) => (
-                <FaqAccordion
-                  key={index}
-                  question={question}
-                  answer={
-                    answer
-                  }
-                />
+              {faq.faq.map(({ question, answer }, index) => (
+                <FaqAccordion key={index} question={question} answer={answer} />
               ))}
             </div>
           </div>
@@ -122,7 +131,7 @@ const page = async () => {
         <JoinCommunity />
         <Footer />
       </div>
-</section>
+    </section>
   );
 };
 

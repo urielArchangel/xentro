@@ -6,7 +6,7 @@ import Image from "next/image";
 const HowtoParticipate = () => {
   return (
     <>
-      <section className="px-[8%] mt-28 overflow-hidden" id="exclusive">
+      <section className="px-[8%] mt-28 overflow-hidden" >
         <div className="flex justify-center">
           <p className="text-white gilroy-bold text-3xl md:text-4xl lg:text-5xl mb-10">
             How To Participate

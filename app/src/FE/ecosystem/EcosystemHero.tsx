@@ -4,6 +4,7 @@ import homepagestyles from "@/app/css/homepage.module.css";
 import heroimage from "@/app/images/ecosystem/ecosystem.png";
 import slider from "@/app/images/airdrop/xentroLogoSlider.png";
 import ecosystemcss from '@/app/css/airdrop.module.css'
+import Link from "next/link";
 
 const EcosystemHero = () => {
   return (
@@ -24,9 +25,9 @@ const EcosystemHero = () => {
               " border-0 p-[0.07em] rounded-full hd-shadow inline-block"
             }
           >
-            <button className="bg-[#091420] w-full h-full rounded-full  px-5 py-3 text-white text-xl gilroy-bold">
+            <Link href="/airdrop" className="block bg-[#091420] w-full h-full rounded-full  px-5 py-3 text-white text-xl gilroy-bold">
               Join Xentro
-            </button>
+            </Link>
           </div>
         </div>
         <div className="min-[769px]:col-span-2 scale-[0.8] min-[769px]:scale-[1]">

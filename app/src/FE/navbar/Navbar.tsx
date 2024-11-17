@@ -217,7 +217,7 @@ const Navbar = () => {
               </li>
               <li className=" w-[80px] relative h-full opacity-[0.5]">
                 <Link
-                  href="/stake"
+                  href=""
                   className={`h-full flex items-center justify-center py-2 px-3 bg-blue-700 md:bg-transparent md:p-0 `}
                 >
                   Stake

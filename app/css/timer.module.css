@@ -20,7 +20,8 @@ left: 0;
   align-items: center;
   gap: 0.5rem;
   margin-bottom: 2rem;
-  z-index: 100;
+  position: relative;
+
 }
 
 .timeSection {

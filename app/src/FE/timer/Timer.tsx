@@ -7,6 +7,13 @@ import logo from "@/app/images/xentroLogoWNameWhite.png";
 import rocket from "@/app/images/rocket.png";
 import { subscribeEmail } from "../../BE/serveractions";
 import useMessage from "antd/es/message/useMessage";
+import youtube from "@/app/images/socials/yt.png";
+import medium from "@/app/images/socials/Medium.png";
+import x from "@/app/images/socials/XTask.png";
+import telegram from "@/app/images/socials/Telegram.png";
+import instagram from "@/app/images/socials/Instagram.png";
+import star from "@/app/images/socials/Star.png";
+import Link from "next/link";
 
 type TimeLeft =
   | {
@@ -66,10 +73,10 @@ export default function Timer() {
   const CountdownBlock = useCallback(
     ({ value, label }: { value: number; label: string }) => (
       <div
-        className={`${styles.bg_gradient_border} border-0 p-[0.04em] w-[50px] md:w-[70px] rounded-lg hd-shadow`}
+        className={`${styles.bg_gradient_border} border-0 p-[0.04em] md:p-[0.01em] lg:p-[0.01em]  w-[50px] md:w-[120px] lg:w-[200px] rounded-lg hd-shadow`}
       >
         <span
-          className="px-[5px] py-3 bg-[#002953] block w-full h-full rounded-lg text-center"
+          className="px-[5px] py-3 bg-[#002953] block w-full h-full md:py-10 lg:py-20 rounded-lg text-center"
           aria-label={label}
         >
           {value}
@@ -82,10 +89,10 @@ export default function Timer() {
   return (
 <>{context}
       <div className={` ${styles.container}`}>
-        <div className=" w-full  max-w-[700px]">
-        <Image src={logo} alt="Xentro" className=" w-[120px] md:w-[150px] mb-5 block mx-auto" />
+        <div className=" w-full  max-w-[1200px] absolute z-[3] ">
+        <Image src={logo} alt="Xentro" className=" w-[120px] md:w-[200px] mb-5 block mx-auto" />
 
-        <h1 className="gilroy-black-bold tracking-wide text-[25px] md:text-[35px] text-center mb-12 ">
+        <h1 className="gilroy-black-bold tracking-wide text-[25px] md:text-[60px] text-center mb-12 ">
           Launching Soon!
         </h1>
 
@@ -95,19 +102,19 @@ export default function Timer() {
           </div>
         ) : (
           <div
-            className={`${styles.countdown} gilroy-bold tracking-wider text-2xl md:text-[35px] mx-auto `}
+            className={`${styles.countdown} gilroy-bold tracking-wider text-2xl md:text-[70px] lg:text-[120px] mx-auto  w-full`}
           >
             <CountdownBlock value={timeLeft.days} label="Days" />
-            <div>:</div> 
+            <div className="lg:mx-6">:</div> 
             <CountdownBlock value={timeLeft.hours} label="Hours" />
-            <div>:</div>
+            <div className="lg:mx-6">:</div>
             <CountdownBlock value={timeLeft.minutes} label="Minutes" />
-            <div>:</div>
+            <div className="lg:mx-6">:</div>
             <CountdownBlock value={timeLeft.seconds} label="Seconds" />
           </div>
         )}
 
-        <section className=" z-10 mt-20">
+        <section className=" z-10 mt-20 max-w-[700px] mx-auto">
           <div className="w-full flex flex-col items-center gap-3 sm:flex-row justify-center my-6">
             <input
             ref={emailRef}
@@ -123,19 +130,56 @@ export default function Timer() {
               </button>
             </div>
           </div>
+          
         </section>
+        <h5 className="text-[18px] md:text-[20px] text-center mt-4">Our socials</h5>
+        <ul className="flex items-center space-x-5 my-4 w-full max-w-[400px] mx-auto justify-center gap-2 sm:justify-between flex-wrap" >
+                  <li>
+                  <Link href="https://medium.com/@joinxentro" target="_blank">
 
-        <div className="absolute bottom-0 right-0 hidden min-[890px]:block">
-          <Image
+                    <Image src={medium} alt="medium" className="w-10" />
+                    </Link>
+                  </li>
+                  <li>
+                  <Link href="http://www.youtube.com/@Joinxentro" >
+
+                    <Image src={youtube} alt="youtube" className="w-10" />
+                    </Link>
+                  </li>
+                  <li>
+                  <Link href="https://twitter.com/joinxentro" target="_blank">
+
+                    <Image src={x} alt="x" className="w-10" />
+                    </Link>
+                  </li>
+                  <li>
+                  <Link href="https://t.me/joinxentro" target="_blank"> 
+                    <Image src={telegram} alt="telegram" className="w-10" />
+                    </Link>
+                  </li>
+                  <li>
+                  <Link href="https://www.instagram.com/joinxentro/" target="_blank">
+                    <Image src={instagram} alt="instagram" className="w-10" />
+                    </Link>
+                  </li>
+                  <li>
+                  <Link href="https://uk.trustpilot.com/review/joinxentro.com">
+                    <Image src={star} alt="star" className="w-10" />
+                    </Link>
+                  </li>
+                </ul>
+
+    
+        </div>
+        <Image
             src={rocket}
             alt="Rocket"
             width={300}
             style={{ filter: "grayscale(100%)" }}
-            className="md:scale-[0.8] lg:scale-[1]"
+            className="w-[200px] md:w-[400px] absolute bottom-0 right-0 hidden min-[890px]:block z-[1]"
           />
-        </div>
-        </div>
       </div>
+      
       </>
   );
 }

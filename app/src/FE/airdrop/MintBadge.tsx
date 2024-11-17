@@ -59,7 +59,7 @@ const MintBadge = ({communityMints,warriorMints}:{communityMints:string,warriorM
   return (
     <>
     {loading?<Loading />:null}
-      <section className="mt-20">
+      <section className="mt-20" >
         <h3 className="text-white gilroy-bold text-3xl md:text-4xl lg:text-5xl mb-10 text-center">
           Mint Your{" "}
           <span className="inline-block relative">
@@ -78,7 +78,7 @@ const MintBadge = ({communityMints,warriorMints}:{communityMints:string,warriorM
           </span>{" "}
           Badge
         </h3>
-        <div className="flex justify-center items-center flex-col min-[961px]:flex-row space-y-10 min-[961px]:space-y-0 min-[961px]:space-x-10">
+        <div  className="flex justify-center items-center flex-col min-[961px]:flex-row space-y-10 min-[961px]:space-y-0 min-[961px]:space-x-10">
           <XentroBadge mints={padMintsValue(communityMints)} unlocked={hasUserMintedCommunityBadge}
             title="Xentro Community Badge"
             description="Complete all Xentro Exclusive Social Tasks."
