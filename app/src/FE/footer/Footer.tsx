@@ -7,6 +7,7 @@ import airdropcss from "@/app/css/airdrop.module.css";
 import youtube from "@/app/images/socials/yt.png";
 import medium from "@/app/images/socials/Medium.png";
 import x from "@/app/images/socials/XTask.png";
+import tiktok from "@/app/images/socials/tiktokWhite.svg";
 import telegram from "@/app/images/socials/Telegram.png";
 import instagram from "@/app/images/socials/Instagram.png";
 import star from "@/app/images/socials/Star.png";
@@ -77,6 +78,14 @@ const Footer = () => {
                       target="_blank"
                     >
                       <Image src={instagram} alt="instagram" className="w-10" />
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="https://www.tiktok.com/@joinxentro"
+                      target="_blank"
+                    >
+                      <Image src={tiktok} alt="instagram" className="w-10" />
                     </Link>
                   </li>
                   <li>
@@ -210,6 +219,14 @@ const Footer = () => {
                     <Image src={instagram} alt="instagram" className="w-10" />
                   </Link>
                 </li>
+                <li>
+                    <Link
+                      href="https://www.tiktok.com/@joinxentro"
+                      target="_blank"
+                    >
+                      <Image src={tiktok} alt="instagram" className="w-10" />
+                    </Link>
+                  </li>
                 <li>
                   <Link href="https://uk.trustpilot.com/review/joinxentro.com" target="_blank">
                     <Image src={star} alt="star" className="w-10" />

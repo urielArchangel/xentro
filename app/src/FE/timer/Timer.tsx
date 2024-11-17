@@ -10,6 +10,7 @@ import useMessage from "antd/es/message/useMessage";
 import youtube from "@/app/images/socials/yt.png";
 import medium from "@/app/images/socials/Medium.png";
 import x from "@/app/images/socials/XTask.png";
+import tiktok from "@/app/images/socials/tiktokWhite.svg";
 import telegram from "@/app/images/socials/Telegram.png";
 import instagram from "@/app/images/socials/Instagram.png";
 import star from "@/app/images/socials/Star.png";
@@ -24,7 +25,7 @@ type TimeLeft =
     }
   | "Complete";
 
-const targetDate = new Date("2024-11-31T00:00:00").getTime();
+const targetDate = new Date("2024-11-30T00:00:00").getTime();
 
 export default function Timer() {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>(() => calculateTimeLeft());
@@ -160,6 +161,14 @@ export default function Timer() {
                   <li>
                   <Link href="https://www.instagram.com/joinxentro/" target="_blank">
                     <Image src={instagram} alt="instagram" className="w-10" />
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="https://www.tiktok.com/@joinxentro"
+                      target="_blank"
+                    >
+                      <Image src={tiktok} alt="instagram" className="w-10" />
                     </Link>
                   </li>
                   <li>

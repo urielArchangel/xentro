@@ -8,6 +8,7 @@ import medium from "@/app/images/socials/Medium.png";
 import x from "@/app/images/socials/XTask.png";
 import telegram from "@/app/images/socials/Telegram.png";
 import instagram from "@/app/images/socials/Instagram.png";
+import tiktok from "@/app/images/socials/tiktokWhite.svg";
 import Link from "next/link";
 import { useAccount } from "wagmi";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
@@ -38,6 +39,7 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
       medium,
       instagram,
       discord,
+      tiktok
     };
     return icons[platformName] || x;
   };
@@ -126,9 +128,11 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
     const priceInWei = BigInt(
       await contract.methods.getCommissionFee().call()
     ).toString();
+    const maxGasPrice = web3.utils.toWei("30","Gwei")
+    const maxPriorityFee = web3.utils.toWei('2', 'gwei');
     await contract.methods
       .mintCommunityBadge()
-      .send({ value: priceInWei, from: address })
+      .send({ value: priceInWei, from: address, maxFeePerGas:maxGasPrice,maxPriorityFeePerGas:maxPriorityFee})
       .on("sent", () => {
         message.destroy();
         message.loading("confirming task...", 1000000);
@@ -178,13 +182,14 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
       message.error("Mint community badge first", 3);
       return;
     }
-
+    const maxGasPrice = web3.utils.toWei("30","Gwei")
+    const maxPriorityFee = web3.utils.toWei('2', 'gwei');
     const priceInWei = BigInt(
       await contract.methods.getCommissionFee().call()
     ).toString();
     await contract.methods
       .mintWarriorBadge()
-      .send({ value: priceInWei, from: address })
+      .send({ value: priceInWei, from: address, maxFeePerGas:maxGasPrice,maxPriorityFeePerGas:maxPriorityFee })
       .on("sent", () => {
         message.destroy();
         message.loading("confirming task...", 1000000);
