@@ -80,15 +80,15 @@ const Footer = () => {
                       <Image src={instagram} alt="instagram" className="w-10" />
                     </Link>
                   </li>
-                  <li>
+                  <li >
                     <Link
                       href="https://www.tiktok.com/@joinxentro"
                       target="_blank"
                     >
-                      <Image src={tiktok} alt="instagram" className="w-10" />
+                      <Image src={tiktok} alt="instagram" className="w-10  " />
                     </Link>
                   </li>
-                  <li>
+                  <li className="">
                     <Link href="https://uk.trustpilot.com/review/joinxentro.com" target="_blank">
                       <Image src={star} alt="star" className="w-10" />
                     </Link>
@@ -219,15 +219,15 @@ const Footer = () => {
                     <Image src={instagram} alt="instagram" className="w-10" />
                   </Link>
                 </li>
-                <li>
+                <li >
                     <Link
                       href="https://www.tiktok.com/@joinxentro"
                       target="_blank"
                     >
-                      <Image src={tiktok} alt="instagram" className="w-10" />
+                      <Image src={tiktok} alt="tiktok" className="w-8 " />
                     </Link>
                   </li>
-                <li>
+                <li >
                   <Link href="https://uk.trustpilot.com/review/joinxentro.com" target="_blank">
                     <Image src={star} alt="star" className="w-10" />
                   </Link>

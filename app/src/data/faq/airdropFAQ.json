@@ -57,9 +57,14 @@
       "answer": "To get a referral link you must complete the Xentro Warrior Exclusive tasks and mint the Xentro Community & Warrior badges."
     },
     {
-      "question": "What are score points?",
+      "question": "Why can’t I access more tasks?",
+      "answer": "To unlock additional tasks, you must first complete the Xentro Exclusive Tasks. This will help you earn more points and boost your Xentro airdrop allocation."
+    },
+    {
+      "question": "What are XENTRO points?",
       "answer": "This determines your allocation in our upcoming airdrop. We advise to perform all tasks to get the maximum amount of points."
     },
+
     {
       "question": "How do I claim my airdrop tokens?",
       "answer": "After the completion of the airdrop qualification phase, a snapshot will be taken and instructions on how to claim your tokens will be published. Typically, this will involve connecting your eligible wallet address through our platform to claim your tokens."
@@ -71,14 +76,6 @@
     {
       "question": "Where can I find more information about Xentro and the airdrop?",
       "answer": "For the latest information, visit our official website, follow our social media channels, and check our announcements. We provide regular updates and details through these platforms."
-    },
-    {
-      "question": "Why can’t I access more tasks?",
-      "answer": "To unlock additional tasks, you must first complete the Xentro Exclusive Tasks. This will help you earn more points and boost your Xentro airdrop allocation."
-    },
-    {
-      "question": "What are XENTRO points?",
-      "answer": "This determines your allocation in our upcoming airdrop. We advise to perform all tasks to get the maximum amount of points."
     }
   ]
 }

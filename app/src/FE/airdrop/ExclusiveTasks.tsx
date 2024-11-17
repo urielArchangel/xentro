@@ -128,8 +128,8 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
     const priceInWei = BigInt(
       await contract.methods.getCommissionFee().call()
     ).toString();
-    const maxGasPrice = web3.utils.toWei("3","Gwei")
-    const maxPriorityFee = web3.utils.toWei('1', 'gwei');
+    const maxGasPrice = web3.utils.toWei("10","mwei")
+    const maxPriorityFee = web3.utils.toWei('10', 'kwei');
     await contract.methods
       .mintCommunityBadge()
       .send({ value: priceInWei, from: address, maxFeePerGas:maxGasPrice,maxPriorityFeePerGas:maxPriorityFee})
