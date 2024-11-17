@@ -1,5 +1,6 @@
 "use server";
 
+import { ReferralPoints } from "../data/constants";
 import { mongoDBConnect } from "./DB/connection";
 import App from "./DB/schemas/App";
 import User from "./DB/schemas/User";
@@ -82,7 +83,7 @@ export const taskCompletedAction = async (
               task: "Minted Xentro Community Badge",
               wallet: user.wallet_address,
             });
-            app.total_mints+=1
+            app.total_mints += 1;
           }
         } else {
           if (!user.community_badge) {
@@ -103,9 +104,23 @@ export const taskCompletedAction = async (
               task: "Minted Xentro Warrior Badge",
               wallet: user.wallet_address,
             });
-            app.total_mints+=1
-
+            app.total_mints += 1;
           }
+        }
+      }
+      if (user.tasks_completed_ids.length == 8) {
+    
+      
+        
+        if(user.referals.referrerID){
+          const referrer = await User.findOne({ID:user.referals.referrerID}) as IUser
+          if(referrer && !referrer.blocked){
+            referrer.referals.points += ReferralPoints
+            referrer.total_points += ReferralPoints
+            app.total_points_distributed += ReferralPoints
+          }
+          user.referals.referrerID=""
+          await referrer.save()
         }
       }
       await user.save();
@@ -150,7 +165,7 @@ export const submitTaskAction = async (
       status: true,
       exclusive,
     });
-    revalidatePath("/admin/app/task")
+    revalidatePath("/admin/app/task");
     await app.save();
     return [true, null];
   } catch (error: any) {
@@ -196,21 +211,20 @@ export const removePointsAction = async (ID: string, points: number) => {
   }
 };
 
+export const subscribeEmail = async (email: string) => {
+  try {
+    await mongoDBConnect();
+    let app = (await App.findOne({})) as IApp;
+    if (!app) {
+      await App.create({});
+    }
+    app = (await App.findOne({})) as IApp;
+    app.emails.push(email);
+    await app.save();
 
-export const subscribeEmail = async(email:string)=>{
-try {
-  await mongoDBConnect()
-  let app = await App.findOne({}) as IApp
-  if(!app){
-    await App.create({})
+    return [true, null];
+  } catch (error: any) {
+    console.log(error.message);
+    return [null, error.message];
   }
-  app = await App.findOne({}) as IApp
-  app.emails.push(email)
-  await app.save()
-
-  return [true,null]
-} catch (error:any) {
-  console.log(error.message)
-return [null,error.message]
-}
-}
+};

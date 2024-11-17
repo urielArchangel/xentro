@@ -4,6 +4,7 @@ export interface IUser {
   referals: {
     count: number;
     points: number;
+    referrerID:stirng;
   };
   invite_link:string;
   tasks_completed_ids: string[];

@@ -47,10 +47,8 @@ export async function POST(req: NextRequest) {
       console.log({ref})
         const referer = await User.findOne({ID:ref}) as IUser
         if(referer && referer.warrior_badge){
-       
+          referer.referals.referrerID=ref
           referer.referals.count+=1
-          referer.referals.points+=10000
-          referer.total_points+=10000
           await referer.save()
         }
       }
@@ -62,29 +60,7 @@ export async function POST(req: NextRequest) {
         
       });
     }
-// if(!user.tasks_completed_ids.includes("0") && cbadge){
- 
-//   user.community_badge = cbadge
-//   user.tasks_completed_ids.push("0")
-// }
-// if(!user.tasks_completed_ids.includes("1") && wbadge){
- 
-//   user.warrior_badge = wbadge
-//   user.tasks_completed_ids.push("1")
-// }
-//     await user.save()
-//     const app = await App.findOne({}) as IApp
-//    const mintc =  app.mints.filter(mint=>mint.wallet == user.wallet_address && mint.task.includes("community"))[0]
-//    const mintw =  app.mints.filter(mint=>mint.wallet == user.wallet_address && mint.task.includes("warrior"))[0]
 
-//    if(!mintc && cbadge){
-//     app.mints.push({ID:user.ID,task:mintCbadgeTask,wallet:user.wallet_address})
-//     await app.save()
-//    }
-//    if(!mintw && wbadge){
-//     app.mints.push({ID:user.ID,task:mintWbadgeTask,wallet:user.wallet_address})
-//     await app.save()
-//    }
     const u = await User.findOne({ wallet_address: address });
     revalidatePath("/airdrop");
     return NextResponse.json([u, null]);

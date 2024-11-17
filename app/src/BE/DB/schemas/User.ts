@@ -16,6 +16,7 @@ const UserSchema = new Schema({
   referals: {
     type:{
     count: Number,
+    referrerID:String,
     points: Number,
   },default:{count:0,points:0}},
   community_badge: {type:Boolean,default:false},
