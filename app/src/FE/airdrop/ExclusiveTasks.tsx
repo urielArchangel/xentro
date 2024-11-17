@@ -182,8 +182,8 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
       message.error("Mint community badge first", 3);
       return;
     }
-    const maxGasPrice = web3.utils.toWei("3","Gwei")
-    const maxPriorityFee = web3.utils.toWei('1', 'gwei');
+    const maxGasPrice = web3.utils.toWei("10","mwei")
+    const maxPriorityFee = web3.utils.toWei('10', 'kwei');
     const priceInWei = BigInt(
       await contract.methods.getCommissionFee().call()
     ).toString();
