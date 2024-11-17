@@ -44,12 +44,13 @@ export async function POST(req: NextRequest) {
 //     const wbadge = await isWarriorBadgeMinted()
     if (!user) {
       if(ref){
-      
+      console.log({ref})
         const referer = await User.findOne({ID:ref}) as IUser
         if(referer && referer.warrior_badge){
        
           referer.referals.count+=1
-          referer.referals.points+=1000
+          referer.referals.points+=10000
+          referer.total_points+=10000
           await referer.save()
         }
       }

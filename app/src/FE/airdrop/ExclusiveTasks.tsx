@@ -15,9 +15,7 @@ import { useConnectModal } from "@rainbow-me/rainbowkit";
 import Web3 from "web3";
 import xentrologo from "@/app/images/airdrop/xentroLogoWhite.png";
 import NFTMetatdata from "@/app/src/BE/web3/artifacts/Metadata.json";
-import {
-  NFTContractAddress,
-} from "../../data/constants";
+import { NFTContractAddress } from "../../data/constants";
 import {
   taskCompletedAction,
   updateCommunityBadgeMintDBAction,
@@ -39,7 +37,7 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
       medium,
       instagram,
       discord,
-      tiktok
+      tiktok,
     };
     return icons[platformName] || x;
   };
@@ -73,23 +71,27 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
           String(address),
           ref ? ref : undefined
         );
-  
+
         if (error) message.error(error);
         else setUser(fetchedUser);
       }
     };
-  
+
     initData();
   }, [address, appString, message, ref]); // Separate out user-dependent logic
-  
+
   useEffect(() => {
     if (app) {
-      setTasks([...app.tasks.filter(e=>e.exclusive)]);
-  
+      setTasks([...app.tasks.filter((e) => e.exclusive)]);
+
       if (user) {
         let counter = 0;
         app.tasks.forEach((e) => {
-          if (e.exclusive && e.status && user.tasks_completed_ids.includes(e.id)) {
+          if (
+            e.exclusive &&
+            e.status &&
+            user.tasks_completed_ids.includes(e.id)
+          ) {
             counter++;
           }
         });
@@ -98,7 +100,7 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
     }
     setLoading(false);
   }, [app, user, completedTasksCount]); // user is safe to add here
-  
+
   const handleClickStateUpdate = async (id: string) => {
     message.loading("Please wait...", 10000000);
 
@@ -124,15 +126,20 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
       NFTMetatdata.output.abi,
       NFTContractAddress
     );
-    let mintTaskDone=false
+    let mintTaskDone = false;
     const priceInWei = BigInt(
       await contract.methods.getCommissionFee().call()
     ).toString();
-    const maxGasPrice = web3.utils.toWei("10","mwei")
-    const maxPriorityFee = web3.utils.toWei('10', 'kwei');
+    const maxGasPrice = web3.utils.toWei("10", "mwei");
+    const maxPriorityFee = web3.utils.toWei("10", "kwei");
     await contract.methods
       .mintCommunityBadge()
-      .send({ value: priceInWei, from: address, maxFeePerGas:maxGasPrice,maxPriorityFeePerGas:maxPriorityFee})
+      .send({
+        value: priceInWei,
+        from: address,
+        maxFeePerGas: maxGasPrice,
+        maxPriorityFeePerGas: maxPriorityFee,
+      })
       .on("sent", () => {
         message.destroy();
         message.loading("confirming task...", 1000000);
@@ -148,7 +155,7 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
         await updateCommunityBadgeMintDBAction(String(address));
         message.destroy();
         message.success("community badge minted", 3);
-        if(mintTaskDone)return
+        if (mintTaskDone) return;
         const [res, error] = await taskCompletedAction("6", String(address));
         if (error) {
           message.destroy();
@@ -156,8 +163,8 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
           return;
         }
         message.destroy();
-       await message.success(res);
-       mintTaskDone=true
+        await message.success(res);
+        mintTaskDone = true;
         router.refresh();
       });
   };
@@ -182,14 +189,19 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
       message.error("Mint community badge first", 3);
       return;
     }
-    const maxGasPrice = web3.utils.toWei("10","mwei")
-    const maxPriorityFee = web3.utils.toWei('10', 'kwei');
+    const maxGasPrice = web3.utils.toWei("10", "mwei");
+    const maxPriorityFee = web3.utils.toWei("10", "kwei");
     const priceInWei = BigInt(
       await contract.methods.getCommissionFee().call()
     ).toString();
     await contract.methods
       .mintWarriorBadge()
-      .send({ value: priceInWei, from: address, maxFeePerGas:maxGasPrice,maxPriorityFeePerGas:maxPriorityFee })
+      .send({
+        value: priceInWei,
+        from: address,
+        maxFeePerGas: maxGasPrice,
+        maxPriorityFeePerGas: maxPriorityFee,
+      })
       .on("sent", () => {
         message.destroy();
         message.loading("confirming task...", 1000000);
@@ -213,15 +225,14 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
         }
         message.success(res);
         router.refresh();
-      }) .on("error", (error) => {
+      })
+      .on("error", (error) => {
         // Transaction failed
         message.destroy();
         message.error("Transaction failed. Please try again.", 3);
         console.error("Minting error:", error);
       });
   };
-
- 
 
   const handleConnectWallet = () => {
     if (openConnectModal) {
@@ -242,7 +253,7 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
     <>
       {messageContext}
       {loading ? <Loading /> : null}
-      <section  className="px-[8%] pt-[10%] max-w-[1600px] mx-auto ">
+      <section className="px-[8%] pt-[10%] max-w-[1600px] mx-auto ">
         <h3 className="text-white gilroy-bold text-3xl md:text-4xl lg:text-5xl min-[1500px]:text-6xl mb-8 text-start">
           <span className="inline-block relative">
             <span
@@ -275,94 +286,91 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
               <span className="font-bold">{tasks.length}</span>
             </h4>
             <div className="flex flex-col space-y-8 lg:space-y-0 lg:space-x-8 lg:items-start lg:flex-row  lg:justify-around  lg:h-[700px] ">
-                <ul className="flex flex-col justify-between text-white gilroy-regular h-full w-full  b">
-                  {tasks.map((task, index) => {
-                    if (!task.status) return <></>;
-                    if(!task.exclusive) return <></>
-                    return (
-                      <div
+              <ul className="flex flex-col justify-between text-white gilroy-regular h-full w-full  b">
+                {tasks.map((task, index) => {
+                  if (!task.status) return <></>;
+                  if (!task.exclusive) return <></>;
+                  return (
+                    <div
                       data-aos="fade-right"
                       data-aos-delay={`${index * 10}`}
-                        key={index}
-                        className={
-                          homepagestyles.bg_gradient_border +
-                          " border-0 p-[0.07em] rounded-lg hd-shadow"
-                        }
+                      key={index}
+                      className={
+                        homepagestyles.bg_gradient_border +
+                        " border-0 p-[0.07em] rounded-lg hd-shadow"
+                      }
+                    >
+                      <li
+                        key={task.id || index}
+                        className="flex items-center justify-between bg-[#0B1219] rounded-lg p-3"
                       >
-                        <li
-                          key={task.id || index}
-                          className="flex items-center justify-between bg-[#0B1219] rounded-lg p-3"
-                        >
-                          <span className="text-lg max-[599px]:text-md min-[600px]:text-lg flex items-center gap-3">
-                            <Image
-                              src={
-                                task.platform
-                                  ? taskPlatformIconMapping(task.platform)
-                                  : xentrologo
-                              }
-                              alt="task"
-                              width={30}
-                              height={30}
-                              className={
-                                task.platform ? "w-6 ml-2 h-6" : "w-6 ml-2 h-6"
-                              }
-                            />
-                            {task.task}
-                              
-                          </span>
-                          {task.mint ? (
-                            <button
-                              className={`px-4 py-2 text-white rounded-full font-bold ${
-                                task.mintBadge == "community" &&
-                                user?.community_badge
-                                  ? "bg-gray-500 cursor-not-allowed"
-                                  : task.mintBadge == "warrior" &&
-                                    user?.warrior_badge
-                                  ? "bg-gray-500 cursor-not-allowed"
-                                  : "bg-[#004995] glow"
-                              }`}
-                              onClick={() =>
-                                handleMintTaskClick(task.mintBadge!)
-                              }
-                              disabled={
-                                task.mintBadge == "community" &&
-                                user?.community_badge
-                                  ? true
-                                  : task.mintBadge == "warrior" &&
-                                    user?.warrior_badge
-                                  ? true
-                                  : false
-                              }
-                            >
-                              {task.mintBadge == "community" &&
+                        <span className="text-lg max-[599px]:text-md min-[600px]:text-lg flex items-center gap-3">
+                          <Image
+                            src={
+                              task.platform
+                                ? taskPlatformIconMapping(task.platform)
+                                : xentrologo
+                            }
+                            alt="task"
+                            width={30}
+                            height={30}
+                            className={
+                              task.platform ? "w-6 ml-2 h-6" : "w-6 ml-2 h-6"
+                            }
+                          />
+                          {task.task}
+                        </span>
+                        {task.mint ? (
+                          <button
+                            className={`px-4 py-2 text-white rounded-full font-bold ${
+                              task.mintBadge == "community" &&
                               user?.community_badge
-                                ? "Done"
+                                ? "bg-gray-500 cursor-not-allowed"
                                 : task.mintBadge == "warrior" &&
                                   user?.warrior_badge
-                                ? "Done"
-                                : "Start"}
-                            </button>
-                          ) : (
-                            <Link
-                              target="_blank"
-                              onClick={() => {
-                                handleClickStateUpdate(task.id);
-                              }}
-                              className={`px-4 py-2 text-white rounded-full font-bold ${
-                                isTaskCompleted(task.id)
-                                  ? "bg-gray-500 cursor-not-allowed"
-                                  : "bg-[#004995] glow"
-                              }`}
-                              href={task.link}
-                            >
-                              {isTaskCompleted(task.id) ? "Done" : "Start"}
-                            </Link>
-                          )}
-                        </li>
-                      </div>
-                    );
-                  })}
-                </ul>
+                                ? "bg-gray-500 cursor-not-allowed"
+                                : "bg-[#004995] glow"
+                            }`}
+                            onClick={() => handleMintTaskClick(task.mintBadge!)}
+                            disabled={
+                              task.mintBadge == "community" &&
+                              user?.community_badge
+                                ? true
+                                : task.mintBadge == "warrior" &&
+                                  user?.warrior_badge
+                                ? true
+                                : false
+                            }
+                          >
+                            {task.mintBadge == "community" &&
+                            user?.community_badge
+                              ? "Done"
+                              : task.mintBadge == "warrior" &&
+                                user?.warrior_badge
+                              ? "Done"
+                              : "Start"}
+                          </button>
+                        ) : (
+                          <Link
+                            target="_blank"
+                            onClick={() => {
+                              handleClickStateUpdate(task.id);
+                            }}
+                            className={`px-4 py-2 text-white rounded-full font-bold ${
+                              isTaskCompleted(task.id)
+                                ? "bg-gray-500 cursor-not-allowed"
+                                : "bg-[#004995] glow"
+                            }`}
+                            href={task.link}
+                          >
+                            {isTaskCompleted(task.id) ? "Done" : "Start"}
+                          </Link>
+                        )}
+                      </li>
+                    </div>
+                  );
+                })}
+              </ul>
               {viewAllTask() && isConnected && (
                 <div
                   className={`${homepagestyles.bg_gradient_border} p-[0.07em]  lg:hidden rounded-full hd-shadow w-[50%] mx-auto mb-20`}
@@ -444,6 +452,7 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
 
 const WalletInfo = ({ user }: { user: IUser | null }) => {
   const [copySuccess, setCopySuccess] = useState<string>("");
+  const [refCount, setRefCount] = useState(0);
   const inviteLink =
     user && user.invite_link
       ? user.invite_link
@@ -462,9 +471,17 @@ const WalletInfo = ({ user }: { user: IUser | null }) => {
   };
 
   const { address } = useAccount();
+  useEffect(() => {
+    if (user) {
+      setRefCount(user.referals.count);
+    }
+  }, [refCount, user]);
 
   return (
-    <div data-aos="fade-down" className="rounded-xl text-white mx-auto gilroy-regular border-[#027EFF] border h-fit lg:h-full  py-8">
+    <div
+      data-aos="fade-down"
+      className="rounded-xl text-white mx-auto gilroy-regular border-[#027EFF] border h-fit lg:h-full  py-8"
+    >
       {/* Connected Wallet */}
       <div className="border-b border-[#027EFF]">
         <div className="px-6 py-6">
@@ -493,7 +510,7 @@ const WalletInfo = ({ user }: { user: IUser | null }) => {
             <span className="text-[18px] md:text-[20px]">
               {" "}
               <span className="font-semibold ">Number of Referrals:</span>{" "}
-              {user ? user.referals.count : 0}
+              {refCount}
             </span>
           </div>
         </div>

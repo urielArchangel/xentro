@@ -82,7 +82,7 @@ export const taskCompletedAction = async (
               task: "Minted Xentro Community Badge",
               wallet: user.wallet_address,
             });
-
+            app.total_mints+=1
           }
         } else {
           if (!user.community_badge) {
@@ -103,6 +103,7 @@ export const taskCompletedAction = async (
               task: "Minted Xentro Warrior Badge",
               wallet: user.wallet_address,
             });
+            app.total_mints+=1
 
           }
         }

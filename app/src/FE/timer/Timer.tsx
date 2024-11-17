@@ -10,7 +10,7 @@ import useMessage from "antd/es/message/useMessage";
 import youtube from "@/app/images/socials/yt.png";
 import medium from "@/app/images/socials/Medium.png";
 import x from "@/app/images/socials/XTask.png";
-import tiktok from "@/app/images/socials/tiktokWhite.svg";
+import tiktok from "@/app/images/socials/tiktokWhite.png";
 import telegram from "@/app/images/socials/Telegram.png";
 import instagram from "@/app/images/socials/Instagram.png";
 import star from "@/app/images/socials/Star.png";
@@ -168,7 +168,7 @@ export default function Timer() {
                       href="https://www.tiktok.com/@joinxentro"
                       target="_blank"
                     >
-                      <Image src={tiktok} alt="instagram" className="w-10" />
+                      <Image src={tiktok} alt="tikok" className="w-10" />
                     </Link>
                   </li>
                   <li>
