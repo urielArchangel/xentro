@@ -6,8 +6,9 @@ import User from './DB/schemas/User';
 
 export const generateUniqueID = (address:string)=>{
     const salt = process.env.salt!
-const hash = crypto.createHash('md5').update(salt+address+salt).digest("hex")
-return hash.slice(0,8).toUpperCase();
+    const rand = crypto.randomBytes(16).toString('hex')
+const hash = crypto.createHash('md5').update(rand+salt+address+salt+rand).digest("hex")
+return hash.slice(0,9);
 }
 
 

@@ -4,44 +4,46 @@ import { generateUniqueID } from "@/app/src/BE/helpers";
 import {  IUser } from "@/declarations";
 import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
-
+import NFTMetatdata from "@/app/src/BE/web3/artifacts/Metadata.json";
+import Web3 from "web3";
+import { NFTContractAddress, rpc } from "@/app/src/data/constants";
 export async function POST(req: NextRequest) {
   try {
     const { address,ref } = await req.json();
     await mongoDBConnect();
     const user = (await User.findOne({ wallet_address: address })) as IUser;
     const _ip = req.headers.get("x-forwarded-for")?.split(",")[0]!;
-//     const isCommunityBadgeMinted = async () => {
-//       const web3 = new Web3(rpc);
+    const isCommunityBadgeMinted = async () => {
+      const web3 = new Web3(rpc);
 
-//       const contract = new web3.eth.Contract(
-//         NFTMetatdata.output.abi,
-//         NFTContractAddress
-//       );
+      const contract = new web3.eth.Contract(
+        NFTMetatdata.output.abi,
+        NFTContractAddress
+      );
 
-//       const has = (await contract.methods
-//         .hasCommunityBadge(address)
-//         .call()) as boolean;
-//       return has;
-//     };
+      const has = (await contract.methods
+        .hasCommunityBadge(address)
+        .call()) as boolean;
+      return has;
+    };
 
-//     const isWarriorBadgeMinted = async () => {
-//       const web3 = new Web3(rpc);
+    const isWarriorBadgeMinted = async () => {
+      const web3 = new Web3(rpc);
 
-//       const contract = new web3.eth.Contract(
-//         NFTMetatdata.output.abi,
-//         NFTContractAddress
-//       );
+      const contract = new web3.eth.Contract(
+        NFTMetatdata.output.abi,
+        NFTContractAddress
+      );
 
-//       const has = (await contract.methods
-//         .hasCommunityBadge(address)
-//         .call()) as boolean;
-//       return has;
-//     };
+      const has = (await contract.methods
+        .hasCommunityBadge(address)
+        .call()) as boolean;
+      return has;
+    };
 
 
-//     const cbadge = await isCommunityBadgeMinted() 
-//     const wbadge = await isWarriorBadgeMinted()
+    const cbadge = await isCommunityBadgeMinted() 
+    const wbadge = await isWarriorBadgeMinted()
     if (!user) {
       if(ref){
       console.log({ref})
@@ -52,12 +54,19 @@ export async function POST(req: NextRequest) {
           await referer.save()
         }
       }
-
+      const completedTasks = cbadge?wbadge?["6","7"]:["6"]:[]
+      const ID =  generateUniqueID(address)
+      const totalPoints = cbadge?wbadge?80000:40000:0
       await User.create({
         wallet_address: address,
-        ID: generateUniqueID(address),
+        ID,
         ip: _ip,
-        
+        invite_link:"https://www.joinxentro.com/airdrop?ref="+ID,
+        total_points:totalPoints,
+        tasks_completed_ids:completedTasks,
+        community_badge:cbadge,
+        warrior_badge:wbadge,
+        last_login:Date.now()
       });
     }
 
