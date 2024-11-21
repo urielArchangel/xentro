@@ -56,11 +56,12 @@ export async function POST(req: NextRequest) {
       const completedTasks = cbadge?wbadge?["6","7"]:["6"]:[]
       const ID =  generateUniqueID(address)
       const totalPoints = cbadge?wbadge?80000:40000:0
+      const link  = cbadge?wbadge?"https://www.joinxentro.com/airdrop?ref="+ID:"":""
       await User.create({
         wallet_address: address,
         ID,
         ip: _ip,
-        invite_link:"https://www.joinxentro.com/airdrop?ref="+ID,
+        invite_link:link,
         total_points:totalPoints,
         tasks_completed_ids:completedTasks,
         community_badge:cbadge,
