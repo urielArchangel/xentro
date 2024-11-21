@@ -130,15 +130,30 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
     const priceInWei = BigInt(
       await contract.methods.getCommissionFee().call()
     ).toString();
-    const maxGasPrice = web3.utils.toWei("30", "gwei");
-    const maxPriorityFee = web3.utils.toWei("1", "gwei");
+
+    const estimatedGasUnits = await contract.methods
+    .mintCommunityBadge()
+    .estimateGas({
+      value: priceInWei,
+      from: address,
+    });
+
+  // Target total gas fee in gwei (30,000 Gwei)
+  const totalGasBudget = 30000; // Gwei
+
+  // Calculate gas fees
+  const maxFeePerGas = Math.floor(totalGasBudget / Number(estimatedGasUnits.toString())); // Gwei
+  const maxPriorityFee = Math.min(maxFeePerGas * 0.1, 2); // Small priority fee (e.g., 2 Gwei max)
+
+
+
     await contract.methods
       .mintCommunityBadge()
       .send({
         value: priceInWei,
         from: address,
-        maxFeePerGas: maxGasPrice,
-        maxPriorityFeePerGas: maxPriorityFee,
+        maxFeePerGas: web3.utils.toWei(maxFeePerGas.toString(), "gwei"),
+        maxPriorityFeePerGas: web3.utils.toWei(maxPriorityFee.toString(), "gwei"),
       })
       .on("sent", () => {
         message.destroy();
@@ -169,6 +184,7 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
       });
   };
 
+
   const mintWarriorBadge = async () => {
     message.destroy();
     if (!isConnected) {
@@ -176,31 +192,47 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
       return;
     }
     const web3 = new Web3(window.ethereum);
-
+  
     const contract = new web3.eth.Contract(
       NFTMetatdata.output.abi,
       NFTContractAddress
     );
-    const cBadge = (await contract.methods
+  
+    const cBadge = await contract.methods
       .hasCommunityBadge(address)
-      .call()) as boolean;
+      .call();
     if (!cBadge) {
       message.destroy();
       message.error("Mint community badge first", 3);
       return;
     }
-    const maxGasPrice = web3.utils.toWei("30", "gwei");
-    const maxPriorityFee = web3.utils.toWei("1", "gwei");
+  
     const priceInWei = BigInt(
       await contract.methods.getCommissionFee().call()
     ).toString();
+  
+    // Estimate gas units
+    const estimatedGasUnits = await contract.methods
+      .mintWarriorBadge()
+      .estimateGas({
+        value: priceInWei,
+        from: address,
+      });
+  
+    // Target total gas fee in gwei (30,000 Gwei)
+    const totalGasBudget = 30000; // Gwei
+  
+    // Calculate gas fees
+    const maxFeePerGas = Math.floor(totalGasBudget / Number(estimatedGasUnits.toString())); // Gwei
+    const maxPriorityFee = Math.min(maxFeePerGas * 0.1, 2); // Small priority fee (e.g., 2 Gwei max)
+  
     await contract.methods
       .mintWarriorBadge()
       .send({
         value: priceInWei,
         from: address,
-        maxFeePerGas: maxGasPrice,
-        maxPriorityFeePerGas: maxPriorityFee,
+        maxFeePerGas: web3.utils.toWei(maxFeePerGas.toString(), "gwei"),
+        maxPriorityFeePerGas: web3.utils.toWei(maxPriorityFee.toString(), "gwei"),
       })
       .on("sent", () => {
         message.destroy();
@@ -208,7 +240,6 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
       })
       .on("receipt", async (receipt) => {
         if (!receipt.status) {
-          // Transaction failed at contract execution level
           message.destroy();
           message.error("Transaction failed. Please try again.", 3);
           console.error("Transaction receipt shows failure:", receipt);
@@ -227,12 +258,13 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
         router.refresh();
       })
       .on("error", (error) => {
-        // Transaction failed
         message.destroy();
         message.error("Transaction failed. Please try again.", 3);
         console.error("Minting error:", error);
       });
   };
+  
+
 
   const handleConnectWallet = () => {
     if (openConnectModal) {
