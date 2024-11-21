@@ -18,7 +18,7 @@ const UserSchema = new Schema({
     count: Number,
     referrerID:String,
     points: Number,
-  },default:{count:0,points:0}},
+  },default:{count:0,points:0,referrerID:""}},
   community_badge: {type:Boolean,default:false},
   warrior_badge: {type:Boolean,default:false}, 
   ip: String,

@@ -46,7 +46,6 @@ export async function POST(req: NextRequest) {
     const wbadge = await isWarriorBadgeMinted()
     if (!user) {
       if(ref){
-      console.log({ref})
         const referer = await User.findOne({ID:ref}) as IUser
         if(referer && referer.warrior_badge){
           referer.referals.referrerID=ref
@@ -75,6 +74,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json([u, null]);
   } catch (error: any) {
     console.log(error.message);
-    return NextResponse.json([null, error.message]);
+    return NextResponse.json([null, null]);
   }
 }
