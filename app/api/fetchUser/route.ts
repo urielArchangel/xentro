@@ -45,14 +45,7 @@ export async function POST(req: NextRequest) {
     const cbadge = await isCommunityBadgeMinted() 
     const wbadge = await isWarriorBadgeMinted()
     if (!user) {
-      if(ref){
-        const referer = await User.findOne({ID:ref}) as IUser
-        if(referer && referer.warrior_badge){
-          referer.referals.referrerID=ref
-          referer.referals.count+=1
-          await referer.save()
-        }
-      }
+ 
       const completedTasks = cbadge?wbadge?["6","7"]:["6"]:[]
       const ID =  generateUniqueID(address)
       const totalPoints = cbadge?wbadge?80000:40000:0
@@ -68,6 +61,16 @@ export async function POST(req: NextRequest) {
         warrior_badge:wbadge,
         last_login:Date.now()
       });
+     const updatedUser=await User.findOne({ID})
+      if(ref){
+        const referer = await User.findOne({ID:ref}) as IUser
+        if(referer && referer.warrior_badge){
+          updatedUser.referals.referrerID=ref
+          referer.referals.count+=1
+          await referer.save()
+          await updatedUser.save()
+        }
+      }
     }
 
     const u = await User.findOne({ wallet_address: address });

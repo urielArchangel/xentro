@@ -112,7 +112,7 @@ export const taskCompletedAction = async (
     
       
         
-        if(user.referals.referrerID){
+        if(user.referals.referrerID ){
           const referrer = await User.findOne({ID:user.referals.referrerID}) as IUser
           if(referrer && !referrer.blocked){
             referrer.referals.points += ReferralPoints
