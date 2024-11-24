@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React, { useEffect, useState } from "react";
 import homepagestyles from "@/app/css/homepage.module.css";
 import underline from "@/app/images/underline.png";
@@ -9,57 +9,70 @@ import { useAccount } from "wagmi";
 import { IUser } from "@/declarations";
 import Loading from "@/app/(.)/loading";
 import { Lock, Unlock } from "lucide-react";
+import { useSearchParams } from "next/navigation";
 
-const MintBadge = ({communityMints,warriorMints}:{communityMints:string,warriorMints:string}) => {
-  const padMintsValue = (m:string)=>{
-   return m.padStart(6,"0")
-  }
-  const [loading,setLoading] = useState(true)
-  const [hasUserMintedCommunityBadge,setHasUserMintedCommunityBadge] = useState(false)
-  const [hasUserMintedWarriorBadge,setHasUserMintedWarriorBadge] = useState(false)
-  const [user,setUser]= useState<IUser>()
+const MintBadge = ({
+  communityMints,
+  warriorMints,
+}: {
+  communityMints: string;
+  warriorMints: string;
+}) => {
+  const padMintsValue = (m: string) => {
+    return m.padStart(6, "0");
+  };
+  const [loading, setLoading] = useState(true);
+  const [hasUserMintedCommunityBadge, setHasUserMintedCommunityBadge] =
+    useState(false);
+  const [hasUserMintedWarriorBadge, setHasUserMintedWarriorBadge] =
+    useState(false);
+  const [user, setUser] = useState<IUser>();
 
-  const {address} = useAccount()
-  useEffect(()=>{
-    const run =async()=>{
-    const [user,error] = await fetchUserClient(String(address)) as [IUser,any]
-    setUser(user)
-    if(error){
-      throw new Error(error)
-    }
-    if(user.community_badge){
-      setHasUserMintedCommunityBadge(true)
-    }
-    if(user.warrior_badge){
-      setHasUserMintedWarriorBadge(true)
-    }
+  const { address } = useAccount();
+  const ref = useSearchParams().get("ref");
 
+  useEffect(() => {
+    const run = async () => {
+      if (address) {
 
-    }
+        const [user, error] = (await fetchUserClient(
+          String(address),
+          ref ? ref : undefined
+        )) as [IUser, any];
+        setUser(user);
+        if (error) {
+          throw new Error(error);
+        }
+        if (user.community_badge) {
+          setHasUserMintedCommunityBadge(true);
+        }
+        if (user.warrior_badge) {
+          setHasUserMintedWarriorBadge(true);
+        }
+      }
+    };
+    run();
+    setLoading(false);
+  }, [address]);
 
-    run()
-    setLoading(false)
-  },[address])
-  useEffect(()=>{
-    const run =async()=>{
-  if(user){
-    if(user.community_badge){
-      setHasUserMintedCommunityBadge(true)
-    }
-    if(user.warrior_badge){
-      setHasUserMintedWarriorBadge(true)
-    }
+  useEffect(() => {
+    const run = async () => {
+      if (user) {
+        if (user.community_badge) {
+          setHasUserMintedCommunityBadge(true);
+        }
+        if (user.warrior_badge) {
+          setHasUserMintedWarriorBadge(true);
+        }
+      }
+    };
+    run();
+  }, [user]);
 
-
-    }
-
-      }    
-  },[user])
-  
   return (
     <>
-    {loading?<Loading />:null}
-      <section className="mt-20" >
+      {loading ? <Loading /> : null}
+      <section className="mt-20">
         <h3 className="text-white gilroy-bold text-3xl md:text-4xl lg:text-5xl mb-10 text-center">
           Mint Your{" "}
           <span className="inline-block relative">
@@ -78,13 +91,16 @@ const MintBadge = ({communityMints,warriorMints}:{communityMints:string,warriorM
           </span>{" "}
           Badge
         </h3>
-        <div  className="flex justify-center items-center flex-col min-[961px]:flex-row space-y-10 min-[961px]:space-y-0 min-[961px]:space-x-10">
-          <XentroBadge mints={padMintsValue(communityMints)} unlocked={hasUserMintedCommunityBadge}
+        <div className="flex justify-center items-center flex-col min-[961px]:flex-row space-y-10 min-[961px]:space-y-0 min-[961px]:space-x-10">
+          <XentroBadge
+            mints={padMintsValue(communityMints)}
+            unlocked={hasUserMintedCommunityBadge}
             title="Xentro Community Badge"
             description="Complete all Xentro Exclusive Social Tasks."
           />
-          <XentroBadge mints={padMintsValue(warriorMints)}
-          unlocked={hasUserMintedWarriorBadge}
+          <XentroBadge
+            mints={padMintsValue(warriorMints)}
+            unlocked={hasUserMintedWarriorBadge}
             title="Xentro Warrior Badge"
             description="Join the ranks of the Xentro Warriors and be eligible for the airdrop."
           />
@@ -97,13 +113,23 @@ const MintBadge = ({communityMints,warriorMints}:{communityMints:string,warriorM
 interface MintBadgeProps {
   title: string;
   description: string;
-  mints:string,
-  unlocked:boolean
+  mints: string;
+  unlocked: boolean;
 }
 
-const XentroBadge: React.FC<MintBadgeProps> = ({ title, description,mints,unlocked }) => {
+const XentroBadge: React.FC<MintBadgeProps> = ({
+  title,
+  description,
+  mints,
+  unlocked,
+}) => {
   return (
-    <div data-aos={title.toLowerCase().includes("warrior")?"slide-left":"slide-right"} className="bg-[#0028511f] p-5 rounded-xl text-white border border-[#002953] min-[480px]:h-[530px] min-[480px]:relative w-[90%] min-[480px]:w-max">
+    <div
+      data-aos={
+        title.toLowerCase().includes("warrior") ? "slide-left" : "slide-right"
+      }
+      className="bg-[#0028511f] p-5 rounded-xl text-white border border-[#002953] min-[480px]:h-[530px] min-[480px]:relative w-[90%] min-[480px]:w-max"
+    >
       <div className="group relative">
         <div className={`blur-sm p-1`}>
           <Image
@@ -118,11 +144,18 @@ const XentroBadge: React.FC<MintBadgeProps> = ({ title, description,mints,unlock
         >
           <div className="flex flex-col justify-end items-center font-bold">
             <ul className="flex min-[480px]:space-x-5 space-x-1 gilroy-bold min-[480px]:text-3xl text-xl min-[480px]:mb-10 mb-4">
-            {mints.split("").map( (e,i)=>{
-              return ( <li key={i} data-aos="fade-down" data-aos-delay={`${ i * 100 }`} className="p-1 min-[480px]:w-10 min-[480px]:h-12 w-8 h-8 text-center rounded-md bg-[#254367]">
-                {e}
-              </li>)})}
-             
+              {mints.split("").map((e, i) => {
+                return (
+                  <li
+                    key={i}
+                    data-aos="fade-down"
+                    data-aos-delay={`${i * 100}`}
+                    className="p-1 min-[480px]:w-10 min-[480px]:h-12 w-8 h-8 text-center rounded-md bg-[#254367]"
+                  >
+                    {e}
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </div>
@@ -136,15 +169,17 @@ const XentroBadge: React.FC<MintBadgeProps> = ({ title, description,mints,unlock
         }
       >
         <button className="bg-[#08131E] w-full h-full rounded-full px-5 py-2 text-[#0477EF] text-xl">
-        { unlocked? <span className="flex justify-center items-center gap-2">
-         <Unlock />
-            <span className="font-semibold">Unlocked</span>
-          </span>
-:
-          <span className="flex justify-center items-center gap-2">
-         <Lock />
-            <span className="font-semibold">Locked</span>
-          </span>}
+          {unlocked ? (
+            <span className="flex justify-center items-center gap-2">
+              <Unlock />
+              <span className="font-semibold">Unlocked</span>
+            </span>
+          ) : (
+            <span className="flex justify-center items-center gap-2">
+              <Lock />
+              <span className="font-semibold">Locked</span>
+            </span>
+          )}
         </button>
       </div>
     </div>

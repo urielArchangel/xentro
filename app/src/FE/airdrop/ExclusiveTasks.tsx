@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useContext, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import underline from "@/app/images/underline.png";
 import homepagestyles from "@/app/css/homepage.module.css";
 import Image, { StaticImageData } from "next/image";
@@ -66,10 +66,14 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
     [user]
   );
   const ref = useSearchParams().get("ref");
+
   useEffect(() => {
+  
     const initData = async () => {
       setApp(JSON.parse(appString));
       if (address) {
+ 
+
         const [fetchedUser, error] = await fetchUserClient(
           String(address),
           ref ? ref : undefined
@@ -81,7 +85,7 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
     };
 
     initData();
-  }, [address, appString, message, ref]); // Separate out user-dependent logic
+  }, [address, appString, message]); // Separate out user-dependent logic
 
   useEffect(() => {
     if (app) {
