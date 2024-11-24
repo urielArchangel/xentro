@@ -9,7 +9,7 @@ import x from "@/app/images/socials/XTask.png";
 import telegram from "@/app/images/socials/Telegram.png";
 import instagram from "@/app/images/socials/Instagram.png";
 import tiktok from "@/app/images/socials/tiktokWhite.svg";
-import youtube from "@/app/images/socials/YouTubeTask.png";
+import youtube from "@/app/images/socials/yt.png";
 
 import Link from "next/link";
 import { useAccount } from "wagmi";
