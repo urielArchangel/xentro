@@ -1,6 +1,6 @@
 export const adminCookieName = "admin_auth"
 export const NFTContractAddress = "0x60e569f9e262133078c226044cAf51B862FeA2e6"
-// export const NFTContractAddress = "0x453c5bda3EDd5c7F39483B30C3B9A32C948130aa"
+// export const NFTContractAddress = "0x453c5bda3EDd5c7F39483B30C3B9A32C948130aa" //test
 export const ReferralPoints = 10000
 export const userDataCookieName = "user_0"
 export const joinXentroXID = "1350830915048628227"

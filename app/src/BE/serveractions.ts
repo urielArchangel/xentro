@@ -108,7 +108,17 @@ export const taskCompletedAction = async (
           }
         }
       }
-      if (user.tasks_completed_ids.length == 8) {
+      let completedAllExclusiveTasks = false
+      app.tasks.filter((e)=>{
+        if(e.exclusive && e.status){
+          if(!user.tasks_completed_ids.includes(e.id)){
+            completedAllExclusiveTasks = false
+            return
+          }
+          completedAllExclusiveTasks =true
+        }
+      })
+      if (completedAllExclusiveTasks) {
     
       
         
@@ -145,7 +155,8 @@ export const submitTaskAction = async (
   link: string,
   task: string,
   platform: string,
-  exclusive: boolean
+  exclusive: boolean,
+  id?:string
 ) => {
   try {
     await mongoDBConnect();
@@ -154,17 +165,34 @@ export const submitTaskAction = async (
       await App.create({});
       app = (await App.findOne({})) as IApp;
     }
+    if(id){
+      const filter = app.tasks.filter(e=>e.id == id) 
+      if(filter.length> 0){
+        filter[0].link = link
+        filter[0].points = points
+        filter[0].task = task
+        filter[0].platform = platform
+        filter[0].exclusive = exclusive
+        app.markModified('tasks');
+        await app.save();
+        revalidatePath("/admin/app/task");
+        await app.save();
+        return [true, null];
 
+      }
+
+    }
     app.tasks.push({
       task,
       platform,
       link,
       points,
       mint: false,
-      id: String(app.tasks.length),
+      id: String(app.taskCount),
       status: true,
       exclusive,
     });
+    app.taskCount+=1;
     revalidatePath("/admin/app/task");
     await app.save();
     return [true, null];
@@ -228,3 +256,23 @@ export const subscribeEmail = async (email: string) => {
     return [null, error.message];
   }
 };
+
+
+export const deleteTaskAction =async(id:string)=>{
+  try {
+    await mongoDBConnect();
+    let app = (await App.findOne({})) as IApp;
+ 
+    if(id){
+      const filter = app.tasks.filter(e=>e.id != id) 
+      app.tasks=filter
+    }
+   
+    revalidatePath("/admin/app/task-overview");
+    await app.save();
+    return [true, null];
+  } catch (error: any) {
+    console.log(error.message);
+    return [null, error.message];
+  }
+}

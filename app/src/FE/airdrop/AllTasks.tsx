@@ -8,8 +8,10 @@ import medium from "@/app/images/socials/Medium.png";
 import x from "@/app/images/socials/XTask.png";
 import telegram from "@/app/images/socials/Telegram.png";
 import instagram from "@/app/images/socials/Instagram.png";
-import youtube from "@/app/images/socials/yt.png";
 import Link from "next/link";
+import youtube from "@/app/images/socials/yt.png";
+import coinmarketcap from "@/app/images/socials/cmctask.png";
+import trustpilot from "@/app/images/socials/tptask.png";
 import { FaSearch } from "react-icons/fa";
 import { useAccount } from "wagmi";
 import { fetchUserClient, trauncateAddressMiddle } from "../helpers";
@@ -18,17 +20,12 @@ import { taskCompletedAction } from "../../BE/serveractions";
 import useMessage from "antd/es/message/useMessage";
 import Loading from "@/app/(.)/loading";
 
-
-const AllTasks = ({
- appString
-}: {
-  appString:string
-}) => {
+const AllTasks = ({ appString }: { appString: string }) => {
   const [completedTasksCount, setCompletedTasksCount] = useState(0);
   const [message, messageContext] = useMessage();
   const [app, setApp] = useState<IApp | null>(null);
   const [user, setUser] = useState<IUser | null>(null);
-const [loading,setLoading] =useState(true)
+  const [loading, setLoading] = useState(true);
   const handleClickStateUpdate = async (id: string) => {
     message.loading("Please wait...", 10000000);
 
@@ -49,11 +46,14 @@ const [loading,setLoading] =useState(true)
       medium,
       instagram,
       discord,
+      trustpilot,
+      youtube,
+      coinmarketcap,
     };
     return icons[platformName] || x;
   };
   const [tasks, setTasks] = useState<ITask[]>([]);
-
+  const [originalTasks, setOriginalTasks] = useState<ITask[]>([]);
 
   const isTaskCompleted = useCallback(
     (id: string) => user?.tasks_completed_ids.includes(id) ?? false,
@@ -61,7 +61,7 @@ const [loading,setLoading] =useState(true)
   );
   const handleSearchTasks = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchValue = e.target.value.toLowerCase();
-    const filteredTasks = tasks.filter((task) =>
+    const filteredTasks = originalTasks.filter((task) =>
       task.task.toLowerCase().includes(searchValue)
     );
     setTasks(filteredTasks);
@@ -69,33 +69,33 @@ const [loading,setLoading] =useState(true)
 
   const { address } = useAccount();
 
-
   useEffect(() => {
     const initData = async () => {
       setApp(JSON.parse(appString));
       if (address) {
-        const [fetchedUser, error] = await fetchUserClient(
-          String(address),
-        );
-  
+        const [fetchedUser, error] = await fetchUserClient(String(address));
+
         if (error) message.error(error);
         else setUser(fetchedUser);
       }
     };
-  
+
     initData();
   }, [address, appString, message]); // Separate out user-dependent logic
-  
-
 
   useEffect(() => {
     if (app) {
-      setTasks([...app.tasks.filter(e=>!e.exclusive)]);
-  
+      setTasks([...app.tasks.filter((e) => !e.exclusive)]);
+      setOriginalTasks([...app.tasks.filter((e) => !e.exclusive)]);
+
       if (user) {
         let counter = 0;
         app.tasks.forEach((e) => {
-          if (e.exclusive && e.status && user.tasks_completed_ids.includes(e.id)) {
+          if (
+            e.exclusive &&
+            e.status &&
+            user.tasks_completed_ids.includes(e.id)
+          ) {
             counter++;
           }
         });
@@ -104,16 +104,12 @@ const [loading,setLoading] =useState(true)
     }
     setLoading(false);
   }, [app, user, completedTasksCount]); // user is safe to add here
-  
-
-
-
 
   return (
     <>
-    {loading? <Loading />:null}
+      {loading ? <Loading /> : null}
       {messageContext}
-      <div >
+      <div>
         <div
           className={
             homepagestyles.bg_gradient_border +
@@ -138,7 +134,7 @@ const [loading,setLoading] =useState(true)
                   <span
                     className={`${homepagestyles.gradientText} text-white gilroy-bold text-lg sm:text-xl md:text-2xl lg:text-3xl tracking-wider`}
                   >
-                    {user?user.total_points:0}
+                    {user ? user.total_points : 0}
                   </span>
                 </p>
               </div>
@@ -242,9 +238,7 @@ const [loading,setLoading] =useState(true)
                   >
                     {isTaskCompleted(task.id) ? "Done" : "Start"}
                   </Link>
-                    
                 </li>
-             
               </div>
             ))}
           </ul>

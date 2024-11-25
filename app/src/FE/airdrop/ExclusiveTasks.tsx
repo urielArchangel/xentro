@@ -10,7 +10,8 @@ import telegram from "@/app/images/socials/Telegram.png";
 import instagram from "@/app/images/socials/Instagram.png";
 import tiktok from "@/app/images/socials/tiktokWhite.svg";
 import youtube from "@/app/images/socials/yt.png";
-
+import coinmarketcap from "@/app/images/socials/cmctask.png";
+import trustpilot from "@/app/images/socials/tptask.png";
 import Link from "next/link";
 import { useAccount } from "wagmi";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
@@ -40,7 +41,9 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
       instagram,
       discord,
       tiktok,
-      youtube
+      youtube,
+      coinmarketcap,
+      trustpilot
     };
     return icons[platformName] || x;
   };

@@ -5,6 +5,7 @@ const AppSchema = new Schema({
   total_points_distributed: { type: Number, default: 0 },
   total_mints: { type: Number, default: 0 },
   tasks_completed: { type: Number, default: 0 },
+  taskCount:{type:Number,default:8},
   tasks: {
     type: [
       {

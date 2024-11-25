@@ -134,33 +134,33 @@ export default function Timer() {
           
         </section>
         <h5 className="text-[18px] md:text-[20px] text-center mt-4">Our socials</h5>
-        <ul className="flex items-center space-x-5 my-4 w-full max-w-[400px] mx-auto justify-center gap-2 sm:justify-between flex-wrap" >
+        <ul className="flex items-center space-x-5 my-4 w-full max-w-[500px] mx-auto justify-center gap-2 sm:justify-between flex-wrap" >
                   <li>
                   <Link href="https://medium.com/@joinxentro" target="_blank">
 
-                    <Image src={medium} alt="medium" className="w-10" />
+                    <Image src={medium} alt="medium" className="w-6 sm:w-8 md:w-10" />
                     </Link>
                   </li>
                   <li>
                   <Link href="http://www.youtube.com/@Joinxentro" >
 
-                    <Image src={youtube} alt="youtube" className="w-10" />
+                    <Image src={youtube} alt="youtube" className="w-6 sm:w-8 md:w-10" />
                     </Link>
                   </li>
                   <li>
                   <Link href="https://twitter.com/joinxentro" target="_blank">
 
-                    <Image src={x} alt="x" className="w-10" />
+                    <Image src={x} alt="x" className="w-6 sm:w-8 md:w-10" />
                     </Link>
                   </li>
                   <li>
                   <Link href="https://t.me/joinxentro" target="_blank"> 
-                    <Image src={telegram} alt="telegram" className="w-10" />
+                    <Image src={telegram} alt="telegram" className="w-6 sm:w-8 md:w-10" />
                     </Link>
                   </li>
                   <li>
                   <Link href="https://www.instagram.com/joinxentro/" target="_blank">
-                    <Image src={instagram} alt="instagram" className="w-10" />
+                    <Image src={instagram} alt="instagram" className="w-6 sm:w-8 md:w-10" />
                     </Link>
                   </li>
                   <li>
@@ -168,12 +168,12 @@ export default function Timer() {
                       href="https://www.tiktok.com/@joinxentro"
                       target="_blank"
                     >
-                      <Image src={tiktok} alt="tikok" className="w-10" />
+                      <Image src={tiktok} alt="tikok" className="w-6 sm:w-8 md:w-10" />
                     </Link>
                   </li>
                   <li>
                   <Link href="https://uk.trustpilot.com/review/joinxentro.com">
-                    <Image src={star} alt="star" className="w-10" />
+                    <Image src={star} alt="star" className="w-6 sm:w-8 md:w-10" />
                     </Link>
                   </li>
                 </ul>

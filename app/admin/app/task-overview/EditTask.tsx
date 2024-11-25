@@ -13,14 +13,17 @@ import useMessage from "antd/es/message/useMessage";
 import { useRouter } from "next/navigation";
 import cmc from '@/app/images/socials/coinmarketcap.svg'
 import trustpilot from '@/app/images/socials/trustpilot.svg'
+import { ITask } from "@/declarations";
+import { useModal } from "@/app/src/FE/misc/modals/ModalProvider";
 
 
-const Task = () => {
+const EditTask = ({task}:{task:ITask}) => {
   const router = useRouter();
+  const { setModal, closeModal } = useModal()
   const [message, c] = useMessage();
   const [selectedPlatform, setSeletedPlatform] = useState<
-    "x" | "discord" | "instagram" | "telegram" | "youtube" | "medium" | "tiktok" |"trustpilot" | "coinmarketcap"
-  >("x");
+    "x" | "discord" | "instagram" | "telegram" | "youtube" | "medium" | "tiktok" |"trustpilot" | "coinmarketcap" 
+  | string>(task.platform);
   const taskLinkRef = useRef<HTMLInputElement>(null);
   const taskPointRef = useRef<HTMLInputElement>(null);
   const taskRef = useRef<HTMLInputElement>(null);
@@ -60,27 +63,30 @@ const Task = () => {
       return;
     }
     message.destroy();
-    message.loading("Creating task, please wait...", 10000000);
+    message.loading("editing task, please wait...", 10000000);
     const points = Number(taskPointRef.current.value);
-    const task = taskRef.current.value;
+    const _task = taskRef.current.value;
     const link = taskLinkRef.current.value;
     const platorm = selectedPlatform;
     const exclusive = exclusiveRef.current.checked;
     const [_, error] = await submitTaskAction(
       points,
       link,
-      task,
+      _task,
       platorm,
-      exclusive
+      exclusive,
+      task.id
     );
-    message.destroy();
+    await message.destroy();
     if (error) {
-      message.error(error);
+     await message.error(error);
       console.log(error);
       return;
     }
-    message.success("Task created successfully");
-    router.push("/admin/app/task");
+    await message.success("Task edited successfully");
+    router.push("/admin/app/task-overview");
+    setModal(<></>)
+    closeModal()
   };
 
   return (
@@ -232,6 +238,7 @@ const Task = () => {
                   placeholder="Task description"
                   className="h-16 w-full block px-4 bg-transparent border border-[#DADCDD] max-w-[400px] outline-none rounded-sm"
                   ref={taskRef}
+                  defaultValue={task.task}
                 />
               </div>
             </div>
@@ -247,6 +254,7 @@ const Task = () => {
             <input
               ref={taskLinkRef}
               type="text"
+              defaultValue={task.link}
               placeholder="invite xentro tech/XTyKaFK"
               className="h-16 w-full block px-4 bg-transparent border border-[#DADCDD] max-w-[400px] outline-none rounded-sm"
             />
@@ -263,6 +271,7 @@ const Task = () => {
               ref={taskPointRef}
               type="number"
               placeholder="0 "
+              defaultValue={task.points}
               className="h-16 w-full block px-4 bg-transparent border border-[#DADCDD] max-w-[400px] outline-none rounded-sm"
             />
           </div>
@@ -274,7 +283,7 @@ const Task = () => {
           >
             Exclusive
           </label>
-          <input type="checkbox" id="exclusive" ref={exclusiveRef} />
+          <input type="checkbox" id="exclusive" ref={exclusiveRef} defaultChecked={task.exclusive} />
         </div>
         <section className="space-x-3 space-y-4 md:space-y-0 text-center md:text-right my-8">
       
@@ -290,4 +299,4 @@ const Task = () => {
   );
 };
 
-export default Task;
+export default EditTask;

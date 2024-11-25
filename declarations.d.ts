@@ -40,10 +40,12 @@ export interface IApp {
   total_points_distributed: number;
   total_mints: number;
   tasks_completed: number;
+  taskCount:number
   tasks: ITask[];
   mints: IMint[];
   emails:string[];
   save:()=>Promise<void>
+  markModified:(a:string)=>void
 }
 
 export interface IMetricsData {

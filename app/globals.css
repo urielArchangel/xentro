@@ -116,7 +116,9 @@ button:disabled {
   animation-duration: 1s;
   animation-timing-function: linear;
 }
-
+.white-filter{
+  filter: invert(1) brightness(2);
+}
 /* Custom scrollbar styling for webkit browsers */
 ::-webkit-scrollbar {
   width: 6px; /* Width of the scrollbar */
