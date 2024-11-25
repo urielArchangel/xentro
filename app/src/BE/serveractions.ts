@@ -261,7 +261,7 @@ export const subscribeEmail = async (email: string) => {
 export const deleteTaskAction =async(id:string)=>{
   try {
     await mongoDBConnect();
-    let app = (await App.findOne({})) as IApp;
+    const app = (await App.findOne({})) as IApp;
  
     if(id){
       const filter = app.tasks.filter(e=>e.id != id) 
