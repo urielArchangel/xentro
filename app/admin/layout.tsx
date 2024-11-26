@@ -14,7 +14,9 @@ const AdminLayout = ({ children }: { children: ReactNode }) => {
 useEffect(()=>{
 const run =async()=>{
   if(address && adminAddresses.includes(address)){
+  if(pathname.includes("auth")){
     router.push("/admin/app/overview")
+    }
   }else{
   if(isConnected){
     message.destroy()
