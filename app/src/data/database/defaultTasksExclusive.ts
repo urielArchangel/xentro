@@ -52,7 +52,7 @@ export const exclusiveTasksDefault = [
     points: 20000,
     status: true,
     exclusive: true,
-    link:"http://www.youtube.com/@Joinxentro-v1s",
+    link:"https://m.youtube.com/@Joinxentro",
     mint: false,
     mintBadge: "",
   },    

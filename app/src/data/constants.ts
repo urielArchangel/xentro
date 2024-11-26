@@ -9,7 +9,7 @@ export const twitterHandleLink  =  "https://twitter.com/joinxentro"
 export const rpc = "https://mainnet.base.org"
 export const mintCbadgeTask = "Minted Xentro Community Badge"
 export const mintWbadgeTask = "Minted Xentro Warrior Badge"
-export const adminAddresses = ["0x0C26a9BfC3b4F9fFB36F0cD57C99cbCe600203d2","0xd33e318Aa1f1B00B8e30A6f14984fA5bb68b8b24","0x8B602e0CD6497C8e77c496d9916F6c0df4E82934","0x18025af492A94d1769e2E4C0E693Fec617a5A310"]
+export const adminAddresses = ["0x0C26a9BfC3b4F9fFB36F0cD57C99cbCe600203d2","0xd33e318Aa1f1B00B8e30A6f14984fA5bb68b8b24","0x8B602e0CD6497C8e77c496d9916F6c0df4E82934"]
 export  const acceptedTaskOptions=["joinPage","followPage","retweetPost","sharePost","engagePost","commentPost"]
 export const taskNameToDescriptionMap:
     {[id:string]:string}

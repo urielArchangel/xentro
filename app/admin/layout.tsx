@@ -1,6 +1,5 @@
 'use client'
 import React, { ReactNode,useEffect } from "react";
-
 import { useAccount } from "wagmi";
 import { adminAddresses } from "@/app/src/data/constants";
 import { usePathname, useRouter } from "next/navigation";
