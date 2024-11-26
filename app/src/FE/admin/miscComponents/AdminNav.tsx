@@ -1,9 +1,14 @@
-import React from 'react'
+'use client'
+import React, { useEffect } from 'react'
 import { BellIcon, UserCircle2 } from 'lucide-react'
 import { FaEllipsisVertical } from "react-icons/fa6";
+import { useAccount } from 'wagmi';
+import { trauncateAddressMiddle } from '../../helpers';
 
 
 const AdminNav = () => {
+  const { address} = useAccount()
+
   return (
     <section className='bg-white w-full h-[12vh] px-6 border'>
         <div className='flex items-center w-full justify-end space-x-4'>
@@ -12,7 +17,7 @@ const AdminNav = () => {
             <div className='flex items-center'>
             <UserCircle2 className='bg-[#DA7C7C] text-white rounded-full mx-2' size={40}/>
             <div>
-                <p className='font-semibold text-md'>email@email.com</p>
+                <p className='font-semibold text-md'>{trauncateAddressMiddle(address,4)}</p>
                 <p className='text-[#0171F3] font-semibold text-md'>Super Admin</p>
             </div>
             </div>

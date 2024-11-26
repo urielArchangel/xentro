@@ -90,8 +90,8 @@ export default function Timer() {
   return (
 <>{context}
       <div className={` ${styles.container}`}>
-        <div className=" w-full  max-w-[1200px] absolute z-[3] ">
-        <Image src={logo} alt="Xentro" className=" w-[120px] md:w-[200px] mb-5 block mx-auto" />
+        <div className=" w-full  max-w-[1200px] absolute z-[3]">
+        <Image src={logo} alt="Xentro" className=" w-[120px] md:w-[200px] mb-5 block mx-auto mt-8" />
 
         <h1 className="gilroy-black-bold tracking-wide text-[25px] md:text-[60px] text-center mb-12 ">
           Launching Soon!
