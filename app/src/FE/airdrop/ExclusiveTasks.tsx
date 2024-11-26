@@ -43,7 +43,7 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
       tiktok,
       youtube,
       coinmarketcap,
-      trustpilot
+      trustpilot,
     };
     return icons[platformName] || x;
   };
@@ -58,11 +58,7 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
   const [completedTasksCount, setCompletedTasksCount] = useState(0);
   const [tasks, setTasks] = useState<ITask[]>([]);
   const router = useRouter();
-  const viewAllTask = useCallback(() => {
-    return app?.tasks.some(
-      (task) => !user?.tasks_completed_ids.includes(task.id) && !task.exclusive
-    );
-  }, [app, user]);
+  const [viewAllTasks, setViewAllTask] = useState(true);
 
   const isTaskCompleted = useCallback(
     (id: string) => user?.tasks_completed_ids.includes(id) ?? false,
@@ -71,12 +67,9 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
   const ref = useSearchParams().get("ref");
 
   useEffect(() => {
-  
     const initData = async () => {
       setApp(JSON.parse(appString));
       if (address) {
- 
-
         const [fetchedUser, error] = await fetchUserClient(
           String(address),
           ref ? ref : undefined
@@ -106,6 +99,20 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
           }
         });
         setCompletedTasksCount(counter);
+        const exclusiveIds = app.tasks
+          .filter((task) => task.exclusive)
+          .map((task) => task.id);
+
+        // Create a Set for O(1) lookups
+        const completedIdSet = new Set(user.tasks_completed_ids);
+
+        // Check if all exclusive IDs are in the completed IDs
+        const allExclusiveCompleted = exclusiveIds.every((id) =>
+          completedIdSet.has(id)
+        );
+
+        // Update the view flag
+        setViewAllTask(allExclusiveCompleted);
       }
     }
     setLoading(false);
@@ -142,20 +149,20 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
     ).toString();
 
     const estimatedGasUnits = await contract.methods
-    .mintCommunityBadge()
-    .estimateGas({
-      value: priceInWei,
-      from: address,
-    });
+      .mintCommunityBadge()
+      .estimateGas({
+        value: priceInWei,
+        from: address,
+      });
 
-  // Target total gas fee in gwei (30,000 Gwei)
-  const totalGasBudget = 30000; // Gwei
+    // Target total gas fee in gwei (30,000 Gwei)
+    const totalGasBudget = 30000; // Gwei
 
-  // Calculate gas fees
-  const maxFeePerGas = Math.floor(totalGasBudget / Number(estimatedGasUnits.toString())); // Gwei
-  const maxPriorityFee = Math.min(maxFeePerGas * 0.1, 2); // Small priority fee (e.g., 2 Gwei max)
-
-
+    // Calculate gas fees
+    const maxFeePerGas = Math.floor(
+      totalGasBudget / Number(estimatedGasUnits.toString())
+    ); // Gwei
+    const maxPriorityFee = Math.min(maxFeePerGas * 0.1, 2); // Small priority fee (e.g., 2 Gwei max)
 
     await contract.methods
       .mintCommunityBadge()
@@ -163,7 +170,10 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
         value: priceInWei,
         from: address,
         maxFeePerGas: web3.utils.toWei(maxFeePerGas.toString(), "gwei"),
-        maxPriorityFeePerGas: web3.utils.toWei(maxPriorityFee.toString(), "gwei"),
+        maxPriorityFeePerGas: web3.utils.toWei(
+          maxPriorityFee.toString(),
+          "gwei"
+        ),
       })
       .on("sent", () => {
         message.destroy();
@@ -194,7 +204,6 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
       });
   };
 
-
   const mintWarriorBadge = async () => {
     message.destroy();
     if (!isConnected) {
@@ -202,25 +211,23 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
       return;
     }
     const web3 = new Web3(window.ethereum);
-  
+
     const contract = new web3.eth.Contract(
       NFTMetatdata.output.abi,
       NFTContractAddress
     );
-  
-    const cBadge = await contract.methods
-      .hasCommunityBadge(address)
-      .call();
+
+    const cBadge = await contract.methods.hasCommunityBadge(address).call();
     if (!cBadge) {
       message.destroy();
       message.error("Mint community badge first", 3);
       return;
     }
-  
+
     const priceInWei = BigInt(
       await contract.methods.getCommissionFee().call()
     ).toString();
-  
+
     // Estimate gas units
     const estimatedGasUnits = await contract.methods
       .mintWarriorBadge()
@@ -228,21 +235,26 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
         value: priceInWei,
         from: address,
       });
-  
+
     // Target total gas fee in gwei (30,000 Gwei)
     const totalGasBudget = 30000; // Gwei
-  
+
     // Calculate gas fees
-    const maxFeePerGas = Math.floor(totalGasBudget / Number(estimatedGasUnits.toString())); // Gwei
+    const maxFeePerGas = Math.floor(
+      totalGasBudget / Number(estimatedGasUnits.toString())
+    ); // Gwei
     const maxPriorityFee = Math.min(maxFeePerGas * 0.1, 2); // Small priority fee (e.g., 2 Gwei max)
-  
+
     await contract.methods
       .mintWarriorBadge()
       .send({
         value: priceInWei,
         from: address,
         maxFeePerGas: web3.utils.toWei(maxFeePerGas.toString(), "gwei"),
-        maxPriorityFeePerGas: web3.utils.toWei(maxPriorityFee.toString(), "gwei"),
+        maxPriorityFeePerGas: web3.utils.toWei(
+          maxPriorityFee.toString(),
+          "gwei"
+        ),
       })
       .on("sent", () => {
         message.destroy();
@@ -273,8 +285,6 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
         console.error("Minting error:", error);
       });
   };
-  
-
 
   const handleConnectWallet = () => {
     if (openConnectModal) {
@@ -413,7 +423,7 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
                   );
                 })}
               </ul>
-              {viewAllTask() && isConnected && (
+              {viewAllTasks && isConnected && (
                 <div
                   className={`${homepagestyles.bg_gradient_border} p-[0.07em]  lg:hidden rounded-full hd-shadow w-[50%] mx-auto mb-20`}
                 >
@@ -476,7 +486,7 @@ const ExclusiveTasks = ({ appString }: { appString: string }) => {
             </div>
           </div>
         </div>
-        {viewAllTask() && isConnected && (
+        {viewAllTasks && isConnected && (
           <div
             className={`${homepagestyles.bg_gradient_border} p-[0.07em] hidden lg:block rounded-full hd-shadow w-full max-w-[300px] mx-auto mt-16`}
           >

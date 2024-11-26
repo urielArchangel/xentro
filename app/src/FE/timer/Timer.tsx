@@ -25,7 +25,7 @@ type TimeLeft =
     }
   | "Complete";
 
-const targetDate = new Date("2024-11-30T00:00:00").getTime();
+const targetDate = new Date("2024-12-04T12:00:00").getTime();
 
 export default function Timer() {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>(() => calculateTimeLeft());

@@ -5,11 +5,72 @@ import JoinCommunity from "@/app/src/FE/homepage/components/JoinCommunity";
 import Link from "next/link";
 import homepagestyles from "@/app/css/homepage.module.css";
 import AllTasks from "@/app/src/FE/airdrop/AllTasks";
+import { useAccount } from "wagmi";
+import { useRouter } from "next/navigation";
+import { fetchUserClient } from "@/app/src/FE/helpers";
+import { IApp, IUser } from "@/declarations";
+import Loading from "../../loading";
+import useMessage from "antd/es/message/useMessage";
 
 const AllTasksComponent = ({ appString }: { appString: string }) => {
- 
+  const app = JSON.parse(appString) as IApp;
+  const router = useRouter();
+  const { address } = useAccount();
+  const [loading, setLoading] = useState(true);
+  const [valid, setValidity] = useState(false);
+  const [message, c] = useMessage();
+  const [user, setUser] = useState<IUser | null>(null);
+
+  useEffect(() => {
+    const run = async () => {
+      if (!address) {
+        window.location.href = "/airdrop";
+      }
+      if (address) {
+        const [user, error] = (await fetchUserClient(address)) as [
+          user: IUser,
+          error: any
+        ];
+        if (error) {
+          message.destroy();
+          await message.warning(
+            "You must complete all exclusive tasks first ",
+            2
+          );
+
+          setTimeout(() => {
+            window.location.href = "/airdrop";
+          }, 2000);
+        }
+        setUser(user);
+        const exclusiveIds = app.tasks
+          .filter((task) => task.exclusive)
+          .map((task) => task.id);
+
+        // Create a Set for O(1) lookups
+        const completedIdSet = new Set(user.tasks_completed_ids);
+
+        // Check if all exclusive IDs are in the completed IDs
+        const allExclusiveCompleted = exclusiveIds.every((id) =>
+          completedIdSet.has(id)
+        );
+
+        if (!allExclusiveCompleted) {
+          window.location.href = "/airdrop";
+        }
+
+        setValidity(true);
+      }
+    };
+    run();
+
+    setLoading(false);
+  }, [valid, address]);
   return (
     <>
+      {c}
+      {loading ? <Loading /> : null}
+      {valid ? (
         <div className=" pt-24 md:pt-32 max-w-[1000px] mx-auto px-2">
           <section className="px-4  text-white gilroy-regular">
             <button>
@@ -50,13 +111,13 @@ const AllTasksComponent = ({ appString }: { appString: string }) => {
             </h1>
             <p className="mb-4"> Complete all tasks to earn rewards</p>
           </section>
-          <AllTasks
-          appString={appString}
-          />
+          <AllTasks appString={appString} />
           <JoinCommunity />
           <Footer />
         </div>
-  
+      ) : (
+        <Loading />
+      )}
     </>
   );
 };

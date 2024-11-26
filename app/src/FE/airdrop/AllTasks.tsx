@@ -20,7 +20,7 @@ import { taskCompletedAction } from "../../BE/serveractions";
 import useMessage from "antd/es/message/useMessage";
 import Loading from "@/app/(.)/loading";
 
-const AllTasks = ({ appString }: { appString: string }) => {
+const AllTasks = ({ appString }: { appString: string, }) => {
   const [completedTasksCount, setCompletedTasksCount] = useState(0);
   const [message, messageContext] = useMessage();
   const [app, setApp] = useState<IApp | null>(null);
