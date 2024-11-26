@@ -22,7 +22,6 @@ const TaskOverview = ({
   appString: string;
 }) => {
   const app = JSON.parse(appString) as IApp;
-  console.log({app})
   const downloadCSV = () => {
     const csvData = [
       ["Platform", "Task", "Link", "Points", "Status"],
@@ -155,7 +154,7 @@ const deleteTask = async(id:string)=>{
         Task Overview
       </h2>
 
-      <section className="bg-white  rounded-xl my-4 overflow-x-scroll">
+      <section className="bg-white  rounded-xl my-4 overflow-x-scroll pb-24">
         <div className="w-full min-w-[1400px]">
           <div className="flex justify-end px-8 items-center border-[#CCCCCC] border-b py-4">
             <div className="flex items-center space-x-6">
