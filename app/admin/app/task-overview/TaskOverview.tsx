@@ -12,8 +12,7 @@ import yt from "@/app/images/socials/YouTubeTask.png";
 import tg from "@/app/images/socials/telegramTask.png";
 import cmc from "@/app/images/socials/coinmarketcap.svg";
 import trustpilot from "@/app/images/socials/trustpilot.svg";
-
-import { IApp, IUser } from "@/declarations";
+import { IApp } from "@/declarations";
 import { FaEllipsisVertical } from "react-icons/fa6";
 import { useModal } from "@/app/src/FE/misc/modals/ModalProvider";
 
@@ -23,7 +22,7 @@ const TaskOverview = ({
   appString: string;
 }) => {
   const app = JSON.parse(appString) as IApp;
-
+  console.log({app})
   const downloadCSV = () => {
     const csvData = [
       ["Platform", "Task", "Link", "Points", "Status"],
