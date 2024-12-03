@@ -111,7 +111,7 @@ const TaskOverview = ({
     }
   };
   const {  setModal, openModal } = useModal();
-
+  console.log({app})
   const editTask = async (id: string) => {
     if (app) {
       const task = app.tasks.filter((e) => e.id == id)[0];

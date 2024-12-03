@@ -21,7 +21,9 @@ const run =async()=>{
     message.destroy()
     await message.error("Not admin address")
      }
-    router.push("/admin/auth")
+     setTimeout(()=>{
+      router.push("/admin/auth")
+     },1000)
   }
 }
 run()
