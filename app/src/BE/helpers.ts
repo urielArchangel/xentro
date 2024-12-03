@@ -10,7 +10,7 @@ import User from './DB/schemas/User';
 export const fetchAppData = async()=>{
    try{
     const res = await fetch("/api/admin/fetchApp",{next:{revalidate:0}})
-    const [app,error] = await res.json()
+    const [app,error] = await res.json() as [IApp,any]
     if(error){
         throw new Error("An error occured")
     }
