@@ -21,6 +21,7 @@ import { fetchAppData } from '@/app/src/BE/helpers'
 const TaskOverview = () => {
   const [app,setApp] = useState<IApp>()
   const downloadCSV = () => {
+    if(!app)return
     const csvData = [
       ["Platform", "Task", "Link", "Points", "Status"],
       ...app.tasks.map((e) => [e.platform, e.task, e.link, e.points, e.status]),
