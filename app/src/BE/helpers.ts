@@ -9,9 +9,14 @@ import User from './DB/schemas/User';
 
 export const fetchAppData = async()=>{
  
-    const res = await fetch(process.env.baseurl+"/api/admin/fetchApp",{next:{revalidate:0}})
-    const [app,_] = await res.json() as [IApp,any]
- 
+    await mongoDBConnect()
+    let app = await App.findOne({}) as IApp
+    if(!app){
+        await App.create({})
+
+        app = await App.findOne({}) as IApp
+
+    }
     return app
   
 }
