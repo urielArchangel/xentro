@@ -15,6 +15,8 @@ import trustpilot from "@/app/images/socials/trustpilot.svg";
 import { IApp } from "@/declarations";
 import { FaEllipsisVertical } from "react-icons/fa6";
 import { useModal } from "@/app/src/FE/misc/modals/ModalProvider";
+import { fetchAppData } from '@/app/src/BE/helpers'
+
 
 const TaskOverview = () => {
   const [app,setApp] = useState<IApp>()
