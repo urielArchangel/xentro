@@ -9,7 +9,7 @@ import User from './DB/schemas/User';
 
 export const fetchAppData = async()=>{
  
-    const res = await fetch("/api/admin/fetchApp",{next:{revalidate:0}})
+    const res = await fetch(process.env.baseurl+"/api/admin/fetchApp",{next:{revalidate:0}})
     const [app,_] = await res.json() as [IApp,any]
  
     return app
