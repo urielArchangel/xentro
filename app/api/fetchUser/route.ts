@@ -1,6 +1,6 @@
 import { mongoDBConnect } from "@/app/src/BE/DB/connection";
 import User from "@/app/src/BE/DB/schemas/User";
-import { generateUniqueID } from "@/app/src/BE/helpers";
+import { generateUniqueID } from "@/app/src/BE/uuid";
 import {  IUser } from "@/declarations";
 import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";

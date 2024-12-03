@@ -4,7 +4,7 @@ import { ReferralPoints } from "../data/constants";
 import { mongoDBConnect } from "./DB/connection";
 import App from "./DB/schemas/App";
 import User from "./DB/schemas/User";
-import { generateUniqueID } from "./helpers";
+import { generateUniqueID } from "./uuid";
 import { IApp, IUser } from "@/declarations";
 import { revalidatePath, revalidateTag } from "next/cache";
 
