@@ -21,7 +21,7 @@ const TaskOverview = ({
 }: {
   appString: string;
 }) => {
-  const [app,setApp] = useState<IApp>()
+  const [app,setApp] = useState<IApp>([])
   const downloadCSV = () => {
     const csvData = [
       ["Platform", "Task", "Link", "Points", "Status"],
