@@ -1,3 +1,5 @@
+'use server'
+
 import { IApp, IUser } from '@/declarations';
 import crypto from 'crypto'
 import App from './DB/schemas/App';

@@ -16,13 +16,8 @@ import { IApp } from "@/declarations";
 import { FaEllipsisVertical } from "react-icons/fa6";
 import { useModal } from "@/app/src/FE/misc/modals/ModalProvider";
 
-const TaskOverview = ({
-  appString,
-}: {
-  appString: string;
-}) => {
-  const app_ = JSON.parse(appString) as IApp
-  const [app,setApp] = useState<IApp>(app_)
+const TaskOverview = () => {
+  const [app,setApp] = useState<IApp>()
   const downloadCSV = () => {
     const csvData = [
       ["Platform", "Task", "Link", "Points", "Status"],
@@ -43,8 +38,14 @@ const TaskOverview = ({
   };
 
   useEffect(()=>{
-setApp(JSON.parse(appString) )
-  },[appString])
+    const run = async()=>{
+  const app_  = await fetchAppData()
+setApp(app_)
+
+    }
+    run()
+
+  },[app])
 
 
   const returnPlatformImage = (a: string) => {
@@ -219,7 +220,7 @@ const deleteTask = async(id:string)=>{
             </thead>
 
             <tbody>
-              {app.tasks.map((e, i) => (
+              {app && app.tasks.map((e, i) => (
                 <tr key={i}>
                   <td className="w-[80px] text-start p-4 ">
                     <input type="checkbox" className="block cursor-pointer" />
