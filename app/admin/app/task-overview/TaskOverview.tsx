@@ -15,22 +15,15 @@ import trustpilot from "@/app/images/socials/trustpilot.svg";
 import { IApp } from "@/declarations";
 import { FaEllipsisVertical } from "react-icons/fa6";
 import { useModal } from "@/app/src/FE/misc/modals/ModalProvider";
-import { fetchAppData } from '@/app/src/BE/helpers'
 
 
-const TaskOverview = () => {
-  const [app, setApp] = useState<IApp>()
+const TaskOverview = ({appString}:{appString:string}) => {
 
-  
-  useEffect(() => {
-    console.log("effect")
-    const run = async () => {
-      const app_ = await fetchAppData()
-      setApp(app_)
-    }
-    run()
+  const [app, setApp] = useState<IApp>(JSON.parse(appString))
+  useEffect(()=>{
+    setApp(JSON.parse(appString))
+  },[appString])
 
-  }, [app])
 
   const downloadCSV = () => {
     if (!app) return
