@@ -1,6 +1,6 @@
 "use client";
 import { ChevronDown, ChevronsUpDownIcon } from "lucide-react";
-import React, { useRef, useState,useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import msExcel from "@/app/images/admin/overview/msExcelIcon.png";
 import Image from "next/image";
 import X from "@/app/images/socials/Twitter.png";
@@ -19,9 +19,21 @@ import { fetchAppData } from '@/app/src/BE/helpers'
 
 
 const TaskOverview = () => {
-  const [app,setApp] = useState<IApp>()
+  const [app, setApp] = useState<IApp>()
+
+  
+  useEffect(() => {
+    console.log("effect")
+    const run = async () => {
+      const app_ = await fetchAppData()
+      setApp(app_)
+    }
+    run()
+
+  }, [app])
+
   const downloadCSV = () => {
-    if(!app)return
+    if (!app) return
     const csvData = [
       ["Platform", "Task", "Link", "Points", "Status"],
       ...app.tasks.map((e) => [e.platform, e.task, e.link, e.points, e.status]),
@@ -40,15 +52,6 @@ const TaskOverview = () => {
     document.body.removeChild(link);
   };
 
-  useEffect(()=>{
-    const run = async()=>{
-  const app_  = await fetchAppData()
-setApp(app_)
-
-    }
-    run()
-
-  },[app])
 
 
   const returnPlatformImage = (a: string) => {
@@ -120,8 +123,8 @@ setApp(app_)
         break;
     }
   };
-  const {  setModal, openModal } = useModal();
-  console.log({app})
+  const { setModal, openModal } = useModal();
+  console.log({ app })
   const editTask = async (id: string) => {
     if (app) {
       const task = app.tasks.filter((e) => e.id == id)[0];
@@ -130,26 +133,26 @@ setApp(app_)
       openModal();
     }
   };
-const deleteTask = async(id:string)=>{
-  if (app) {
-    const DeleteTaskModal = (await import("./DeleteTaskModal")).default;
-    setModal(<DeleteTaskModal id={id} />);
-    openModal();
+  const deleteTask = async (id: string) => {
+    if (app) {
+      const DeleteTaskModal = (await import("./DeleteTaskModal")).default;
+      setModal(<DeleteTaskModal id={id} />);
+      openModal();
+    }
   }
-}
 
   const openMenuAction = (i: number) => {
     const menu = document.getElementById("menu_" + i) as HTMLDivElement;
-   
+
     menu.hidden = false;
     menu.style.display = "flex";
   };
-  const closeMenuAction = (i:number) => {
+  const closeMenuAction = (i: number) => {
     const menu = document.getElementById("menu_" + i) as HTMLDivElement;
 
-   menu.onmouseover = ()=>{
-    return
-   }
+    menu.onmouseover = () => {
+      return
+    }
     const menus = document.querySelectorAll(
       ".menuaction"
     ) as NodeListOf<HTMLDivElement>;
@@ -244,14 +247,14 @@ const deleteTask = async(id:string)=>{
                     )}
                   </td>
                   <td className="text-lg py-4 relative ">
-                  
+
                     <FaEllipsisVertical
-                  onMouseEnter={() => {
-                    openMenuAction(i);
-                  }}
-                  onMouseLeave={() => {
-                    closeMenuAction(i);
-                  }}
+                      onMouseEnter={() => {
+                        openMenuAction(i);
+                      }}
+                      onMouseLeave={() => {
+                        closeMenuAction(i);
+                      }}
                       size={25}
                       className="text-[#A2A7B4] cursor-pointer w-10 "
                     />
@@ -260,13 +263,13 @@ const deleteTask = async(id:string)=>{
                       key={i}
                       className={
                         "absolute w-full right-[95%] top-[0px] z-[5] hidden flex-col menuaction border bg-white py-6 px-2 rounded-[10px] space-y-4"
-                      }  onMouseEnter={() => {
+                      } onMouseEnter={() => {
                         openMenuAction(i);
                       }}
                       onMouseLeave={() => {
                         closeMenuAction(i);
                       }}
-                 
+
                     >
                       <button
                         onClick={() => {
@@ -276,7 +279,7 @@ const deleteTask = async(id:string)=>{
                       >
                         Edit
                       </button>
-                      <button onClick={()=>{
+                      <button onClick={() => {
                         deleteTask(e.id)
                       }} className="bg-red-500 text-white py-2 rounded-[10px] hover:bg-red-700">
                         Delete
