@@ -8,15 +8,14 @@ import User from './DB/schemas/User';
 
 
 export const fetchAppData = async()=>{
-    await mongoDBConnect()
-    let app = await App.findOne({}) as IApp
-    if(!app){
-        await App.create({})
-
-        app = await App.findOne({}) as IApp
-
+   try{
+    const res = await fetch("/api/admin/fetchApp",{next:{revalidate:0}})
+    const [app,error] = await res.json()
+    if(error){
+        throw new Error("An error occured")
     }
     return app
+   }catch(err:any){}
 }
 
 export const fetchUsers = async()=>{
