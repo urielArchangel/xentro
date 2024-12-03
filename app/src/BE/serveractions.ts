@@ -20,6 +20,7 @@ export const updateCommunityBadgeMintDBAction = async (address: string) => {
 
     user.community_badge = true;
     await user.save();
+    revalidatePath("/admiin/app/task-overview");
     return [true, null];
   } catch (err: any) {
     console.log({ err });
@@ -137,6 +138,7 @@ export const taskCompletedAction = async (
       await app.save();
       revalidatePath("/airdrop");
       revalidatePath("/airdrop/tasks");
+      revalidatePath("/admiin/app/task-overview");
 
       revalidateTag("fetchUser_client");
 
@@ -194,6 +196,7 @@ export const submitTaskAction = async (
     });
     app.taskCount+=1;
     revalidatePath("/admin/app/task");
+    revalidatePath("/admiin/app/task-overview");
     await app.save();
     return [true, null];
   } catch (error: any) {
@@ -219,6 +222,7 @@ export const addPointsAction = async (ID: string, points: number) => {
     await user.save();
     revalidatePath("/admin/app/data/" + ID);
     revalidatePath("/aidrop");
+    revalidatePath("/admiin/app/task-overview");
 
     return [true, null];
   } catch (error: any) {
@@ -232,6 +236,7 @@ export const removePointsAction = async (ID: string, points: number) => {
     user.total_points -= points;
     await user.save();
     revalidatePath("/admin/app/data/" + ID);
+    revalidatePath("/admiin/app/task-overview");
     revalidatePath("/aidrop");
     return [true, null];
   } catch (error: any) {
