@@ -1,6 +1,6 @@
 "use client";
 import { ChevronDown, ChevronsUpDownIcon } from "lucide-react";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState,useEffect } from "react";
 import msExcel from "@/app/images/admin/overview/msExcelIcon.png";
 import Image from "next/image";
 import X from "@/app/images/socials/Twitter.png";
@@ -21,7 +21,7 @@ const TaskOverview = ({
 }: {
   appString: string;
 }) => {
-  const app = JSON.parse(appString) as IApp;
+  const [app,setApp] = useState<IApp>()
   const downloadCSV = () => {
     const csvData = [
       ["Platform", "Task", "Link", "Points", "Status"],
@@ -40,6 +40,11 @@ const TaskOverview = ({
     link.click();
     document.body.removeChild(link);
   };
+
+  useEffect(()=>{
+setApp(JSON.parse(appString) )
+  },[appString])
+
 
   const returnPlatformImage = (a: string) => {
     switch (a) {
