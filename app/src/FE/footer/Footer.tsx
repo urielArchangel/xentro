@@ -245,7 +245,7 @@ const Footer = () => {
                 }
               >
                 <button className="bg-[#021327] block w-full h-full rounded-[11px] px-6 py-4 text-white text-[20px] font-bold">
-                  info@joinxentro.com
+                  pr@joinxentro.com
                 </button>
               </div>
             </div>
