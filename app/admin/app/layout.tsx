@@ -3,6 +3,7 @@ import AdminSideNav from "@/app/src/FE/admin/miscComponents/AdminSideNav";
 import ModalContext from "@/app/src/FE/admin/miscComponents/ModalContext";
 import { Metadata } from "next";
 import React, { ReactNode } from "react";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata: Metadata = {
   title: "Admin | Xentro - Gateway to UNTRAD Banking",
